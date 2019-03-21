@@ -7,6 +7,19 @@ import model.data_structures.*;
 
 public class Sort {
 	
+	// Metodos de ordenamiento para objetos comparables
+	public static <T extends Comparable<? super T>> void ordenarShellSort(IArregloDinamico<T> datos) {
+		ordenarShellSort(datos, Comparator.<T>naturalOrder());
+	}
+	
+	public static <T extends Comparable<? super T>> void ordenarMergeSort(IArregloDinamico<T> datos) {
+		ordenarMergeSort(datos, Comparator.<T>naturalOrder());
+	}
+	
+	public static <T extends Comparable<? super T>> void ordenarQuickSort(IArregloDinamico<T> datos) {
+		ordenarQuickSort(datos, Comparator.<T>naturalOrder());
+	}
+	
 	/*
 	 * **********************************************************************************************
 	 * *********************************** SHELL SORT ***********************************************
@@ -18,6 +31,7 @@ public class Sort {
 	 */
 
 	public static <T> void ordenarShellSort(IArregloDinamico<T> datos, Comparator<T> c) {
+		if (datos.darTamano() == 0) return;
 		// Esta es una implementacion hecha con el proposito de entender shellsort, que permite
 		// el uso de diferentes secuencias con facilidad. La unica diferencia en uso de recursos
 		// de esta implementacion es la creacion de la secuencia y su guardado en memoria, algo minimo.
@@ -65,7 +79,7 @@ public class Sort {
 	 * @param movingViolationsQueue - conjunto de datos a ordenar (inicio) y conjunto de datos ordenados (final)
 	 */
 	public static <T> void ordenarMergeSort(IArregloDinamico<T> datos, Comparator<T> comparator ) {
-		
+		if (datos.darTamano() == 0) return;
 		//Bottom - Up
 		int N = datos.darTamano();
 		//Se crea un arreglo auxiliar
@@ -126,6 +140,7 @@ public class Sort {
 	 * @param datos - conjunto de datos a ordenar (inicio) y conjunto de datos ordenados (final)
 	 */
 	public static <T> void ordenarQuickSort(IArregloDinamico<T> datos, Comparator<T> c) {
+		if (datos.darTamano() == 0) return;
 		// Desordenar: basado shuffle() de la libreria StdRandom del libro
 		shuffle(datos);
 		ordenarQuickSort(datos, 0, datos.darTamano()-1, c);
@@ -189,7 +204,7 @@ public class Sort {
 		datos.cambiarEnPos(j, temp);
 	}
 	
-	public static <T> boolean isSorted(Comparator<T> c, IArregloDinamico<T> datos) {
+	public static <T> boolean isSorted(IArregloDinamico<T> datos, Comparator<T> c) {
 		for (int i = 0; i < datos.darTamano()-1; i++)
 			if (less(datos.darObjeto(i+1), datos.darObjeto(i), c)) return false;
 		return true;

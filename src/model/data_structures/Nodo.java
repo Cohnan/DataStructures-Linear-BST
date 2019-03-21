@@ -15,14 +15,21 @@ public class Nodo<T> {
 	 * Objeto (información) que almacena el nodo
 	 */
 	private T objeto;
+	private Object value;
 
 
 	/**
 	 * Constructor
 	 */
+	public Nodo(T pObjeto, Object pValue){
+		objeto = pObjeto;
+		siguiente = null;
+		value = pValue;
+	}
 	public Nodo(T pObjeto){
 		objeto = pObjeto;
 		siguiente = null;
+		value = null;
 	}
 
 
@@ -45,6 +52,14 @@ public class Nodo<T> {
 	 */
 	public T darObjeto(){
 		return objeto;
+	}
+	
+	public void cambiarValor(Object pValor){
+		value = pValor;
+	}
+	
+	public Object darValor(){
+		return value;
 	}
 
 
