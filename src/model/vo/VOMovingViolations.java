@@ -37,6 +37,8 @@ public class VOMovingViolations {
 	private String location;
 	private String addressID;
 	private int streetsegID;
+	private float xCoord;
+	private float yCoord;
 	private double totalPaid;
 	private double penalty1;
 	private double penalty2;
@@ -68,6 +70,16 @@ public class VOMovingViolations {
 		campo = linea[headerPositions[STREETSEGID]];
 		if (!campo.equals("")) streetsegID = Integer.parseInt(campo);
 		else streetsegID = -1;
+		
+		
+		campo = linea[headerPositions[XCOORD]];
+		if (!campo.equals("")) xCoord = Float.parseFloat(campo);
+		else xCoord = -1;
+		
+		campo = linea[headerPositions[YCOORD]];
+		if (!campo.equals("")) yCoord = Float.parseFloat(campo);
+		else yCoord = -1;
+		
 		
 		totalPaid = Double.parseDouble(linea[headerPositions[TOTALPAID]]);
 		
