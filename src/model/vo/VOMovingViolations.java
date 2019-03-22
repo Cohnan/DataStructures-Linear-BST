@@ -133,6 +133,23 @@ public class VOMovingViolations {
 	public int getStreetsegID() {
 		return streetsegID;
 	}
+	
+	
+	/**
+	 * @return xCoord
+	 */
+	public float getXCoord() {
+		return xCoord;
+	}
+	
+	/**
+	 * @return yCoord
+	 */
+	public float getYCoord() {
+		return yCoord;
+	}
+	
+	
 
 	/**
 	 * @return date - Fecha cuando se puso la infracción .
