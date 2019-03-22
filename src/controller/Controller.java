@@ -331,19 +331,10 @@ public class Controller {
 					return null;
 				}
 			}
-
 		}
 		return numeroDeCargas;
 	}
 
-	public IQueue <VODaylyStatistic> getDailyStatistics () {
-		return null;
-	}
-
-	public IStack <VOMovingViolations> nLastAccidents(int n) {
-		return null;
-	}
-	
 	/**
 	 * Verificar que el identificador de las infracciones (ID) sea único
 	 * @return Cola con infracciones cuyos ObjectID se encuentran repetidos. 
@@ -700,7 +691,7 @@ public class Controller {
 		
 		// Agregar la deuda de cada infraccion a la deuda total de cada mes
 		for (VOMovingViolations infraccion : movingVOLista) {
-			mesAct = infraccion.getTicketIssueDate().getMonthValue() - (cuatrimestreCargado-1)*4;
+			mesAct = infraccion.getTicketIssueDate().getMonthValue() - (semestreCargado-1)*6;
 			deudaAdicional = (infraccion.getTotalPaid() - infraccion.getFineAmount() - 
 					infraccion.getPenalty1() - infraccion.getPenalty2());
 			

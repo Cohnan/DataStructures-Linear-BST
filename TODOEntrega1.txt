@@ -1,0 +1,5 @@
+ - Impresion de solo 20 infracciones
+ - Creacion de orden por coordenadas
+ - Actualizar nombre de metodos y documentacion
+ - Hacer analisis de complejidad de los metodos
+ - Cambiar view

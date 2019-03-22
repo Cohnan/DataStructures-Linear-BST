@@ -50,7 +50,7 @@ public class MovingViolationsManagerView
 	}
 	
 	/**
-	 *Imprime la informaci�n sobre la carga de datos
+	 * Imprime la informaci�n sobre la carga de datos
 	 * @param Cola con los datos cargados
 	 */
 	public void printMovingViolationsLoadInfo(IArregloDinamico<Integer> resultados0) {
@@ -63,7 +63,7 @@ public class MovingViolationsManagerView
 			System.out.println("Infracciones Mes " + (i+1)+": " + infMes);
 			totalInfracciones += infMes;
 		}
-		System.out.println("Total Infracciones Cuatrisemetre: " + totalInfracciones);
+		System.out.println("Total Infracciones Semestre: " + totalInfracciones);
 		
 	}
 	/**

@@ -276,4 +276,14 @@ public class VOMovingViolations {
 		}
 		
 	}
+	
+	public static class XYCoordOrder implements Comparator<VOMovingViolations> {
+
+		@Override
+		public int compare(VOMovingViolations arg0, VOMovingViolations arg1) {
+			if (arg0.getXCoord() != arg1.getXCoord()) return (int)(100*(arg0.getXCoord() - arg1.getXCoord()));
+			return (int)(100*(arg0.getYCoord() - arg1.getYCoord()));
+		}
+		
+	}
 }
