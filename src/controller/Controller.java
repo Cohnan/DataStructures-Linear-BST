@@ -40,7 +40,24 @@ public class Controller {
 	/**
 	 * Numero actual del cuatrimestre cargado
 	 */
-	private static int cuatrimestreCargado = -1;
+	private static int semestreCargado = -1;
+	
+	/**
+	 * X minimo de infraccion
+	 */
+	private static float xMin;
+	/**
+	 * Y minimo de infraccion
+	 */
+	private static float yMin;
+	/**
+	 * X maximo de infraccion
+	 */
+	private static float xMax;
+	/**
+	 * Y maximo de infraccion
+	 */
+	private static float yMax;
 	
 	/*
 	 * Constructor
@@ -241,6 +258,7 @@ public class Controller {
 					    	     "Moving_Violations_Issued_in_May_2018.csv",
 					    	     "Moving_Violations_Issued_in_June_2018.csv"
 					    	     });
+			semestreCargado = 1;
 		}
 		else if(n == 2)
 		{
@@ -251,6 +269,7 @@ public class Controller {
 								 "Moving_Violations_Issued_in_November_2018.csv",
 								 "Moving_Violations_Issued_in_December_2018.csv"
 								 });
+			semestreCargado = 2;
 		}
 		else
 		{
@@ -285,9 +304,17 @@ public class Controller {
 				}
 				
 				// Lee linea a linea el archivo para crear las infracciones y cargarlas a la lista
+				VOMovingViolations infraccion;
 				for (String[] row : reader) {
-					movingVOLista.agregar(new VOMovingViolations(posiciones, row));
+					infraccion = new VOMovingViolations(posiciones, row);
+					movingVOLista.agregar(infraccion);
 					contadorInf += 1;
+					
+					// Se actualizan las coordenadas extremas
+					xMin = Math.min(xMin, infraccion.getXCoord());
+					xMax = Math.max(xMax, infraccion.getXCoord());
+					yMin = Math.min(yMin, infraccion.getYCoord());
+					yMax = Math.max(yMax, infraccion.getYCoord());			
 				}
 				// Se agrega el numero de infracciones cargadas en este archivo al resultado 
 				numeroDeCargas.agregar(contadorInf);
