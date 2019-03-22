@@ -82,7 +82,7 @@ public class Controller {
 			case 0:
 				view.printMessage("Ingrese el cuatrimestre (1, 2 o 3)");
 				int numeroCuatrimestre = sc.nextInt();
-				IQueue<Integer> resultados0 = loadMovingViolations(numeroCuatrimestre);
+				IArregloDinamico<Integer> resultados0 = loadMovingViolations(numeroCuatrimestre);
 				view.printMovingViolationsLoadInfo(resultados0);
 				break;
 			case 1:
@@ -229,38 +229,32 @@ public class Controller {
 	 * @param n Numero de cuatrimestre del anio (entre 1 y 3)
 	 * @return Cola con el numero de datos cargados por mes del cuatrimestre
 	 */
-	public IQueue<Integer> loadMovingViolations(int n)
+	public IArregloDinamico<Integer> loadMovingViolations(int n)
 	{
-		IQueue<Integer> numeroDeCargas = new Queue<>();
+		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		if(n == 1)
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
 					    	     "Moving_Violations_Issued_in_February_2018.csv",
 					    	     "Moving_Violations_Issued_in_March_2018.csv",
-					    	     "Moving_Violations_Issued_in_April_2018.csv"
+					    	     "Moving_Violations_Issued_in_April_2018.csv",
+					    	     "Moving_Violations_Issued_in_May_2018.csv",
+					    	     "Moving_Violations_Issued_in_June_2018.csv"
 					    	     });
-			cuatrimestreCargado = 1;
 		}
 		else if(n == 2)
 		{
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_May_2018.csv", 
-								 "Moving_Violations_Issued_in_June_2018.csv",
-								 "Moving_Violations_Issued_in_July_2018.csv",
-								 "Moving_Violations_Issued_in_August_2018.csv"
+			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
+								 "Moving_Violations_Issued_in_August_2018.csv",
+								 "Moving_Violations_Issued_in_September_2018.csv", 
+								 "Moving_Violations_Issued_in_October_2018.csv",
+								 "Moving_Violations_Issued_in_November_2018.csv",
+								 "Moving_Violations_Issued_in_December_2018.csv"
 								 });
-			cuatrimestreCargado = 2;
-		}
-		else if(n == 3){
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_September_2018.csv", 
-					"Moving_Violations_Issued_in_October_2018.csv",
-					"Moving_Violations_Issued_in_November_2018.csv",
-					"Moving_Violations_Issued_in_December_2018.csv"
-			});
-			cuatrimestreCargado = 3;
 		}
 		else
 		{
-			throw new IllegalArgumentException("No existe ese cuatrimestre en un annio.");
+			throw new IllegalArgumentException("No existe ese semestre en un annio.");
 		}
 		return numeroDeCargas;
 	}
@@ -271,9 +265,9 @@ public class Controller {
 	 * Dado un arreglo con los nombres de los archivos a cargar
 	 * @returns Cola con el numero de datos cargados por mes del cuatrimestre
 	 */
-	private IQueue<Integer> loadMovingViolations(String[] movingViolationsFilePaths){
+	private IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths){
 		CSVReader reader = null;
-		IQueue<Integer> numeroDeCargas =new Queue<>();
+		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		
 		int contadorInf; // Cuenta numero de infracciones en cada archivo
 		try {
@@ -296,7 +290,7 @@ public class Controller {
 					contadorInf += 1;
 				}
 				// Se agrega el numero de infracciones cargadas en este archivo al resultado 
-				numeroDeCargas.enqueue(contadorInf);
+				numeroDeCargas.agregar(contadorInf);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

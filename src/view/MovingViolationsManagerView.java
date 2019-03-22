@@ -1,5 +1,6 @@
 package view;
 
+import model.data_structures.IArregloDinamico;
 import model.data_structures.IQueue;
 import model.data_structures.IStack;
 
@@ -52,13 +53,13 @@ public class MovingViolationsManagerView
 	 *Imprime la informaci�n sobre la carga de datos
 	 * @param Cola con los datos cargados
 	 */
-	public void printMovingViolationsLoadInfo(IQueue<Integer> resultados0) {
+	public void printMovingViolationsLoadInfo(IArregloDinamico<Integer> resultados0) {
 		int totalInfracciones = 0;
-		int totalMeses = resultados0.size();
+		int totalMeses = resultados0.darTamano();
 		int infMes;
 		System.out.println("  ----------Informaci�n Sobre la Carga------------------  ");
 		for (int i = 0; i < totalMeses; i++) {
-			infMes = resultados0.dequeue();
+			infMes = resultados0.darObjeto(i);
 			System.out.println("Infracciones Mes " + (i+1)+": " + infMes);
 			totalInfracciones += infMes;
 		}
