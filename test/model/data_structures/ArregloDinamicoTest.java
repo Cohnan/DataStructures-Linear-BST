@@ -226,7 +226,7 @@ public class ArregloDinamicoTest extends TestCase{
 			int i = 0;
 			for(String dato: arreglo) {
 				assertTrue("Escenario: " + n + ". El " + i + "-esimo elemento deberia ser: Elemento " + i
-						+ ", pero se obtuvo " + dato, arreglo.darObjeto(i).equals("Elemento " + i));
+						+ ", pero se obtuvo " + dato, dato.equals("Elemento " + i));
 				i += 1;
 			}
 			// Verificar que solo se identifican n elementos
