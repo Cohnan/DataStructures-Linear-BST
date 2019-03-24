@@ -32,7 +32,7 @@ public class Controller {
 	 * Objeto de la Vista
 	 */
 	private MovingViolationsManagerView view;
-	
+
 	/**
 	 * Lista donde se van a cargar los datos de los archivos
 	 */
@@ -41,7 +41,7 @@ public class Controller {
 	 * Numero actual del cuatrimestre cargado
 	 */
 	private static int semestreCargado = -1;
-	
+
 	/**
 	 * X minimo de infraccion
 	 */
@@ -58,7 +58,7 @@ public class Controller {
 	 * Y maximo de infraccion
 	 */
 	private static float yMax;
-	
+
 	/*
 	 * Constructor
 	 */
@@ -75,7 +75,7 @@ public class Controller {
 		Controller controller = new Controller();
 		int option = -1;
 		boolean numeroEncontrado = false;
-		
+
 		while(!fin)
 		{
 			view.printMenu();
@@ -90,161 +90,145 @@ public class Controller {
 					sc = new Scanner(System.in);
 				}
 			} numeroEncontrado = false;
-					
+
 			try { // Este try se usa para no tener que reiniciar el programa en caso de que 
-				  // ocurra un error pequenio al ejecutar como ingresar mal la fecha  
-			
-			switch(option)
-			{
-			case 0:
-				view.printMessage("Ingrese el cuatrimestre (1, 2 o 3)");
-				int numeroCuatrimestre = sc.nextInt();
-				IArregloDinamico<Integer> resultados0 = loadMovingViolations(numeroCuatrimestre);
-				view.printMovingViolationsLoadInfo(resultados0);
-				break;
-			case 1:
-				IQueue<VOMovingViolations> resultados1 = verifyObjectIDIsUnique();
-				view.printMovingViolationsReq1(resultados1);
-				break;
+				// ocurra un error pequenio al ejecutar como ingresar mal la fecha  
 
-			case 2:
+				switch(option)
+				{
+				case 0:
+					view.printMessage("Ingrese el Semestre (1 -[Enero - Junio], 2[Julio - Diciembre])");
+					int numeroCuatrimestre = sc.nextInt();
+					IArregloDinamico<Integer> resultados0 = loadMovingViolations(numeroCuatrimestre);
+					view.printMovingViolationsLoadInfo(resultados0, xMin,yMin,xMax,yMax);
+					break;
+				case 1:
+					IQueue<VOMovingViolations> resultados1 = verifyObjectIDIsUnique();
+					view.printMovingViolationsReq1(resultados1);
+					break;
 
-				view.printMessage("Ingrese la fecha con hora inicial (Ej : 01/04/2018T04:40:00)");
-				LocalDateTime fechaInicialReq2A = convertirFecha_Hora_LDT(sc.next());
+				case 2:
 
-				view.printMessage("Ingrese la fecha con hora final (Ej : 01/04/2018T04:40:00)");
-				LocalDateTime fechaFinalReq2A = convertirFecha_Hora_LDT(sc.next());
+					view.printMessage("Ingrese la fecha con hora inicial (Ej : 01/04/2018T04:40:00)");
+					LocalDateTime fechaInicialReq2A = convertirFecha_Hora_LDT(sc.next());
 
-				IQueue<VOMovingViolations> resultados2 = controller.getMovingViolationsInRange(fechaInicialReq2A, fechaFinalReq2A);
+					view.printMessage("Ingrese la fecha con hora final (Ej : 01/04/2018T04:40:00)");
+					LocalDateTime fechaFinalReq2A = convertirFecha_Hora_LDT(sc.next());
 
-				view.printMovingViolationsReq2(resultados2);
+					IQueue<VOMovingViolations> resultados2 = controller.getMovingViolationsInRange(fechaInicialReq2A, fechaFinalReq2A);
 
-				break;
+					view.printMovingViolationsReq2(resultados2);
 
-			case 3:
+					break;
 
-				view.printMessage("Ingrese el VIOLATIONCODE (Ej : T210)");
-				String violationCode3 = sc.next();
+				case 3:
 
-				double [] promedios3 = controller.avgFineAmountByViolationCode(violationCode3);
+					view.printMessage("Ingrese el VIOLATIONCODE (Ej : T210)");
+					String violationCode3 = sc.next();
 
-				view.printMessage("FINEAMT promedio sin accidente: " + promedios3[0] + ", con accidente:" + promedios3[1]);
-				break;
+					double [] promedios3 = controller.avgFineAmountByViolationCode(violationCode3);
+
+					view.printMessage("FINEAMT promedio sin accidente: " + promedios3[0] + ", con accidente:" + promedios3[1]);
+					break;
 
 
-			case 4:
+				case 4:
 
-				view.printMessage("Ingrese el ADDRESS_ID");
-				String addressId4 = sc.next();
+					view.printMessage("Ingrese el ADDRESS_ID");
+					String addressId4 = sc.next();
 
-				view.printMessage("Ingrese la fecha inicial (Ej : 28/03/2018)");
-				LocalDate fechaInicialReq4A = convertirFecha(sc.next());
+					view.printMessage("Ingrese la fecha inicial (Ej : 28/03/2018)");
+					LocalDate fechaInicialReq4A = convertirFecha(sc.next());
 
-				view.printMessage("Ingrese la fecha final (Ej : 28/03/2018)");
-				LocalDate fechaFinalReq4A = convertirFecha(sc.next());
+					view.printMessage("Ingrese la fecha final (Ej : 28/03/2018)");
+					LocalDate fechaFinalReq4A = convertirFecha(sc.next());
 
-				IStack<VOMovingViolations> resultados4 = controller.getMovingViolationsAtAddressInRange(addressId4, fechaInicialReq4A, fechaFinalReq4A);
+					IStack<VOMovingViolations> resultados4 = controller.getMovingViolationsAtAddressInRange(addressId4, fechaInicialReq4A, fechaFinalReq4A);
 
-				view.printMovingViolationsReq4(resultados4);
+					view.printMovingViolationsReq4(resultados4);
 
-				break;
+					break;
 
-			case 5:
-				view.printMessage("Ingrese el limite inferior de FINEAMT  (Ej: 50)");
-				double limiteInf5 = sc.nextDouble();
+				case 5:
+					view.printMessage("Ingrese el limite inferior de FINEAMT  (Ej: 50)");
+					double limiteInf5 = sc.nextDouble();
 
-				view.printMessage("Ingrese el limite superior de FINEAMT  (Ej: 50)");
-				double limiteSup5 = sc.nextDouble();
+					view.printMessage("Ingrese el limite superior de FINEAMT  (Ej: 50)");
+					double limiteSup5 = sc.nextDouble();
 
-				IQueue<VOViolationCode> violationCodes = controller.violationCodesByFineAmt(limiteInf5, limiteSup5);
-				view.printViolationCodesReq5(violationCodes);
-				break;
+					IQueue<VOViolationCode> violationCodes = controller.violationCodesByFineAmt(limiteInf5, limiteSup5);
+					view.printViolationCodesReq5(violationCodes);
+					break;
 
-			case 6:
+				case 6:
 
-				view.printMessage("Ingrese el limite inferior de TOTALPAID (Ej: 200)");
-				double limiteInf6 = sc.nextDouble();
+					view.printMessage("Ingrese el limite inferior de TOTALPAID (Ej: 200)");
+					double limiteInf6 = sc.nextDouble();
 
-				view.printMessage("Ingrese el limite superior de TOTALPAID (Ej: 200)");
-				double limiteSup6 = sc.nextDouble();
+					view.printMessage("Ingrese el limite superior de TOTALPAID (Ej: 200)");
+					double limiteSup6 = sc.nextDouble();
 
-				view.printMessage("Ordenar Ascendentmente: (Ej: true)");
-				boolean ascendente6 = sc.nextBoolean();				
+					view.printMessage("Ordenar Ascendentmente: (Ej: true)");
+					boolean ascendente6 = sc.nextBoolean();				
 
-				IStack<VOMovingViolations> resultados6 = controller.getMovingViolationsByTotalPaid(limiteInf6, limiteSup6, ascendente6);
-				view.printMovingViolationReq6(resultados6);
-				break;
+					IStack<VOMovingViolations> resultados6 = controller.getMovingViolationsByTotalPaid(limiteInf6, limiteSup6, ascendente6);
+					view.printMovingViolationReq6(resultados6);
+					break;
 
-			case 7:
+				case 7:
 
-				view.printMessage("Ingrese la hora inicial (Ej: 23)");
-				int horaInicial7 = sc.nextInt();
+					view.printMessage("Ingrese la hora inicial (Ej: 23)");
+					int horaInicial7 = sc.nextInt();
 
-				view.printMessage("Ingrese la hora final (Ej: 23)");
-				int horaFinal7 = sc.nextInt();
+					view.printMessage("Ingrese la hora final (Ej: 23)");
+					int horaFinal7 = sc.nextInt();
 
-				IQueue<VOMovingViolations> resultados7 = controller.getMovingViolationsByHour(horaInicial7, horaFinal7);
-				view.printMovingViolationsReq7(resultados7);
-				break;
+					IQueue<VOMovingViolations> resultados7 = controller.getMovingViolationsByHour(horaInicial7, horaFinal7);
+					view.printMovingViolationsReq7(resultados7);
+					break;
 
-			case 8:
+				case 8:
 
-				view.printMessage("Ingrese el VIOLATIONCODE (Ej : T210)");
-				String violationCode8 = sc.next();
+					view.printMessage("Ingrese el VIOLATIONCODE (Ej : T210)");
+					String violationCode8 = sc.next();
 
-				double [] resultado8 = controller.avgAndStdDevFineAmtOfMovingViolation(violationCode8);
+					double [] resultado8 = controller.avgAndStdDevFineAmtOfMovingViolation(violationCode8);
 
-				view.printMessage("FINEAMT promedio: " + resultado8[0] + ", desviación estandar:" + resultado8[1]);
-				break;
+					view.printMessage("FINEAMT promedio: " + resultado8[0] + ", desviación estandar:" + resultado8[1]);
+					break;
 
-			case 9:
+				case 9:
 
-				view.printMessage("Ingrese la hora inicial (Ej: 23)");
-				int horaInicial9 = sc.nextInt();
+					view.printMessage("Ingrese la hora inicial (Ej: 23)");
+					int horaInicial9 = sc.nextInt();
 
-				view.printMessage("Ingrese la hora final (Ej: 23)");
-				int horaFinal9 = sc.nextInt();
+					view.printMessage("Ingrese la hora final (Ej: 23)");
+					int horaFinal9 = sc.nextInt();
 
-				int resultado9 = controller.countMovingViolationsInHourRange(horaInicial9, horaFinal9);
+					int resultado9 = controller.countMovingViolationsInHourRange(horaInicial9, horaFinal9);
 
-				view.printMessage("Número de infracciones: " + resultado9);
-				break;
+					view.printMessage("Número de infracciones: " + resultado9);
+					break;
 
-			case 10:
-				double[] resultados10 = controller.percentWithAccidentsByHour();
-				view.printMovingViolationsByHourReq10(resultados10);
-				break;
+				case 10:
+					double[] resultados10 = controller.percentWithAccidentsByHour();
+					view.printMovingViolationsByHourReq10(resultados10);
+					break;
 
-			case 11:
-				view.printMessage("Ingrese la fecha inicial (Ej : 28/03/2017)");
-				LocalDate fechaInicial11 = convertirFecha(sc.next());
-
-				view.printMessage("Ingrese la fecha final (Ej : 28/03/2017)");
-				LocalDate fechaFinal11 = convertirFecha(sc.next());
-
-				double resultados11 = controller.totalDebt(fechaInicial11, fechaFinal11);
-				view.printMessage("Deuda total "+ resultados11);
-				break;
-	
-			case 12:
-				double[] resultados12 = controller.accumulatedDebtByMonth();
-				view.printTotalDebtbyMonthReq12(resultados12);
-				break;
-
-			case 13:	
-				fin=true;
-				sc.close();
-				break;
-			}
+				case 11:
+					fin=true;
+					sc.close();
+					break;
+				}
 			} catch(Exception e) { // Si ocurrio un error al ejecutar algun metodo
 				e.printStackTrace(); System.out.println("Ocurrio un error. Se recomienda reiniciar el programa.");}
 		}
 	}
-	
+
 	/**
-	 * Carga los datos del cuatrimestre indicado
-	 * @param n Numero de cuatrimestre del anio (entre 1 y 3)
-	 * @return Cola con el numero de datos cargados por mes del cuatrimestre
+	 * Carga los datos del semestre dado
+	 * @param n Numero del semestre del anio (1 � 2)
+	 * @return Cola con el numero de datos cargados por mes del semestre
 	 */
 	public IArregloDinamico<Integer> loadMovingViolations(int n)
 	{
@@ -252,23 +236,23 @@ public class Controller {
 		if(n == 1)
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
-					    	     "Moving_Violations_Issued_in_February_2018.csv",
-					    	     "Moving_Violations_Issued_in_March_2018.csv",
-					    	     "Moving_Violations_Issued_in_April_2018.csv",
-					    	     "Moving_Violations_Issued_in_May_2018.csv",
-					    	     "Moving_Violations_Issued_in_June_2018.csv"
-					    	     });
+					"Moving_Violations_Issued_in_February_2018.csv",
+					"Moving_Violations_Issued_in_March_2018.csv",
+//					"Moving_Violations_Issued_in_April_2018.csv",
+//					"Moving_Violations_Issued_in_May_2018.csv",
+//					"Moving_Violations_Issued_in_June_2018.csv"
+			});
 			semestreCargado = 1;
 		}
 		else if(n == 2)
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
-								 "Moving_Violations_Issued_in_August_2018.csv",
-								 "Moving_Violations_Issued_in_September_2018.csv", 
-								 "Moving_Violations_Issued_in_October_2018.csv",
-								 "Moving_Violations_Issued_in_November_2018.csv",
-								 "Moving_Violations_Issued_in_December_2018.csv"
-								 });
+					"Moving_Violations_Issued_in_August_2018.csv",
+					"Moving_Violations_Issued_in_September_2018.csv", 
+					"Moving_Violations_Issued_in_October_2018.csv",
+					"Moving_Violations_Issued_in_November_2018.csv",
+					"Moving_Violations_Issued_in_December_2018.csv"
+			});
 			semestreCargado = 2;
 		}
 		else
@@ -287,14 +271,14 @@ public class Controller {
 	private IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths){
 		CSVReader reader = null;
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
-		
+
 		int contadorInf; // Cuenta numero de infracciones en cada archivo
 		try {
 			movingVOLista = new ArregloDinamico<VOMovingViolations>(500000);
 
 			for (String filePath : movingViolationsFilePaths) {
 				reader = new CSVReader(new FileReader("data/"+filePath));
-				
+
 				contadorInf = 0;
 				// Deduce las posiciones de las columnas que se reconocen de acuerdo al header
 				String[] headers = reader.readNext();
@@ -302,14 +286,14 @@ public class Controller {
 				for (int i = 0; i < VOMovingViolations.EXPECTEDHEADERS.length; i++) {
 					posiciones[i] = buscarArray(headers, VOMovingViolations.EXPECTEDHEADERS[i]);
 				}
-				
+
 				// Lee linea a linea el archivo para crear las infracciones y cargarlas a la lista
 				VOMovingViolations infraccion;
 				for (String[] row : reader) {
 					infraccion = new VOMovingViolations(posiciones, row);
 					movingVOLista.agregar(infraccion);
 					contadorInf += 1;
-					
+
 					// Se actualizan las coordenadas extremas
 					xMin = Math.min(xMin, infraccion.getXCoord());
 					xMax = Math.max(xMax, infraccion.getXCoord());
@@ -347,23 +331,23 @@ public class Controller {
 		String anterior = null;
 		boolean yaIncluido = false;
 		Queue<VOMovingViolations> repetidos = new Queue<>();
-		
+
 		//Se recorren las infracciones
 		for(VOMovingViolations s: movingVOLista){
-			
+
 			//Se toma el objeto actual
 			actual = s.objectId();
 			//En caso de que se repita el ObjID y no se haya incluido, se agrega a la cola
 			if(actual.equals(anterior)){
 				if(!yaIncluido){
-				repetidos.enqueue(s);
-				yaIncluido = true;
+					repetidos.enqueue(s);
+					yaIncluido = true;
 				}
 			}
 			else{
 				yaIncluido = false;
 			}
-			
+
 			//El actual queda como anterior
 			anterior = actual;
 		}
@@ -372,7 +356,7 @@ public class Controller {
 		return repetidos;
 
 	}
-	
+
 	/**
 	 * Consultar todas las infracciones que se encuentren en un rango de fechas determinado.
 	 * @param fechaInicial
@@ -382,7 +366,7 @@ public class Controller {
 	public IQueue<VOMovingViolations> getMovingViolationsInRange(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 
 		IQueue<VOMovingViolations> respuesta = new Queue<>();
-		
+
 		//Se ordenan las infracciones de acuerdo a la fecha en la que fueron impuestas
 		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TicketIssueOrder());
 
@@ -413,11 +397,11 @@ public class Controller {
 		int suma2 = 0;
 		int contador1 = 0;
 		int contador2 = 0;
-		
+
 		//Se recorren todas las infracciones del cuatrimestre
 		for(VOMovingViolations s: movingVOLista){
 			if(s.getViolationCode().equals(violationCode3)){
-				
+
 				//En caso de que no hubo accidente
 				if(!s.getAccidentIndicator()){
 					suma1 += s.getFineAmount();
@@ -443,26 +427,26 @@ public class Controller {
 	 */
 	public IStack<VOMovingViolations> getMovingViolationsAtAddressInRange(String addressId,
 			LocalDate fechaInicial, LocalDate fechaFinal) {
-		
+
 		ArregloDinamico<VOMovingViolations> respuesta = new ArregloDinamico<>();
 		IStack<VOMovingViolations> resultado = new Stack<>();
-		
+
 		//En caso de que la infracci�n coincida con el addressID y este en el rango solicitado se agrega al arreglo din�mico
 		for(VOMovingViolations s: movingVOLista){
 			if(s.getAddressID().equals(addressId) && s.getTicketIssueDate().toLocalDate().compareTo(fechaInicial)>=0 && s.getTicketIssueDate().toLocalDate().compareTo(fechaFinal)<=0){
 				respuesta.agregar(s);
 			}
 		}
-		
+
 		//Se ordena el arreglo ascendentemente
 		Sort.ordenarShellSort(respuesta,new VOMovingViolations.StreetsgeIDDateOrder());
-		
+
 		//Se agregan los elementos del arreglo a una pila
 		//Se logra el orden descentemente por StreetseIdDate
 		for(VOMovingViolations s: respuesta){
 			resultado.push(s);
 		}
-		
+
 		return resultado;
 	}
 
@@ -519,7 +503,7 @@ public class Controller {
 
 		return colaTuplas;
 	}
-	
+
 	/**
 	 * Consultar infracciones donde la cantidad pagada está en un rango dado 
 	 * ordenadas por fecha de infracción.
@@ -544,7 +528,7 @@ public class Controller {
 		} else {
 			Sort.ordenarShellSort(listaResp, new VOMovingViolations.TicketIssueOrder().reversed());
 		}
-		
+
 		// Copiar datos ordenados empezando en el final para transferir el orden actual a la pila
 		// Y para minimizar el costo de la operacion de borrado dada la implementacion de borrar
 		IStack<VOMovingViolations> pilaResp = new Stack<>();
@@ -599,7 +583,7 @@ public class Controller {
 		// Puede simplemente iterarse una vez la lista y un contador adicional para la suma de los
 		// cuadrados de los fineamounts
 		ArregloDinamico<Integer> valoresFA = new ArregloDinamico<>();
-		
+
 		for (VOMovingViolations infraccion : movingVOLista) {
 			if (infraccion.getViolationCode().equals(violationCode8)) {
 				sumaFA += infraccion.getFineAmount();
@@ -609,7 +593,7 @@ public class Controller {
 		}
 		// Calculos
 		if (contadorFA == 0) return new double [] {0.0, 0.0};
-		
+
 		double promedio = sumaFA/contadorFA;
 		double var = 0;
 		for (double fa : valoresFA) {
@@ -618,7 +602,7 @@ public class Controller {
 
 		return new double [] {promedio , Math.sqrt(var)};
 	}
-	
+
 	/**
 	 * Número de infracciones que ocurrieron en un rango de horas del día
 	 * @param horaInicial9 Hora inicial de consulta
@@ -631,10 +615,10 @@ public class Controller {
 		for(VOMovingViolations s: movingVOLista){
 			if(s.getTicketIssueDate().getHour()>=horaInicial9 && s.getTicketIssueDate().getHour()<=horaFinal9 ) contador++;
 		}
-		
+
 		return contador;
 	}
-	
+
 	/**
 	 * Calcular la deuda total por infracciones que se dieron en un rango de fechas
 	 * @param fechaInicial11 Fecha inicial de consulta
@@ -654,32 +638,32 @@ public class Controller {
 
 		return deudaAcum;
 	}
-	
+
 	/**
 	 * Calcula el porcentaje de infracciones que tuvieron accidentes por hora del día
 	 * @return Arreglo con la informacion deseada por cada mes del cuatrimestre
 	 */
 	private double[] percentWithAccidentsByHour() {
-		
+
 		double[] infraccionesByHour = new double[24]; // Se inicializan en 0's
 		double[] accidentesByHour = new double[24];
 		int horaActual;
 		for (VOMovingViolations infraccion : movingVOLista) {
 			horaActual = infraccion.getTicketIssueDate().getHour();
-			
+
 			infraccionesByHour[horaActual] += 1;
-			
+
 			if (infraccion.getAccidentIndicator()) accidentesByHour[horaActual] += 1;
 		}
-		
+
 		// Convertir accidentes por hora en porcentajes
 		for (int i = 0; i < accidentesByHour.length; i++) {
 			accidentesByHour[i] = (100.*accidentesByHour[i]) / infraccionesByHour[i];
 		}
-		
+
 		return accidentesByHour;
 	}
-	
+
 	/**
 	 * Calcula la deuda acumulada por infracciones diferenciado por mes.
 	 * @return Arreglo con la informacion deseada por cada mes del cuatrimestre
@@ -688,24 +672,24 @@ public class Controller {
 		double[] deudasByMonth = new double[] {0., 0., 0., 0.};
 		int mesAct;
 		double deudaAdicional = 0;
-		
+
 		// Agregar la deuda de cada infraccion a la deuda total de cada mes
 		for (VOMovingViolations infraccion : movingVOLista) {
 			mesAct = infraccion.getTicketIssueDate().getMonthValue() - (semestreCargado-1)*6;
 			deudaAdicional = (infraccion.getTotalPaid() - infraccion.getFineAmount() - 
 					infraccion.getPenalty1() - infraccion.getPenalty2());
-			
+
 			deudasByMonth[mesAct - 1] += deudaAdicional;
 		}
-		
+
 		// Acumular las deudas en el mismo arreglo
 		for (int i = 1; i < deudasByMonth.length; i++) {
 			deudasByMonth[i] += deudasByMonth[i-1];
 		}
-		
+
 		return deudasByMonth;
 	}
-	
+
 	/**
 	 * Metodo para buscar strings en un array de strings, usado para deducir la posicion
 	 * de las columnas esperadas en cada archivo.
@@ -723,7 +707,7 @@ public class Controller {
 		return -1;
 	}
 
-	
+
 	/**
 	 * Convertir fecha a un objeto LocalDate
 	 * @param fecha fecha en formato dd/mm/aaaa con dd para dia, mm para mes y aaaa para agno
@@ -744,6 +728,6 @@ public class Controller {
 	{
 		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm:ss"));
 
-    }
+	}
 }
 

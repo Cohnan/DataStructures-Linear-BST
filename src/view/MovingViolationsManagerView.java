@@ -16,26 +16,24 @@ public class MovingViolationsManagerView
 	
 	public void printMenu() {
 		System.out.println("---------ISIS 1206 - Estructuras de datos----------");
-		System.out.println("---------------------Taller 3----------------------");
-		System.out.println("0. Cargar datos del cuatrimestre");
-		System.out.println("1. Verificar que OBJECTID es en realidad un identificador unico");
-		System.out.println("2. Consultar infracciones por fecha/hora inicial y fecha/hora final");
-		System.out.println("3. Dar FINEAMT promedio con y sin accidente por VIOLATIONCODE");
-		System.out.println("4. Consultar infracciones por direccion entre fecha inicial y fecha final");
-
+		System.out.println("---------------------Proyecto 2----------------------");
+		System.out.println("0. Cargar datos de un Semestre");
+		System.out.println("1. R1A");
+		System.out.println("2. R2A");
+		System.out.println("3. R3A");
 		
-		System.out.println("5. Consultar los tipos de infracciones (VIOLATIONCODE) con su valor (FINEAMT) promedio en un rango dado");
-		System.out.println("6. Consultar infracciones donde la cantidad pagada (TOTALPAID) esta en un rango dado. Se ordena por fecha de infracciï¿½n");
-		System.out.println("7. Consultar infracciones por hora inicial y hora final, ordenada ascendentemente por VIOLATIONDESC");
-		System.out.println("8. Dado un tipo de infraccion (VIOLATIONCODE) informar el (FINEAMT) promedio y su desviacion estandar.");
-
-		System.out.println("9. El numero de infracciones que ocurrieron en un rango de horas del dia. Se define el rango de horas por valores enteros en el rango [0, 24]");
-		System.out.println("10. Grafica ASCII con el porcentaje de infracciones que tuvieron accidentes por hora del dia");
-		System.out.println("11. La deuda (TOTALPAID ï¿½ FINEAMT - PENALTY1 â€“ PENALTY2) total por infracciones que se dieron en un rango de fechas.");
-		System.out.println("12. Grafica ASCII con la deuda acumulada total por infracciones");
-
+		System.out.println("4. R1B");
+		System.out.println("5. R2B");
+		System.out.println("6. R3B");
 		
-		System.out.println("13. Salir");
+		
+		System.out.println("7. R1C");
+		System.out.println("8. R2C");
+		System.out.println("9. R3C");
+		System.out.println("10. R4C");
+		
+		
+		System.out.println("11. Salir");
 		System.out.println("Digite el nï¿½mero de opciï¿½n para ejecutar la tarea, luego presione enter: (Ej., 1):");
 		
 	}
@@ -53,18 +51,20 @@ public class MovingViolationsManagerView
 	 * Imprime la informaciï¿½n sobre la carga de datos
 	 * @param Cola con los datos cargados
 	 */
-	public void printMovingViolationsLoadInfo(IArregloDinamico<Integer> resultados0) {
+	public void printMovingViolationsLoadInfo(IArregloDinamico<Integer> resultados0, float xmin, float ymin, float xmax, float ymax ) {
 		int totalInfracciones = 0;
 		int totalMeses = resultados0.darTamano();
 		int infMes;
-		System.out.println("  ----------Informaciï¿½n Sobre la Carga------------------  ");
+		System.out.println("  ----------Informacion Sobre la Carga------------------  ");
 		for (int i = 0; i < totalMeses; i++) {
 			infMes = resultados0.darObjeto(i);
 			System.out.println("Infracciones Mes " + (i+1)+": " + infMes);
 			totalInfracciones += infMes;
 		}
 		System.out.println("Total Infracciones Semestre: " + totalInfracciones);
-		
+		System.out.println(" ----------Zona Geográfica----------------------");
+		System.out.println("Las coordenadas (Xmin,Ymin) son: ("+ xmin +"," +ymin+")"  );
+		System.out.println("Las coordenadas (Xmax,Ymax) son: ("+ xmax +"," +ymax+")"  );
 	}
 	/**
 	 *Imprime el requerimiento 1A - Verifique Unique ID
