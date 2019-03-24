@@ -2,8 +2,10 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public class BTS<K extends Comparable<K>, V> implements ITablaSimOrd<K, V> {
+public class BlancoRojoBTS<K extends Comparable<K>, V> implements ITablaSimOrd<K, V> {
 
+	
+	
 	@Override
 	public Iterator<K> iterator() {
 		// TODO Auto-generated method stub

@@ -5,26 +5,32 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.util.Sort;
+
 public class BTSTest {
 	/*
 	 * Atributos 
 	 */
-	private BTS<String, Integer> tabla;
+	private ITablaSimOrd<String, Integer> tabla;
 	private final int numeroEscenarios = 100;
-	private final int tamanoMax = 100;
 	
 	/*
 	 * Escenarios
 	 */
 	// Arreglo con n elementos
-	private void setUpEscenario(int n, int max) {
-		// En caso de no especificarse un tamanio inicial para la tabla, se elige n/2, 
-		// donde n es el numero de elementos a agregar
-		if (max == -1) max = (n+1)/2;
-		
-		tabla = new BTS<String, Integer>(max); // TODO Unica linea a modificar para cambiar tabla en test
-		for (int i = 0; i < n; i++) {
-			tabla.put("Elemento " + i, i);
+	private void setUpEscenario(int n, boolean aleatorio) {
+		tabla = new BlancoRojoBTS<String, Integer>();
+		if (!aleatorio) {
+			for (int i = 0; i < n; i++) {
+				tabla.put("Elemento " + i, i);
+			}
+		} else {
+			IArregloDinamico<Integer> ordenPos = new ArregloDinamico<>(n);
+			Sort.shuffle(ordenPos);
+			
+			for (Integer i: ordenPos) {
+				tabla.put("Elemento " + i, i);
+			}
 		}
 	}
 
@@ -38,18 +44,13 @@ public class BTSTest {
 	@Test
 	public void testBTS() {
 		for (int n = 1; n < numeroEscenarios; n++) {
-			setUpEscenario(n, 1);
-			assertTrue("Escenario: " + n + " con tamanio inicial 1. El arreglo deberia tener tamano " + n, tabla.darTamano() == n);
+			setUpEscenario(n, true);
+			assertTrue("Escenario: " + n + " creado en desorden. El arbol deberia tener tamano " + n, tabla.darTamano() == n);
 			
-			setUpEscenario(n, 10);
-			assertTrue("Escenario: " + n + " con tamanio inicial 10. El arreglo deberia tener tamano " + n, tabla.darTamano() == n);
-			
-			setUpEscenario(n, tamanoMax);
-			assertTrue("Escenario: " + n + " con tamanio inicial " + tamanoMax + ". El arreglo deberia tener tamano " + n, tabla.darTamano() == n);
-			
-			setUpEscenario(n, -1);
-			assertTrue("Escenario: " + n + " con tamanio inicial " + (n+1)/2 + ". El arreglo deberia tener tamano " + n, tabla.darTamano() == n);
+			setUpEscenario(n, false);
+			assertTrue("Escenario: " + n + " creado en orden. El arbol deberia tener tamano " + n, tabla.darTamano() == n);
 		}
+		System.out.println("El constructor funciona!\n");
 	}
 	
 	/**
@@ -58,26 +59,17 @@ public class BTSTest {
 	@Test
 	public void testDarTamano() {
 		for (int n = 1; n <= numeroEscenarios; n++) {
-			setUpEscenario(n, -1);
-			assertTrue("Escenario: " + n + " con tamanio inicial " + (n+1)/2 + ". El arreglo deberia tener " + n + " elementos."
+			setUpEscenario(n, true);
+			assertTrue("Escenario: " + n + " creado en desorden. El arbol deberia tener " + n + " elementos."
 						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
-			System.out.println("darTamano() funciona para el escenario " + "(" + n + ", " + (n/2) + ")");
 			
-			setUpEscenario(n, 1);
-			assertTrue("Escenario: " + n + " con tamanio inicial 1. El arreglo deberia tener " + n + " elementos."
+			setUpEscenario(n, false);
+			assertTrue("Escenario: " + n + " creado en orden. El arbol deberia tener " + n + " elementos."
 						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
-			System.out.println("darTamano() funciona para el escenario " + "(" + n + ", " + 1 + ")");
 			
-			setUpEscenario(n, 10);
-			assertTrue("Escenario: " + n + " con tamanio inicial 10. El arreglo deberia tener " + n + " elementos."
-						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
-			System.out.println("darTamano() funciona para el escenario " + "(" + n + ", " + 10 + ")");
-			
-			setUpEscenario(n, tamanoMax);
-			assertTrue("Escenario: " + n + " con tamanio inicial " + tamanoMax + ". El arreglo deberia tener " + n + " elementos."
-						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
-			System.out.println("darTamano() funciona para el escenario " + "(" + n + ", " + tamanoMax + ")");
+			System.out.println("darTamano() funciona para el escenario " + n);
 		}
+		System.out.println("darTamano() funciona!\n");
 	}
 	
 	/**
@@ -85,25 +77,24 @@ public class BTSTest {
 	 */
 	@Test
 	public void testGet() {
-		Integer[] tamanosInic = new Integer[] {-1, 1, 10, tamanoMax};// Arreglo con los tamanos iniciales de las tablas para cada escenario
 		for (int n = 1; n <= numeroEscenarios; n++) {	
-			for (Integer tamano : tamanosInic) {
-				System.out.println("\n\nEntrando a probar get()  para el escenario N, m = " + n + ", " + tamano);
-				setUpEscenario(n, tamano);
+			for (boolean desordenado: new boolean[]{true, false}) {
+				System.out.println("\n\nEntrando a probar get()  para el escenario N = " + n);
+				setUpEscenario(n, desordenado);
 				
 				// Obtener los elementos
 				Integer valor;
 				for (int i = 0; i < n; i++) {
 					valor = tabla.get("Elemento " + i);
 					// Verificar que el objeto es el esperado
-					assertTrue("Escenario: " + n + " de tamanio " + tamano + ". El dato esperado era: " + i
+					assertTrue("Escenario: " + n + " creado en desorden?: " + desordenado + ". El dato esperado era: " + i
 							+ ", pero se obtuvo " + (valor != null? "nulo": valor), valor != null && valor.equals(i));
-					// Verificar que no ha cambiado el tamano del arreglo
-					assertTrue("Escenario: " + n + " de tamanio " + tamano + ". El arreglo deberia tener " + n + " elementos."
+					// Verificar que no ha cambiado el tamano del arbol
+					assertTrue("Escenario: " + n + " creado en desorden?: " + desordenado + ". El arbol deberia tener " + n + " elementos."
 							+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
 				}
 				
-				System.out.println("get() funciona para el escenario " + "(" + n + ", " + tamano + ")");
+				System.out.println("get() funciona para el escenario " + n);
 			}
 		}
 		System.out.println("get() funciona!\n");
@@ -116,23 +107,26 @@ public class BTSTest {
 	public void testPut() {
 		int nAgregar;
 		Integer valor;
+		IArregloDinamico<Integer> ordenPos; // Arreglo con el orden en que se agregan los nuevos elementos
 		
 		for (int n = 1; n <= numeroEscenarios; n++) {
-			setUpEscenario(n, -1);
+			setUpEscenario(n, true);
 			nAgregar = 2*n;
 			
 			// Agrega nAgregar elementos nuevos
-			for (int i = 0; i < nAgregar; i++) {
+			ordenPos = new ArregloDinamico<>(nAgregar);
+			Sort.shuffle(ordenPos);
+			for (int i: ordenPos) {
 				tabla.put("Nuevo elemento " + i, i);
 				
 				// Comprobar que el elemento fue agregado
 				valor = tabla.get("Nuevo elemento " + i);
 				assertTrue("Escenario: " + n + ". Se espera que al conseguir el elemento recien colocado se obtenga " + i + 
 						", pero se obtiene " + (valor != null? "nulo": valor), valor != null && valor.equals(i));
-				System.out.println("put() funciona para el escenario " + "(" + n + ", " + (n/2) + "), agregando nuevos elementos");
+				System.out.println("put() funciona para el escenario " + n + ", agregando nuevos elementos");
 			}
 			// Comprobar que el tamanio de la tabla es el esperado
-			assertTrue("Escenario: " + n + ". El arreglo deberia tener " + (n + nAgregar) + " elementos."
+			assertTrue("Escenario: " + n + ". El arbol deberia tener " + (n + nAgregar) + " elementos."
 					+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == (n + nAgregar));
 			System.out.println("put() funciona para el escenario " + "(" + n + ", " + (n/2) + "), agregando nuevos elementos, Y identifica el tamanio adecuado");
 			
@@ -145,13 +139,14 @@ public class BTSTest {
 				valor = tabla.get("Nuevo elemento " + i);
 				assertTrue("Escenario: " + n + ". Se espera que al conseguir el elemento recien colocado se obtenga " + (-i) + 
 						", pero se obtiene " + (valor != null? "nulo": valor), valor == -i);
-				System.out.println("put() funciona para el escenario " + "(" + n + ", " + (n/2) + "), reemplazando elementos");
+				System.out.println("put() funciona para el escenario " + n + ", reemplazando elementos");
 			}
-			// Comprobar que no se cambio el tamanio del arreglo
-			assertTrue("Escenario: " + n + ". No debio cambiar de tamanio. El arreglo deberia tener " + (n + nAgregar) + " elementos."
+			// Comprobar que no se cambio el tamanio del arbol
+			assertTrue("Escenario: " + n + ". No debio cambiar de tamanio. El arbol deberia tener " + (n + nAgregar) + " elementos."
 					+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == (n + nAgregar));
-			System.out.println("put() funciona para el escenario " + "(" + n + ", " + (n/2) + "), reemplazando elementos, Y identifica el tamanio adecuado");
+			System.out.println("put() funciona para el escenario " + n + ", reemplazando elementos, Y identifica el tamanio adecuado");
 		}
+		System.out.println("put() funciona!\n");
 	}
 	
 	/**
@@ -164,7 +159,7 @@ public class BTSTest {
 		int nEliminados;
 		
 		for (int n = 1; n <= numeroEscenarios; n++) {
-			setUpEscenario(n, -1);
+			setUpEscenario(n, true);
 			nEliminar = n;
 			nEliminados = 0;
 			
@@ -178,11 +173,12 @@ public class BTSTest {
 				nEliminados += 1;
 				
 				// Comprobar que el total de elementos disminuye en 1
-				assertTrue("Escenario: " + n + ". El arreglo deberia tener " + (n - nEliminados) + " elementos."
+				assertTrue("Escenario: " + n + ". El arbol deberia tener " + (n - nEliminados) + " elementos."
 						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == (n - nEliminados));
 			}
 			System.out.println("delete() funciona para el escenario " + n + ", eliminando todos los elementos.");			
 		}
+		System.out.println("delete() funciona!");
 	}
 	
 	/**
@@ -190,11 +186,11 @@ public class BTSTest {
 	 */
 	@Test
 	public void testIterator() {
-		int n = 1000;
-		
-		// Probar el iterador para los 2 posibles constructores para un n grande cualquiera
-		for (Integer max : new Integer[]{0, tamanoMax}){
-			setUpEscenario(n, max);
+		int n = numeroEscenarios; // n grande para probar el iterador
+		int nProbar = 20; // Probar varias veces el iterador para el arbol creado de diferentes maneras pero con los mismos elementos
+		boolean[] constrActual = new boolean[] {true, false};
+		for (int j = 0; j < nProbar; j++) {  
+			setUpEscenario(n, constrActual[j%2]); // Probar intercaladamente para cada constructor
 			
 			int i = 0;
 			for(String dato: tabla) {
@@ -204,6 +200,8 @@ public class BTSTest {
 			}
 			// Verificar que solo se identifican n elementos
 			assertTrue("Escenario: " + n + ". El iterador deberia identificar y devolver " + n + " elementos", i == n);
+			System.out.println("El iterador paso la prueba #" + j);
 		}
+		System.out.println("El iterador funciona para un tamanio " + n);
 	}
 }

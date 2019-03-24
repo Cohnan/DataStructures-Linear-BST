@@ -4,6 +4,6 @@
  - Hacer analisis de complejidad de los metodos
  - Cambiar view
 
-1C: ordenar por AddressId, crear una tabla de simbolos ordenada que reorganice las keys con el AddressId como key y tal que el valor sea un array[5] de floats/o de Strings
+1C: usar hashtable (linear probing o separate chaining tienen la misma complejidad)
 
 
