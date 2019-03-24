@@ -19,7 +19,7 @@ public class BTSTest {
 	 */
 	// Arreglo con n elementos
 	private void setUpEscenario(int n, boolean aleatorio) {
-		tabla = new BlancoRojoBTS<String, Integer>();
+		tabla = new BlancoRojoBST<String, Integer>();
 		if (!aleatorio) {
 			for (int i = 0; i < n; i++) {
 				tabla.put("Elemento " + i, i);
