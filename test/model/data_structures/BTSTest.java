@@ -309,7 +309,26 @@ public class BTSTest {
 	/**
 	 * Prueba el metodo deleteMin().
 	 */
-	public void testdeleteMin() {}
+	public void testdeleteMin() {
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// Eliminar 
+				tabla.deleteMin();
+						
+				// Verificar que se elimino el elemento correcto
+				assertTrue("Escenario: " + n + ". El dato Elemento " + 0
+						+ " no deberia estar contenido.", !tabla.contains("Elemento "+ 0));
+				
+				// Comprobar que el total de elementos disminuye en 1
+				assertTrue("Escenario: " + n + ". El arbol deberia tener " + (n - 1) + " elementos."
+						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == (n - 1));
+				System.out.println("deleteMin() funciona para el escenario " + n + ", eliminando todos los elementos.");
+			}
+						
+		
+		System.out.println("deleteMin() funciona!");
+	}
 	
 	/**
 	 * Prueba el metodo floor().
