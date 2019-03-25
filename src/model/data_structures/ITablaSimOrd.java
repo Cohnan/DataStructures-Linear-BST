@@ -19,4 +19,12 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	K max();
 	
 	void deleteMin();
+	
+	K floor(K key);
+	
+	K ceiling(K key);
+	
+	K select(int num);
+	
+	int rank(K key);
 }
