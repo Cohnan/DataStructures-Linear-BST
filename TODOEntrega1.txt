@@ -1,9 +1,0 @@
- - Impresion de solo 20 infracciones
- - Creacion de orden por coordenadas
- - Actualizar nombre de metodos y documentacion
- - Hacer analisis de complejidad de los metodos
- - Cambiar view
-
-1C: usar hashtable (linear probing o separate chaining tienen la misma complejidad)
-
-

@@ -419,8 +419,8 @@ public class BTSTest {
 						+ ", pero se obtuvo " + (valor != null? "nulo": valor), valor != null && valor.equals(i));
 				
 			}
-			System.out.println("testFloor() funciona para el escenario " + n + ", para todos los elementos.");			
+			System.out.println("testCeiling() funciona para el escenario " + n + ", para todos los elementos.");			
 		}
-		System.out.println("testFloor() funciona!");
+		System.out.println("testCeiling() funciona!");
 	}
 }
