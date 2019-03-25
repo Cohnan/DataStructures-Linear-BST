@@ -18,6 +18,7 @@ public class MovingViolationsManagerView
 		System.out.println("---------ISIS 1206 - Estructuras de datos----------");
 		System.out.println("---------------------Proyecto 2----------------------");
 		System.out.println("0. Cargar datos de un Semestre");
+		
 		System.out.println("1. R1A");
 		System.out.println("2. R2A");
 		System.out.println("3. R3A");
@@ -58,16 +59,13 @@ public class MovingViolationsManagerView
 		System.out.println("  ----------Informacion Sobre la Carga------------------  ");
 		for (int i = 0; i < totalMeses; i++) {
 			infMes = resultados0.darObjeto(i);
-			if (numSem == 2){
-				i +=6;
-			}
-			System.out.println("Infracciones en " + ObtenerMes(i+1)+": " + infMes);
+			System.out.println("Infracciones en " + ObtenerMes(i + 6*(numSem-1) +1)+": " + infMes);
 			totalInfracciones += infMes;
 		}
 		System.out.println("Total Infracciones Semestre: " + totalInfracciones);
-		System.out.println(" ----------Zona Geográfica----------------------");
-		System.out.println("Las coordenadas (Xmin,Ymin) son: ("+ xmin +"," +ymin+")"  );
-		System.out.println("Las coordenadas (Xmax,Ymax) son: ("+ xmax +"," +ymax+")"  );
+		System.out.println(" ----------Zona Geogrï¿½fica----------------------");
+		System.out.println("Las coordenadas (Xmin,Ymin) son: ("+ xmin +", " +ymin+")"  );
+		System.out.println("Las coordenadas (Xmax,Ymax) son: ("+ xmax +", " +ymax+")"  );
 	}
 //	/**
 //	 *Imprime el requerimiento 1A - Verifique Unique ID

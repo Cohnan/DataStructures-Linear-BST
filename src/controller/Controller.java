@@ -227,7 +227,7 @@ public class Controller {
 
 	/**
 	 * Carga los datos del semestre dado
-	 * @param n Numero del semestre del anio (1 ó 2)
+	 * @param n Numero del semestre del anio (1 ï¿½ 2)
 	 * @return Cola con el numero de datos cargados por mes del semestre
 	 */
 	public IArregloDinamico<Integer> loadMovingViolations(int n)
@@ -274,7 +274,7 @@ public class Controller {
 
 		int contadorInf; // Cuenta numero de infracciones en cada archivo
 		try {
-			movingVOLista = new ArregloDinamico<VOMovingViolations>(500000);
+			movingVOLista = new ArregloDinamico<VOMovingViolations>(670000);
 
 			for (String filePath : movingViolationsFilePaths) {
 				reader = new CSVReader(new FileReader("data/"+filePath));

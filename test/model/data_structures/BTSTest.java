@@ -44,7 +44,7 @@ public class BTSTest {
 
 	@Test
 	public void testBTS() {
-		for (int n = 1; n < numeroEscenarios; n++) {
+		for (int n = 0; n < numeroEscenarios; n++) {
 			setUpEscenario(n, true);
 			assertTrue("Escenario: " + n + " creado en desorden. El arbol deberia tener tamano " + n, tabla.darTamano() == n);
 			
@@ -59,7 +59,7 @@ public class BTSTest {
 	 */
 	@Test
 	public void testDarTamano() {
-		for (int n = 1; n <= numeroEscenarios; n++) {
+		for (int n = 0; n <= numeroEscenarios; n++) {
 			setUpEscenario(n, true);
 			assertTrue("Escenario: " + n + " creado en desorden. El arbol deberia tener " + n + " elementos."
 						+ " Pero tiene " + tabla.darTamano(), tabla.darTamano() == n);
@@ -78,7 +78,7 @@ public class BTSTest {
 	 */
 	@Test
 	public void testGet() {
-		for (int n = 1; n <= numeroEscenarios; n++) {	
+		for (int n = 0; n <= numeroEscenarios; n++) {	
 			for (boolean desordenado: new boolean[]{true, false}) {
 				System.out.println("\n\nEntrando a probar get()  para el escenario N = " + n);
 				setUpEscenario(n, desordenado);
@@ -110,7 +110,7 @@ public class BTSTest {
 		Integer valor;
 		IArregloDinamico<Integer> ordenPos; // Arreglo con el orden en que se agregan los nuevos elementos
 		
-		for (int n = 1; n <= numeroEscenarios; n++) {
+		for (int n = 0; n <= numeroEscenarios; n++) {
 			setUpEscenario(n, true);
 			nAgregar = 2*n;
 			
@@ -160,7 +160,7 @@ public class BTSTest {
 		Integer valor;
 		int nEliminados;
 		
-		for (int n = 1; n <= numeroEscenarios; n++) {
+		for (int n = 0; n <= numeroEscenarios; n++) {
 			setUpEscenario(n, true);
 			nEliminar = n;
 			nEliminados = 0;
@@ -216,4 +216,118 @@ public class BTSTest {
 		}
 		System.out.println("iterator() funciona para el escenario " + n + "");
 	}
+	
+	/**
+	 * Prueba el metodo isEmpty().
+	 */
+	public void testIsEmpty() {
+		setUpEscenario(0, true);
+		assertTrue("Escenario: " + 0 + " creado en desorden. El arbol deberia estar vacio."
+					+ " Pero tiene " + tabla.darTamano(), tabla.isEmpty());
+		
+		setUpEscenario(0, false);
+		assertTrue("Escenario: " + 0 + " creado en orden. El arbol deberia estar vacio."
+				+ " Pero tiene " + tabla.darTamano(), tabla.isEmpty());
+		
+		System.out.println("isEmpty() funciona para el escenario " + 0);
+		
+		for (int n = 1; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			assertTrue("Escenario: " + n + " creado en desorden. El arbol deberia no estar vacio."
+						+ " Pero tiene " + tabla.darTamano(), !tabla.isEmpty());
+			
+			setUpEscenario(n, false);
+			assertTrue("Escenario: " + n + " creado en orden. El arbol deberia no estar vacio."
+					+ " Pero tiene " + tabla.darTamano(), !tabla.isEmpty());
+			
+			System.out.println("isEmpty() funciona para el escenario " + n);
+		}
+		System.out.println("isEmpty() funciona!\n");
+	}
+	
+	/**
+	 * Prueba el metodo contains().
+	 */
+	public void testcontains() {
+		int nRevisar;
+		
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			nRevisar = n;
+			
+			// Revisar nRevisar elementos
+			for (int i = 0; i < nRevisar; i++) {
+				// Verificar que el  Elemento i se encuentra 
+				assertTrue("Escenario: " + n + ". Se esperaba que el elemento Elemento " + i + " estuviera contenido.",
+						tabla.contains("Elemento " + i));
+				
+				// Comprobar que Elemento -i no se encuentra
+				assertTrue("Escenario: " + n + ". Se esperaba que el elemento Elemento " + (-i) + " no estuviera contenido.",
+						tabla.contains("Elemento " + (-i)));
+			}
+			System.out.println("contains() funciona para el escenario " + n);			
+		}
+		System.out.println("contains() funciona!");
+	}
+	
+	/**
+	 * Prueba el metodo testMin().
+	 */
+	public void testmin() {
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			assertTrue("Escenario: " + n + " creado en desorden. El arbol elemento minimo deberia ser "
+					+ "Elemento 0, pero es " + tabla.min(), tabla.min().equals("Elemento 0"));
+			
+			setUpEscenario(n, false);
+			assertTrue("Escenario: " + n + " creado en orden. El arbol elemento minimo deberia ser "
+					+ "Elemento 0, pero es " + tabla.min(), tabla.min().equals("Elemento 0"));
+			
+			System.out.println("min() funciona para el escenario " + n);
+		}
+		System.out.println("min() funciona!\n");
+	}
+	
+	/**
+	 * Prueba el metodo testMax().
+	 */
+	public void testmax() {
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			assertTrue("Escenario: " + n + " creado en desorden. El arbol elemento maximo deberia ser "
+					+ "Elemento " + (n-1) + ", pero es " + tabla.max(), tabla.max().equals("Elemento 0"));
+			
+			setUpEscenario(n, false);
+			assertTrue("Escenario: " + n + " creado en orden. El arbol elemento maximo deberia ser "
+					+ "Elemento " + (n-1) + ", pero es " + tabla.max(), tabla.max().equals("Elemento 0"));
+			
+			System.out.println("max() funciona para el escenario " + n);
+		}
+		System.out.println("max() funciona!\n");
+	}
+	
+	/**
+	 * Prueba el metodo deleteMin().
+	 */
+	public void testdeleteMin() {}
+	
+	/**
+	 * Prueba el metodo floor().
+	 */
+	public void testfloor() {}
+	
+	/**
+	 * Prueba el metodo ceiling().
+	 */
+	public void testceiling() {}
+	
+	/**
+	 * Prueba el metodo select().
+	 */
+	public void testselect() {}
+	
+	/**
+	 * Prueba el metodo rank().
+	 */
+	public void testrank() {}
 }
