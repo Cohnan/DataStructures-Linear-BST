@@ -116,7 +116,7 @@ public class BTSTest {
 			
 			// Agrega nAgregar elementos nuevos
 			ordenPos = new ArregloDinamico<>(nAgregar);
-			for (int i = 0; i < nAgregar; i++) ordenPos.agregar(i);
+			for (int i = 1; i <= nAgregar; i++) ordenPos.agregar(i);
 			Sort.shuffle(ordenPos);
 			for (int i: ordenPos) {
 				tabla.put(-i, i);
