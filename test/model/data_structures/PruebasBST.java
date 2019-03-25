@@ -2,7 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
+//import com.sun.org.apache.bcel.internal.generic.Select;
 
 import junit.framework.TestCase;
 import model.vo.LocationVO;
@@ -17,7 +17,7 @@ public class PruebasBST extends TestCase{
 	private ITablaSimOrd<Integer, Integer> tabla2;
 	
 	/**
-	 * Escenario 0, tabla vacía
+	 * Escenario 0, tabla vacï¿½a
 	 */
 	private void setUpEscenario0() {
 		tabla= new BlancoRojoBST<>();
@@ -30,7 +30,7 @@ public class PruebasBST extends TestCase{
 	private void setUpEscenario1() {
 		tabla= new BlancoRojoBST<>();
 		tabla.put("Daniel", 10);
-		tabla.put("Sebastián", 20);
+		tabla.put("Sebastiï¿½n", 20);
 		tabla.put("Camila", 40);
 		
 	}
@@ -51,14 +51,14 @@ public class PruebasBST extends TestCase{
 
 
 	/**
-	 * Pruebas sobre la tabla vacía
+	 * Pruebas sobre la tabla vacï¿½a
 	 */
 	public void testColaVacia(){
 		setUpEscenario0();
-		//Las colas de prioridad deberían estar vacías
-		assertEquals("No hay elementos debería retornar true",true, tabla.isEmpty());
+		//Las colas de prioridad deberï¿½an estar vacï¿½as
+		assertEquals("No hay elementos deberï¿½a retornar true",true, tabla.isEmpty());
 		//Eliminar
-		assertEquals("No hay elementos debería retornar null",null, tabla.get("Hola"));
+		assertEquals("No hay elementos deberï¿½a retornar null",null, tabla.get("Hola"));
 	}
 	
 	
@@ -74,16 +74,16 @@ public class PruebasBST extends TestCase{
 		setUpEscenario1();
 		assertEquals(false, tabla.isEmpty());
 		assertEquals(true, tabla.contains("Daniel"));
-		assertEquals(true, tabla.contains("Sebastián"));
+		assertEquals(true, tabla.contains("Sebastiï¿½n"));
 		assertEquals(true, tabla.contains("Camila"));
 		assertEquals(true, tabla.darTamano() == 3);
 		assertEquals(true, tabla.get("Daniel") == 10);
-		assertEquals(true, tabla.get("Sebastián") == 20);
+		assertEquals(true, tabla.get("Sebastiï¿½n") == 20);
 		assertEquals(true, tabla.get("Camila") == 40);
 
 		
 		/**
-		 * Pruebas de eliminación
+		 * Pruebas de eliminaciï¿½n
 		 */
 		assertEquals(true, tabla.delete("Camila") == 40);
 		assertEquals(true, tabla.delete("Camila") == null);
@@ -93,8 +93,8 @@ public class PruebasBST extends TestCase{
 		
 		
 		assertEquals(false, tabla.contains("Daniel"));
-		assertEquals(true, tabla.delete("Sebastián") == 20);
-		assertEquals(false, tabla.contains("Sebastián"));
+		assertEquals(true, tabla.delete("Sebastiï¿½n") == 20);
+		assertEquals(false, tabla.contains("Sebastiï¿½n"));
 		assertEquals(true, tabla.isEmpty());
 		
 		
@@ -130,7 +130,7 @@ public class PruebasBST extends TestCase{
 		
 		
 		/**
-		 * Se añaden 100 elementos más
+		 * Se aï¿½aden 100 elementos mï¿½s
 		 */
 		for (int i = 100; i < 200; i++) {
 			tabla2.put(i, i);
@@ -153,7 +153,7 @@ public class PruebasBST extends TestCase{
 		}
 		
 		/**
-		 * Se verifica la eliminación
+		 * Se verifica la eliminaciï¿½n
 		 */
 		for (int i = 0; i < 200; i++) {
 			assertEquals(true, tabla2.delete(i)== i);

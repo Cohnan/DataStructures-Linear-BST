@@ -32,17 +32,17 @@ public class CPTest extends TestCase{
 	public void testColaVacia(){
 		setUpEscenario0();
 
-		//Las colas de prioridad deberían estar vacías
-		assertEquals("No hay elementos debería retornar true",true, cp1.esVacia());
-		assertEquals("No hay elementos debería retornar true",true, cp2.esVacia());
+		//Las colas de prioridad deberï¿½an estar vacï¿½as
+		assertEquals("No hay elementos deberï¿½a retornar true",true, cp1.esVacia());
+		assertEquals("No hay elementos deberï¿½a retornar true",true, cp2.esVacia());
 
-		//Eliminar el máximo
-		assertEquals("No hay elementos debería retornar null",null, cp1.delMax());
-		assertEquals("No hay elementos debería retornar null",null, cp2.delMax());
+		//Eliminar el mï¿½ximo
+		assertEquals("No hay elementos deberï¿½a retornar null",null, cp1.delMax());
+		assertEquals("No hay elementos deberï¿½a retornar null",null, cp2.delMax());
 
-		//Número de elementos debería ser 0
-		assertEquals("No hay elementos debería retornar 0",0, cp1.darNumElementos());
-		assertEquals("No hay elementos debería retornar 0",0, cp2.darNumElementos());
+		//Nï¿½mero de elementos deberï¿½a ser 0
+		assertEquals("No hay elementos deberï¿½a retornar 0",0, cp1.darNumElementos());
+		assertEquals("No hay elementos deberï¿½a retornar 0",0, cp2.darNumElementos());
 
 	}
 
@@ -62,15 +62,16 @@ public class CPTest extends TestCase{
 		cp2.agregar(elemento2);
 		cp2.agregar(elemento3);
 
-		//Ahora se verifica que se elimine el máximo correctamente		
-		assertEquals("El elemento máximo de MaxCP es el número 3",elemento3, cp1.max());
-		assertEquals("El elemento máximo de HeapCP es el número 3",elemento3, cp2.max());
-		assertEquals("Debería eliminarse de MaxCP el elemento 3",elemento3, cp1.delMax());
-		assertEquals("Debería eliminarse de HepCP el elemento 3",elemento3, cp2.delMax());
-		assertEquals("Debería eliminarse de MaxCP el elemento 2",elemento2, cp1.delMax());
-		assertEquals("Debería eliminarse de HepCP el elemento 2",elemento2, cp2.delMax());
-		assertEquals("Debería eliminarse de MaxCP el elemento 1",elemento1, cp1.delMax());
-		assertEquals("Debería eliminarse de HepCP el elemento 1",elemento1, cp2.delMax());
+		//Ahora se verifica que se elimine el mï¿½ximo correctamente		
+		assertEquals("El elemento mï¿½ximo de MaxCP es el nï¿½mero 3",elemento3, cp1.max());
+		assertEquals("El elemento mï¿½ximo de HeapCP es el nï¿½mero 3",elemento3, cp2.max());
+		assertEquals("Deberï¿½a eliminarse de MaxCP el elemento 3",elemento3, cp1.delMax());
+		assertEquals("Deberï¿½a eliminarse de HepCP el elemento 3",elemento3, cp2.delMax());
+		assertEquals("Deberï¿½a eliminarse de MaxCP el elemento 2",elemento2, cp1.delMax());
+		assertEquals("Deberï¿½a eliminarse de HepCP el elemento 2",elemento2, cp2.delMax());
+		assertEquals("Deberï¿½a eliminarse de MaxCP el elemento 1",elemento1, cp1.delMax());
+		assertEquals("Deberï¿½a eliminarse de HepCP el elemento 1",elemento1, cp2.delMax());
 
 
 	}
+}
