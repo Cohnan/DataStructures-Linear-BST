@@ -298,7 +298,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	/**
 	 * Método auxiliar para el select
 	 */
-	public NodoBST<K, V> select(NodoBST<K, V>x, int num){
+	private NodoBST<K, V> select(NodoBST<K, V>x, int num){
 		int aux = size(x.darIzquierda());
 		if(aux>num) return select(x.darIzquierda(),num);
 		else if(aux<num) return select(x.darDerecha(), num-aux-1);

@@ -22,7 +22,7 @@ public class NodoBST<K,V> {
 	public int darTamano(){
 		return tamano;
 	}
-	
+		
 	public K darKey(){
 		return key;
 	}
