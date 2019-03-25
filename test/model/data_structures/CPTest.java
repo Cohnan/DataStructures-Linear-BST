@@ -3,9 +3,7 @@ package model.data_structures;
 import junit.framework.TestCase;
 import model.vo.LocationVO;
 
-public class ColaPrioridadTest extends TestCase {
-
-	
+public class CPTest extends TestCase{
 
 	private MaxColaPrioridad<LocationVO> cp1;
 	private MaxHeapCP<LocationVO> cp2;
@@ -76,61 +74,3 @@ public class ColaPrioridadTest extends TestCase {
 
 
 	}
-
-	public void testMuchosElementos(){
-
-		setUpEscenario1();
-		//Se verifica que las colas contengan todos los datos
-		assertEquals("Debería haber 100 elementos",100, cp1.darNumElementos());
-		assertEquals("Debería haber 100 elementos",100, cp2.darNumElementos());
-
-
-		//Se verifica que estén ordenados las colas
-		assertEquals("El elemento máximo no debería ser ese",109, cp1.max().getNumberOfRegisters());
-		assertEquals("El elemento máximo no debería ser ese",109, cp2.max().getNumberOfRegisters());
-
-		//Se verifica que se eliminen todos los elementos en orden
-		for (int i = 0; i < 100; i++) {
-			assertEquals("Los elementos no se están eliminando en orden",(99-i)+10, cp1.delMax().getNumberOfRegisters());
-			assertEquals("Los elementos no se están eliminando en orden",(99-i)+10, cp2.delMax().getNumberOfRegisters());
-		}
-
-	}
-
-
-	public void agregarNuevoElementosConMuchosElementos(){
-
-		setUpEscenario1();
-
-		//Insertando un elemento muy grande
-		LocationVO auxiliar = new LocationVO(123, "NA", 1000000);
-		cp1.agregar(auxiliar);
-		cp2.agregar(auxiliar);
-
-		//Debe eliminarse el elemento recién agregado
-		assertEquals("El elemento eliminado no debería ser ese",auxiliar, cp1.delMax());
-		assertEquals("El elemento eliminado no debería ser ese",auxiliar, cp2.delMax());
-
-
-		//Insertando un elemento con la misma prioridad
-		auxiliar = new LocationVO(123,"NA",109);
-		LocationVO auxiliar2 = new LocationVO(123, "NA", 99);
-		cp1.agregar(auxiliar);
-		cp2.agregar(auxiliar);
-		cp1.agregar(auxiliar2);
-		cp2.agregar(auxiliar2);
-
-		assertEquals("El elemento eliminado no debería ser ese",109, cp1.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",109, cp1.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",109, cp2.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",109, cp2.delMax().getNumberOfRegisters());
-
-
-		assertEquals("El elemento eliminado no debería ser ese",99, cp1.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",99, cp1.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",99, cp2.delMax().getNumberOfRegisters());
-		assertEquals("El elemento eliminado no debería ser ese",99, cp2.delMax().getNumberOfRegisters());
-
-	}
-
-}
