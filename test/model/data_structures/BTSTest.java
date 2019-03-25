@@ -188,22 +188,32 @@ public class BTSTest {
 	 */
 	@Test
 	public void testIterator() {
-		int n = numeroEscenarios; // n grande para probar el iterador
-		int nProbar = 20; // Probar varias veces el iterador para el arbol creado de diferentes maneras pero con los mismos elementos
-		boolean[] constrActual = new boolean[] {true, false};
-		for (int j = 0; j < nProbar; j++) {  
-			setUpEscenario(n, constrActual[j%2]); // Probar intercaladamente para cada constructor
+		int n = numeroEscenarios; // Realiza el test solo para un numero grande, con diferentes constructores
+		boolean[] elementosVistos; // Inicializado en false
+		int llaveAct;
+		int totalVistos;
+		
+		for (boolean desordenado: new boolean[] {true, false}){
+			setUpEscenario(n, desordenado);
+			elementosVistos = new boolean[n];
+			totalVistos = 0;
 			
-			int i = 0;
-			for(String dato: tabla) {
-				assertTrue("Escenario: " + n + ". El " + i + "-esimo elemento deberia ser: Elemento " + i
-						+ ", pero se obtuvo " + dato, dato.equals("Elemento " + i));
-				i += 1;
+			for(String llave: tabla) {
+				// Cada elemento de la tabla es de la forma "Elemento i" : i, asi que aprovechamos esto para numerarlos por i				
+				llaveAct = tabla.get(llave);
+				assertTrue("Escenario: " + n + ", desordenado?: " + desordenado + ". El valor de las llaves deberia estar entre " + 0 + " y " + n + ", pero se obtuvo que este valor era " + llaveAct, 0 <= llaveAct && llaveAct <= n);
+				
+				// Comprobar que el elemento no ha sido visto antes
+				if (elementosVistos[llaveAct]) {
+					fail("Escenario: " + n + ", desordenado?: " + desordenado + ". El elemento " + llave + " deberia haber sido visto MAXIMO una vez.");
+				} else {
+					totalVistos += 1;
+					elementosVistos[llaveAct] = true;
+				}				
 			}
-			// Verificar que solo se identifican n elementos
-			assertTrue("Escenario: " + n + ". El iterador deberia identificar y devolver " + n + " elementos", i == n);
-			System.out.println("El iterador paso la prueba #" + j);
+			// Comprobar que se vieron todas las llaves (exactamente una vez)
+			assertTrue("Escenario: " + n + ",  desordenado?: " + desordenado + ". Deberian haberse encontrado " + n + " llaves, pero se encontraron " + totalVistos, totalVistos == n);
 		}
-		System.out.println("El iterador funciona para un tamanio " + n);
+		System.out.println("iterator() funciona para el escenario " + n + "");
 	}
 }
