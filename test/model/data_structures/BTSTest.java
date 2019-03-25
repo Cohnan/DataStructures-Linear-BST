@@ -331,22 +331,45 @@ public class BTSTest {
 	}
 	
 	/**
-	 * Prueba el metodo floor().
+	 * Prueba el metodo rank().
 	 */
-	public void testfloor() {}
-	
-	/**
-	 * Prueba el metodo ceiling().
-	 */
-	public void testceiling() {}
+	public void testrank() {
+
+		int valor;
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// 
+			for (int i = 0; i < n; i++) {
+				// 
+				valor = tabla.rank("Elemento " + i);
+				assertTrue("Escenario: " + n + ". El dato esperado era: " + i
+						+ ", pero se obtuvo " + (valor), valor == i);
+				
+			}
+			System.out.println("select() funciona para el escenario " + n + ", para todos los elementos.");			
+		}
+		System.out.println("select() funciona!");
+	}
 	
 	/**
 	 * Prueba el metodo select().
 	 */
-	public void testselect() {}
-	
-	/**
-	 * Prueba el metodo rank().
-	 */
-	public void testrank() {}
+	public void testselect() {
+		String valor;
+		for (int n = 0; n <= numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// 
+			for (int i = 0; i < n; i++) {
+				// 
+				valor = tabla.select(i);
+				assertTrue("Escenario: " + n + ". El dato esperado era: Elemento " + i
+						+ ", pero se obtuvo " + (valor != null? "nulo": valor), valor != null && valor.equals("Elemento " + i));
+				
+			}
+			System.out.println("select() funciona para el escenario " + n + ", para todos los elementos.");			
+		}
+		System.out.println("select() funciona!");
+	}
 }
