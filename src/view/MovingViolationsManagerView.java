@@ -87,6 +87,19 @@ public class MovingViolationsManagerView
 		}
 		
 	}
+	
+	
+	public void requerimiento3B(Iterable<VOColeccion> resultados){
+		
+		System.out.println("Franja"+ "\t"+ "ValorAcumulado"+ "\t"+"TotalInfracciones"+ "\t"+"%SinAcc"+ "\t"+"%ConAcc");
+		
+		
+		for (VOColeccion s: resultados) {
+			System.out.println(s.darFranja()+ "\t"+s.darTotalPagar()+s.darTotalInfracciones()+s.darPorcentajeSinInfracciones()+s.darPorcentajeConInfracciones());
+		}
+		
+		
+	}
 	//	/**
 	//	 *Imprime el requerimiento 1A - Verifique Unique ID
 	//	 * @param Cola con los ObjectID repetidos

@@ -47,6 +47,7 @@ public class VOMovingViolations {
 	private String violationCode;
 	private String violationDesc;
 	private int fineAmount;
+	private Coordenadas coord;
 
 
 	/**
@@ -81,6 +82,7 @@ public class VOMovingViolations {
 		else yCoord = -1;
 		
 		
+		
 		totalPaid = Double.parseDouble(linea[headerPositions[TOTALPAID]]);
 		
 		campo = linea[headerPositions[PENALTY1]];
@@ -104,6 +106,9 @@ public class VOMovingViolations {
 		violationDesc = linea[headerPositions[VIOLATIONDESC]];
 		
 		fineAmount = Integer.parseInt(linea[headerPositions[FINEAMT]]);
+		
+		coord = new Coordenadas(xCoord, yCoord);
+		
 	}
 
 	/**
@@ -201,6 +206,10 @@ public class VOMovingViolations {
 		return fineAmount;
 	}
 	
+	public Coordenadas darCoordenadas(){
+		return coord;
+	}
+	
 	/**
 	 * For comparations
 	 */
@@ -231,7 +240,7 @@ public class VOMovingViolations {
 		public int compare(VOMovingViolations arg0, VOMovingViolations arg1) {
 			
 		if(arg0.getTicketIssueDate().getHour()>arg1.getTicketIssueDate().getHour()) return 1;
-		else if(arg0.getTicketIssueDate().getHour()>arg1.getTicketIssueDate().getHour()) return -1;	
+		else if(arg0.getTicketIssueDate().getHour()<arg1.getTicketIssueDate().getHour()) return -1;	
 		else return 0;
 		}
 		
