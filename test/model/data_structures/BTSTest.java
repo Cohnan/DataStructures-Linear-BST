@@ -17,7 +17,7 @@ public class BTSTest {
 	/*
 	 * Escenarios
 	 */
-	// Arreglo con n elementos
+	// Arreglo con los elementos 0:0, 1:1, ..., n-1:n-1
 	private void setUpEscenario(int n, boolean aleatorio) {
 		tabla = new BlancoRojoBST<Integer, Integer>();
 		if (!aleatorio) {
@@ -422,5 +422,150 @@ public class BTSTest {
 			System.out.println("testCeiling() funciona para el escenario " + n + ", para todos los elementos.");			
 		}
 		System.out.println("testCeiling() funciona!");
+	}
+	
+	/**
+	 * Prueba el metodo getHeight()
+	 */
+	@Test
+	public void testGetHeight() {
+		setUpEscenario(22, false); // Escenario hecho a mano que se conoce con detalle
+		
+		int alturaObtenida;
+		int[] alturasEsperadas = new int[] {3, 2, 3, 1, 3, 2, 3, 0, 4, 3, 4, 2, 4, 3, 4, 1, 4, 3, 4, 2, 4, 3};
+		
+		for (int i = 0; i < 22; i++) {
+			alturaObtenida = tabla.getHeight(i);
+			assertTrue("Escenario: " + 22 + ". La altura esperada para " + i + " era: " + alturasEsperadas[i]
+					+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == alturasEsperadas[i]);
+			System.out.println("Altura correcta para " + i);
+		}	
+		
+		// Elementos inexistentes
+		alturaObtenida = tabla.getHeight(-10);
+		assertTrue("Escenario: " + 22 + ". La altura esperada para " + -10 + " era: " + (-1)
+				+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == -1);
+		System.out.println("Altura correcta para elementos inexistentes.");
+	}
+	
+	/**
+	 * Prueba el metodo height()
+	 */
+	@Test
+	public void testHeight() {
+		setUpEscenario(22, false); // Escenario hecho a mano que se conoce con detalle
+		int alturaObtenida = tabla.height();
+		assertTrue("Escenario: " + 22 + ". La altura esperada para el arbol era: " + 4
+				+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == 4);
+	}
+	
+	/**
+	 * Prueba el metodo darNumeroParejas()
+	 */
+	@Test
+	public void testDarNumeroParejas() {
+		int numeroParejas;
+		
+		for (int n = 0; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			numeroParejas = tabla.darNumeroParejas();
+			assertTrue("Escenario: " + n + ". El numero de parejas esperado en el arbol era: " + n
+					+ ", pero se obtuvieron " + numeroParejas, numeroParejas == n);
+		}
+	}
+	
+	/**
+	 * Prueba el metodo keysInRange()
+	 */
+	@Test
+	public void testKeysInRange() {
+		int nTests = 15; // Numero de intervalos con los que se probara el metodo para cada escenario
+		int minKey;
+		int maxKey;
+		int temp;
+		IArregloDinamico<Integer> llavesEncontradas = new ArregloDinamico<>();
+		
+		for (int n = 1; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// Probar varios rangos por cada escenario
+			for (int i = 0; i < nTests; i++) {
+				llavesEncontradas = new ArregloDinamico<>();
+				// Eleccion de los rangos
+				minKey = (int)(Math.random()*n);
+				maxKey = (int)(Math.random()*n);
+				
+				if (maxKey < minKey) {
+					temp = minKey;
+					minKey = maxKey;
+					maxKey = temp;
+				}
+				
+				// Extraccion de llaves en rango en formato ordenable
+				for (Integer key : tabla.keysInRange(minKey, maxKey)) llavesEncontradas.agregar(key);
+				Sort.ordenarQuickSort(llavesEncontradas);
+				
+							
+				// Revisar que todas las llaves en ese rango fueron encontradas
+				for (int j = minKey; j <= maxKey; j++) {
+					assertTrue("Escenario: " + n + ". Se esperaba encontrar a la llave " + j + " en el rango de busqueda"
+							+ " cuando en cambio se encontro la llave " + llavesEncontradas.darObjeto(j - minKey)
+							, llavesEncontradas.darObjeto(j - minKey).equals(j));
+					System.out.println("Se hallo la llave correcto en el escenacio " + n + " para minKey = " + minKey + ", maxKey =  " + maxKey + " y la llave " + j);
+				}
+				
+				// Asegurarse de que no hay llaves adicionales encontradas en ese rango
+				assertTrue("Escenario: " + n + ". No se esperaban llaves adicionales en el rango dado, pero se obtuvieron " 
+						+ (llavesEncontradas.darTamano() - (maxKey - minKey + 1)) + " llaves adicionales.", llavesEncontradas.darTamano() == (maxKey - minKey + 1));
+			}
+		}
+	}
+	
+	/**
+	 * Prueba el metodo valuesInRange()
+	 */
+	@Test
+	public void testValuesInRange() {
+		int nTests = 15; // Numero de intervalos con los que se probara el metodo para cada escenario
+		int minvalue;
+		int maxvalue;
+		int temp;
+		IArregloDinamico<Integer> valoresEncontradas = new ArregloDinamico<>();
+		
+		for (int n = 1; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// Probar varios rangos por cada escenario
+			for (int i = 0; i < nTests; i++) {
+				valoresEncontradas = new ArregloDinamico<>();
+				// Eleccion de los rangos
+				minvalue = (int)(Math.random()*n);
+				maxvalue = (int)(Math.random()*n);
+				
+				if (maxvalue < minvalue) {
+					temp = minvalue;
+					minvalue = maxvalue;
+					maxvalue = temp;
+				}
+				
+				// Extraccion de valores en rango en formato ordenable
+				for (Integer value : tabla.valuesInRange(minvalue, maxvalue)) valoresEncontradas.agregar(value);
+				Sort.ordenarQuickSort(valoresEncontradas);
+				
+							
+				// Revisar que todas las valores en ese rango fueron encontradas
+				for (int j = minvalue; j <= maxvalue; j++) {
+					assertTrue("Escenario: " + n + ". Se esperaba encontrar a la valor" + j + " en el rango de busqueda"
+							+ " cuando en cambio se encontro la valor" + valoresEncontradas.darObjeto(j - minvalue)
+							, valoresEncontradas.darObjeto(j - minvalue).equals(j));
+					System.out.println("Se hallo la valorcorrecto en el escenacio " + n + " para minvalue = " + minvalue + ", maxvalue =  " + maxvalue + " y la valor" + j);
+				}
+				
+				// Asegurarse de que no hay valores adicionales encontradas en ese rango
+				assertTrue("Escenario: " + n + ". No se esperaban valores adicionales en el rango dado, pero se obtuvieron " 
+						+ (valoresEncontradas.darTamano() - (maxvalue - minvalue + 1)) + " valores adicionales.", valoresEncontradas.darTamano() == (maxvalue - minvalue + 1));
+			}
+		}
 	}
 }
