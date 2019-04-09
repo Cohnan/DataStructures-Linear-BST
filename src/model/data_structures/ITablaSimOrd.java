@@ -2,11 +2,11 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
+public interface ITablaSimOrd<K extends Comparable<? super K>, V> extends Iterable<K> {
 	
 	
 	/**
-	 * Retorna true si la tabla está vacía
+	 * Retorna true si la tabla estï¿½ vacï¿½a
 	 * Retorna false si hay al menos un elemento
 	 */
 	boolean isEmpty();
@@ -34,7 +34,7 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	
 	/**
-	 * Da el tamaño de la tabla
+	 * Da el tamaï¿½o de la tabla
 	 */
 	int darTamano();
 	
@@ -64,12 +64,12 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	
 	/**
-	 * Retorna la llave más grande menor o igual a la llave dada por parámetro
+	 * Retorna la llave mï¿½s grande menor o igual a la llave dada por parï¿½metro
 	 */
 	K floor(K key);
 	
 	/**
-	 * Retorna la llave más pequeña mayor o igual a la llave dada por parámetro
+	 * Retorna la llave mï¿½s pequeï¿½a mayor o igual a la llave dada por parï¿½metro
 	 */
 	K ceiling(K key);
 	
@@ -81,13 +81,13 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	
 	/**
-	 * Número de llaves menores que llave dada por parámetro
+	 * Nï¿½mero de llaves menores que llave dada por parï¿½metro
 	 */
 	int rank(K key);
 	
 	
 	/**
-	 * Altura del árbol
+	 * Altura del ï¿½rbol
 	 */
 	int height();
 	
@@ -99,7 +99,7 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	
 	/**
-	 * Número de elementos en el árbol 
+	 * Nï¿½mero de elementos en el ï¿½rbol 
 	 */
 	int darNumeroParejas();
 	

@@ -14,20 +14,17 @@ import java.util.Iterator;
 import java.util.Scanner;
 import model.util.Sort;
 
-import model.data_structures.IQueue;
-import model.data_structures.IStack;
-import model.data_structures.ITablaSimOrd;
-import model.data_structures.MaxHeapCP;
-import model.data_structures.IArregloDinamico;
+import model.data_structures.*;
 import model.data_structures.Queue;
 import model.data_structures.Stack;
+import model.logic.*;
 import model.data_structures.ArregloDinamico;
 import model.data_structures.BlancoRojoBST;
 import model.vo.VOMovingViolations;
 import model.vo.Coordenadas;
+import model.vo.InfraccionesFranjaHoraria;
 import model.vo.VOColeccion;
-import model.vo.VODaylyStatistic;
-import model.vo.VOViolationCode;
+import model.vo.*;
 
 import view.MovingViolationsManagerView;
 
@@ -40,6 +37,8 @@ public class Controller {
 	 */
 	private MovingViolationsManagerView view;
 
+	private MovingViolationsManager model;
+	
 	/**
 	 * Lista donde se van a cargar los datos de los archivos
 	 */
@@ -65,12 +64,32 @@ public class Controller {
 	 * Y maximo de infraccion
 	 */
 	private static float yMax;
-
+	
+	/*
+	 * Creados en Parte A
+	 */
+	/**
+	 * 1A
+	 */
+	private IColaPrioridad<InfraccionesFranjaHoraria> cpFranjasHorarias;
+	
+	/**
+	 * 2A
+	 */
+	private ITablaHash<Double[], InfraccionesLocalizacion> htLocalizaciones;
+	
+	/**
+	 * 3A
+	 */
+	private ITablaSimOrd<LocalDateTime, InfraccionesFecha> abFechas;
+	
 	/*
 	 * Constructor
 	 */
-	public Controller() {
+	public Controller()
+	{
 		view = new MovingViolationsManagerView();
+		model = new MovingViolationsManager();
 	}
 
 	/*

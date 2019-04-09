@@ -1,6 +1,6 @@
 package model.data_structures;
 
-public interface IColaPrioridad<T extends Comparable<T>> extends Iterable<T> {
+public interface IColaPrioridad<T extends Comparable<? super T>> extends Iterable<T> {
 	/**
 	 * Retorna true si la Cola esta vacia
 	 * @return true si la Cola esta vacia, false de lo contrario
