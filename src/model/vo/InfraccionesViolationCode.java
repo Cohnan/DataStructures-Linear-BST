@@ -22,6 +22,18 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones{
 	
 	private String violationCode;	
 		
+	/*
+	 * Constructores
+	 */
+	/**
+	 * Instantiates a new infracciones violation code.
+	 */
+	
+	public InfraccionesViolationCode(String violationCodeP) {
+		super();
+		this.violationCode = violationCodeP;
+	}
+	
 	/**
 	 * Instantiates a new infracciones violation code.
 	 * @param lista Lista de infracciones que poseen el mismo ViolationCode
@@ -32,6 +44,9 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones{
 		this.violationCode = violationCodeP;
 	}
 
+	/*
+	 * Metodos
+	 */
 	/**
 	 * Gets the violation code.
 	 *

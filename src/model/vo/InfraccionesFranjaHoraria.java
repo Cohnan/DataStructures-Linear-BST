@@ -26,6 +26,19 @@ public class InfraccionesFranjaHoraria extends EstadisticaInfracciones implement
 	
 	private LocalTime hora_Final;
 	
+	/*
+	 * Constructores
+	 */
+	/**
+	 * Instantiates a new franja horaria
+	 */
+	
+	public InfraccionesFranjaHoraria(LocalTime fInicial, LocalTime fFinal) {
+		super();
+		this.hora_Inicial = fInicial;
+		this.hora_Final = fFinal;		
+	}
+	
 	/**
 	 * Instantiates a new franja horaria.
 	 * @param lista Cola con las infraciones que pertenecen al rango de horas establecido
@@ -36,17 +49,10 @@ public class InfraccionesFranjaHoraria extends EstadisticaInfracciones implement
 		this.hora_Inicial = fInicial;
 		this.hora_Final = fFinal;		
 	}
-	
-	/**
-	 * Instantiates a new franja horaria
-	 */
-	
-	public InfraccionesFranjaHoraria(LocalTime fInicial, LocalTime fFinal) {
-		super();
-		this.hora_Inicial = fInicial;
-		this.hora_Final = fFinal;		
-	}
 
+	/*
+	 * Metodos
+	 */
 	/**
 	 * @return the fechaInicial
 	 */

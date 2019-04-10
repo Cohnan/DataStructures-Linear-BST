@@ -27,6 +27,23 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	private int streetID;
 	
 	
+	/*
+	 * Constructores
+	 */
+	
+	/**
+	 * Instantiates a new infracciones localizacion.
+	 */
+	public InfraccionesLocalizacion(double xcoor, double ycoor, String locat, int address, int street) {
+		super();
+		xcoord = xcoor;
+		ycoord = ycoor;
+		location = locat;
+		addressID = address;
+		streetID = street;
+
+	}
+	
 	/**
 	 * Instantiates a new infracciones localizacion.
 	 * @param lista the lista
@@ -41,7 +58,10 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 		streetID = street;
 
 	}
-
+	
+	/*
+	 * Metodos
+	 */
 
 	/**
 	 * Gets the xcoord.

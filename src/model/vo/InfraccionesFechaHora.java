@@ -18,9 +18,14 @@ public class InfraccionesFechaHora extends EstadisticaInfracciones {
 	
 	private LocalDateTime fecha_hora_final;
 	
+	public InfraccionesFechaHora(LocalDateTime pFechaHoraIni, LocalDateTime pFechaHoraFin) {
+		super();
+		fecha_hora_inicial = pFechaHoraIni; 
+		fecha_hora_final = pFechaHoraFin; 
+	}
+	
 	public InfraccionesFechaHora(LocalDateTime pFechaHoraIni, LocalDateTime pFechaHoraFin, IQueue<VOMovingViolations> lista) {
 		super(lista);
-		// TODO Auto-generated constructor stub
 		fecha_hora_inicial = pFechaHoraIni; 
 		fecha_hora_final = pFechaHoraFin; 
 	}

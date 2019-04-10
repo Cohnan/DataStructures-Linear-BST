@@ -18,6 +18,17 @@ public class InfraccionesFecha extends EstadisticaInfracciones {
 	}
 	
 	private LocalDate fecha;
+	
+	/**
+	 * Instantiates a new infracciones fecha.
+	 * @param lista the lista
+	 */
+	public InfraccionesFecha(LocalDate pFecha )
+	{
+		super();
+		fecha = pFecha;
+	}
+	
 	/**
 	 * Instantiates a new infracciones fecha.
 	 * @param lista the lista
