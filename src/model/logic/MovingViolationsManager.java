@@ -92,11 +92,11 @@ public class MovingViolationsManager {
 		if(n == 1)
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
-					//					"Moving_Violations_Issued_in_February_2018.csv",
-					//					"Moving_Violations_Issued_in_March_2018.csv",
-					//					"Moving_Violations_Issued_in_April_2018.csv",
-					//					"Moving_Violations_Issued_in_May_2018.csv",
-					//					"Moving_Violations_Issued_in_June_2018.csv"
+										"Moving_Violations_Issued_in_February_2018.csv",
+										"Moving_Violations_Issued_in_March_2018.csv",
+										"Moving_Violations_Issued_in_April_2018.csv",
+										"Moving_Violations_Issued_in_May_2018.csv",
+										"Moving_Violations_Issued_in_June_2018.csv"
 			});
 			semestreCargado = 1;
 		}
@@ -204,7 +204,7 @@ public class MovingViolationsManager {
 			
 			// Se deben las estadisticas completas para cada franja horaria antes de crear la cola de prioridad
 			// pues se necesita saber la prioridad final de cada elemento a agregar
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TicketIssueOrder());
+			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TimeOrder());
 			
 			Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
@@ -215,6 +215,7 @@ public class MovingViolationsManager {
 			// los datos inmediatamente siguientes
 			VOMovingViolations infrRevisar = iterador.next();
 			int horaRef = infrRevisar.getTicketIssueDate().getHour() % 24;
+			
 			// Datos a actualizar y finalmente agregar
 			InfraccionesFranjaHoraria voFranja = new InfraccionesFranjaHoraria(LocalTime.of(horaRef, 0, 0), 
 					LocalTime.of(horaRef, 59, 59));
@@ -229,6 +230,7 @@ public class MovingViolationsManager {
 				} else {
 					// Agrega el dato que se estuvo actualizando a la cola
 					cpFranjasHorarias.agregar(voFranja);
+					System.out.println(voFranja);
 					// Reestablecer referencias
 					horaRef = infrRevisar.getTicketIssueDate().getHour() % 24;
 					// Reestablecer datos a actualizar
@@ -239,12 +241,14 @@ public class MovingViolationsManager {
 			}
 			// Agregar la ultima referencia
 			cpFranjasHorarias.agregar(voFranja);
+			System.out.println(voFranja);
 		}
 				
 		int i = 0;
 		for (InfraccionesFranjaHoraria estadistica : cpFranjasHorarias) {
 			if (++i > M) break;
 			mPrimeras.enqueue(estadistica);
+			System.out.println("Agregados " + i);
 		}
 		
 		return mPrimeras;		

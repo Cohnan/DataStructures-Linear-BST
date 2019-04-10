@@ -54,7 +54,7 @@ public class MovingViolationsManagerView
 	
 	public void printReq1A(IQueue<InfraccionesFranjaHoraria> resultados) {
 		for(InfraccionesFranjaHoraria vinfraFranjas: resultados) {
-			System.out.println(vinfraFranjas.toString());
+			System.out.println(vinfraFranjas);
 			
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*

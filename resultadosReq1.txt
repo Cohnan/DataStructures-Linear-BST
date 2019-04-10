@@ -1,0 +1,190 @@
+InfraccionesFranjaHoraria [hora_Inicial=00:00,
+ hora_Final=00:59:59,
+ totalInfracciones=20751,
+ porcentajeAccidentes=0.0104573273577177,
+ porcentajeNoAccidentes=0.9895426726422824,
+ valorTotal=1277090.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=01:00,
+ hora_Final=01:59:59,
+ totalInfracciones=8703,
+ porcentajeAccidentes=0.011145581983224176,
+ porcentajeNoAccidentes=0.9888544180167759,
+ valorTotal=525692.5]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=02:00,
+ hora_Final=02:59:59,
+ totalInfracciones=7962,
+ porcentajeAccidentes=0.012057272042200452,
+ porcentajeNoAccidentes=0.9879427279577996,
+ valorTotal=475760.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=03:00,
+ hora_Final=03:59:59,
+ totalInfracciones=7541,
+ porcentajeAccidentes=0.013260840737302744,
+ porcentajeNoAccidentes=0.9867391592626973,
+ valorTotal=446995.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=04:00,
+ hora_Final=04:59:59,
+ totalInfracciones=6223,
+ porcentajeAccidentes=0.00835609834484975,
+ porcentajeNoAccidentes=0.9916439016551503,
+ valorTotal=414135.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=05:00,
+ hora_Final=05:59:59,
+ totalInfracciones=6610,
+ porcentajeAccidentes=0.005446293494704993,
+ porcentajeNoAccidentes=0.994553706505295,
+ valorTotal=473360.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=06:00,
+ hora_Final=06:59:59,
+ totalInfracciones=13570,
+ porcentajeAccidentes=0.0040530582166543845,
+ porcentajeNoAccidentes=0.9959469417833456,
+ valorTotal=946199.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=07:00,
+ hora_Final=07:59:59,
+ totalInfracciones=24773,
+ porcentajeAccidentes=0.003673354054817745,
+ porcentajeNoAccidentes=0.9963266459451823,
+ valorTotal=1653200.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=08:00,
+ hora_Final=08:59:59,
+ totalInfracciones=32741,
+ porcentajeAccidentes=0.004275984239943801,
+ porcentajeNoAccidentes=0.9957240157600562,
+ valorTotal=2176571.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=09:00,
+ hora_Final=09:59:59,
+ totalInfracciones=34878,
+ porcentajeAccidentes=0.0036986065714777225,
+ porcentajeNoAccidentes=0.9963013934285223,
+ valorTotal=2357678.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=10:00,
+ hora_Final=10:59:59,
+ totalInfracciones=45957,
+ porcentajeAccidentes=0.002872250146876428,
+ porcentajeNoAccidentes=0.9971277498531236,
+ valorTotal=3150031.5700000003]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=11:00,
+ hora_Final=11:59:59,
+ totalInfracciones=48504,
+ porcentajeAccidentes=0.0022060036285667163,
+ porcentajeNoAccidentes=0.9977939963714333,
+ valorTotal=3333597.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=12:00,
+ hora_Final=12:59:59,
+ totalInfracciones=48089,
+ porcentajeAccidentes=0.003327164216348853,
+ porcentajeNoAccidentes=0.9966728357836512,
+ valorTotal=3238925.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=13:00,
+ hora_Final=13:59:59,
+ totalInfracciones=47078,
+ porcentajeAccidentes=0.0024639959216619226,
+ porcentajeNoAccidentes=0.9975360040783381,
+ valorTotal=3097903.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=14:00,
+ hora_Final=14:59:59,
+ totalInfracciones=43879,
+ porcentajeAccidentes=0.0025752637936142576,
+ porcentajeNoAccidentes=0.9974247362063857,
+ valorTotal=2865048.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=15:00,
+ hora_Final=15:59:59,
+ totalInfracciones=41096,
+ porcentajeAccidentes=0.0043313217831419115,
+ porcentajeNoAccidentes=0.9956686782168581,
+ valorTotal=2641460.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=16:00,
+ hora_Final=16:59:59,
+ totalInfracciones=37444,
+ porcentajeAccidentes=0.006970409144322188,
+ porcentajeNoAccidentes=0.9930295908556778,
+ valorTotal=2390652.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=17:00,
+ hora_Final=17:59:59,
+ totalInfracciones=31481,
+ porcentajeAccidentes=0.008004828309138845,
+ porcentajeNoAccidentes=0.9919951716908612,
+ valorTotal=2065708.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=18:00,
+ hora_Final=18:59:59,
+ totalInfracciones=28724,
+ porcentajeAccidentes=0.008947221835398969,
+ porcentajeNoAccidentes=0.991052778164601,
+ valorTotal=1880439.46]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=19:00,
+ hora_Final=19:59:59,
+ totalInfracciones=17250,
+ porcentajeAccidentes=0.007478260869565217,
+ porcentajeNoAccidentes=0.9925217391304347,
+ valorTotal=1114901.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=20:00,
+ hora_Final=20:59:59,
+ totalInfracciones=13186,
+ porcentajeAccidentes=0.013347489761868649,
+ porcentajeNoAccidentes=0.9866525102381314,
+ valorTotal=848390.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=21:00,
+ hora_Final=21:59:59,
+ totalInfracciones=11258,
+ porcentajeAccidentes=0.011636169834784153,
+ porcentajeNoAccidentes=0.9883638301652159,
+ valorTotal=697313.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=22:00,
+ hora_Final=22:59:59,
+ totalInfracciones=10912,
+ porcentajeAccidentes=0.012646627565982404,
+ porcentajeNoAccidentes=0.9873533724340176,
+ valorTotal=673815.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=23:00,
+ hora_Final=23:59:59,
+ totalInfracciones=10597,
+ porcentajeAccidentes=0.014626781164480513,
+ porcentajeNoAccidentes=0.9853732188355195,
+ valorTotal=644812.0]

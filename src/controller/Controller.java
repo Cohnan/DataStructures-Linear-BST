@@ -88,11 +88,9 @@ public class Controller {
 					view.printMessage("1A. Consultar las N franjas horarias con mas infracciones que desea ver. Ingresar valor de N: ");
 					int numeroFranjas = sc.nextInt();
 
-					//TODO Completar para la invocación del metodo 1A
-					//model.rankingNFranjas(int N)
-					
-					//TODO Mostrar resultado de tipo Cola con N InfraccionesFranjaHoraria
-					//view.printReq1A( ...);
+					IQueue<InfraccionesFranjaHoraria> primeros = model.rankingNFranjas(numeroFranjas);
+					System.out.println(primeros);
+					view.printReq1A(primeros);
 					break;
 
 				case 2:

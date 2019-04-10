@@ -17,7 +17,17 @@ private ArregloDinamico<T> cp;
 	
 	@Override
 	public Iterator<T> iterator() {
-		return cp.iterator();
+		return new Iterator<T>() {
+			int iActual = 1;
+			@Override
+			public boolean hasNext() {
+				return iActual < cp.darTamano();
+			}
+			@Override
+			public T next() {
+				return cp.darObjeto(iActual++);
+			}
+		};
 	}
 
 	@Override
