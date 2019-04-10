@@ -54,21 +54,6 @@ public class EstadisticaInfracciones {
 	/*
 	 * Constructor
 	 */
-	/**
-	 * Crea un nuevo conjunto con las infracciones
-	 * @param listaInfracciones - Lista con las infracciones que cumplen el criterio de agrupamiento
-	 */
-	/*
-	public EstadisticaInfracciones(IQueue<VOMovingViolations> lista) {
-		//this.listaInfracciones = lista;
-		totalInfracciones = lista.size();
-		
-		//TODO Hacer el calculo de porcentajeAccidentes, porcentajeNoAccidentes y valorTotal
-		porcentajeAccidentes = -50.0;   //TODO Calcular con base en la lista
-		porcentajeNoAccidentes = -50.0; //TODO Calcular con base en la lista
-		valorTotal = -100000.0;         //TODO Calcular con base en la lista
-	}
-	*/
 	
 	public EstadisticaInfracciones() {
 		totalInfracciones = 0;
@@ -76,6 +61,20 @@ public class EstadisticaInfracciones {
 		totalConAccidentes = 0;
 		valorTotal = 0;
 	}
+	
+	/**
+	 * Crea unas estadisticas a partir de una lista de infracciones
+	 * @param listaInfracciones - Lista con las infracciones que cumplen el criterio de agrupamiento
+	 */
+	
+	public EstadisticaInfracciones(IQueue<VOMovingViolations> lista) {
+		this();
+		this.agregar(lista);
+	}
+	
+	//=========================================================
+	//Metodos Getters and Setters
+	//=========================================================
 	
 	public void agregarEstadistica(VOMovingViolations nuevaInfraccion) {
 		totalInfracciones += 1;
@@ -87,9 +86,23 @@ public class EstadisticaInfracciones {
 		valorTotal += nuevaInfraccion.getTotalPaid();
 	}
 	
-	//=========================================================
-	//Metodos Getters and Setters
-	//=========================================================
+	/**
+	 * Actualiza las estadisticas dada una lista de infracciones
+	 * @param listaInfracciones - Lista con las infracciones que cumplen el criterio de agrupamiento
+	 */
+	
+	public void agregar(IQueue<VOMovingViolations> lista) {
+		totalInfracciones = lista.size();
+		
+		int conAccidente;
+		for(VOMovingViolations infraccion : lista) {
+			conAccidente = infraccion.getAccidentIndicator()? 1 : 0;
+			totalConAccidentes += conAccidente;
+			totalSinAccidentes += (1 - conAccidente);
+		
+			valorTotal += infraccion.getTotalPaid();
+		}
+	}
 	
 	/**
 	 * Gets the total infracciones.
@@ -135,17 +148,18 @@ public class EstadisticaInfracciones {
 	 *
 	 * @return the lista infracciones
 	 */
+	/*
 	public IQueue<VOMovingViolations> getListaInfracciones() {
 		return listaInfracciones;
 	}
-
+	*/
 	/**
 	 * Sets the lista infracciones.
 	 *
 	 * @param listaInfracciones the new lista infracciones
 	 */
-	
+	/*
 	public void setListaInfracciones(IQueue<VOMovingViolations> listaInfracciones) {
 		this.listaInfracciones = listaInfracciones;
-	}
+	}*/
 }

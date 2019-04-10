@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import model.data_structures.IQueue;
 
 /**
- * Brinda la información del requerimiento 2C
+ * Brinda la informaciï¿½n del requerimiento 2C
  */
 
 public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHoraria {
@@ -13,8 +13,8 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 	@Override
 	public String toString() {
 		return "InfraccionesFranjaHorariaViolationCode [totalInfracciones="
-				+ totalInfracciones + ",\n porcentajeAccidentes=" + porcentajeAccidentes + ",\n porcentajeNoAccidentes="
-				+ porcentajeNoAccidentes + ",\n valorTotal=" + valorTotal + "]\n";
+				+ totalInfracciones + ",\n porcentajeAccidentes=" + getPorcentajeAccidentes() + ",\n porcentajeNoAccidentes="
+				+ getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n";
 	}
 
 	/**

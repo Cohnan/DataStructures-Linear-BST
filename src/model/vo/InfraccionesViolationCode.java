@@ -3,8 +3,8 @@ package model.vo;
 import model.data_structures.IQueue;
 
 /**
- * Organiza las infracciones por el el código de la infracción y muestra las estadisticas
- * de las respectivas infracciones que poseen el código en mención.
+ * Organiza las infracciones por el el cï¿½digo de la infracciï¿½n y muestra las estadisticas
+ * de las respectivas infracciones que poseen el cï¿½digo en menciï¿½n.
  */
 
 public class InfraccionesViolationCode extends EstadisticaInfracciones{
@@ -12,12 +12,12 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones{
 	@Override
 	public String toString() {
 		return "InfraccionesViolationCode [violationCode=" + violationCode + ",\n totalInfracciones=" + totalInfracciones
-				+ ",\n porcentajeAccidentes=" + porcentajeAccidentes + ",\n porcentajeNoAccidentes="
-				+ porcentajeNoAccidentes + ",\n valorTotal=" + valorTotal + "]\n\n";
+				+ ",\n porcentajeAccidentes=" + getPorcentajeAccidentes() + ",\n porcentajeNoAccidentes="
+				+ getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n\n";
 	}
 
 	/**
-	 * Codigo de la infracción por las que se van a agrupar las infracciones
+	 * Codigo de la infracciï¿½n por las que se van a agrupar las infracciones
 	 */
 	
 	private String violationCode;	

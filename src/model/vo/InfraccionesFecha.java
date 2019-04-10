@@ -13,8 +13,8 @@ public class InfraccionesFecha extends EstadisticaInfracciones {
 	@Override
 	public String toString() {
 		return "InfraccionesFecha [fecha=" + fecha + ",\n totalInfracciones=" + totalInfracciones
-				+ ",\n porcentajeAccidentes=" + porcentajeAccidentes + ",\n porcentajeNoAccidentes="
-				+ porcentajeNoAccidentes + ",\n valorTotal=" + valorTotal + "]\n\n";
+				+ ",\n porcentajeAccidentes=" + getPorcentajeAccidentes() + ",\n porcentajeNoAccidentes="
+				+ getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n\n";
 	}
 	
 	private LocalDate fecha;

@@ -12,8 +12,8 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	public String toString() {
 		return "InfraccionesLocalizacion [xcoord=" + xcoord + ", ycoord=" + ycoord + ",\n location=" + location
 				+ ",\n addressID=" + addressID + ",\n streetID=" + streetID + ",\n totalInfracciones=" + totalInfracciones
-				+ ",\n porcentajeAccidentes=" + porcentajeAccidentes + ",\n porcentajeNoAccidentes="
-				+ porcentajeNoAccidentes + ",\n valorTotal=" + valorTotal + "]\n\n";
+				+ ",\n porcentajeAccidentes=" + getPorcentajeAccidentes() + ",\n porcentajeNoAccidentes="
+				+ getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n\n";
 	}
 
 	private double xcoord;

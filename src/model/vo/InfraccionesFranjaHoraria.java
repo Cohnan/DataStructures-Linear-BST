@@ -14,8 +14,8 @@ public class InfraccionesFranjaHoraria extends EstadisticaInfracciones implement
 	@Override
 	public String toString() {
 		return "InfraccionesFranjaHoraria [hora_Inicial=" + hora_Inicial + ",\n hora_Final=" + hora_Final
-				+ ",\n totalInfracciones=" + totalInfracciones + ",\n porcentajeAccidentes=" + porcentajeAccidentes
-				+ ",\n porcentajeNoAccidentes=" + porcentajeNoAccidentes + ",\n valorTotal=" + valorTotal + "]\n\n";
+				+ ",\n totalInfracciones=" + totalInfracciones + ",\n porcentajeAccidentes=" + getPorcentajeAccidentes()
+				+ ",\n porcentajeNoAccidentes=" + getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n\n";
 	}
 
 	/** The franja horaria inicial. */
@@ -32,7 +32,7 @@ public class InfraccionesFranjaHoraria extends EstadisticaInfracciones implement
 	 */
 	
 	public InfraccionesFranjaHoraria(LocalTime fInicial, LocalTime fFinal, IQueue<VOMovingViolations> lista) {
-		super(lista);
+		super.agregar(lista);
 		this.hora_Inicial = fInicial;
 		this.hora_Final = fFinal;		
 	}
