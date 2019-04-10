@@ -89,7 +89,6 @@ public class Controller {
 					int numeroFranjas = sc.nextInt();
 
 					IQueue<InfraccionesFranjaHoraria> primeros = model.rankingNFranjas(numeroFranjas);
-					System.out.println(primeros);
 					view.printReq1A(primeros);
 					break;
 

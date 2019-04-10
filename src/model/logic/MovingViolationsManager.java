@@ -230,7 +230,6 @@ public class MovingViolationsManager {
 				} else {
 					// Agrega el dato que se estuvo actualizando a la cola
 					cpFranjasHorarias.agregar(voFranja);
-					System.out.println(voFranja);
 					// Reestablecer referencias
 					horaRef = infrRevisar.getTicketIssueDate().getHour() % 24;
 					// Reestablecer datos a actualizar
@@ -241,14 +240,12 @@ public class MovingViolationsManager {
 			}
 			// Agregar la ultima referencia
 			cpFranjasHorarias.agregar(voFranja);
-			System.out.println(voFranja);
 		}
 				
 		int i = 0;
 		for (InfraccionesFranjaHoraria estadistica : cpFranjasHorarias) {
 			if (++i > M) break;
 			mPrimeras.enqueue(estadistica);
-			System.out.println("Agregados " + i);
 		}
 		
 		return mPrimeras;		
