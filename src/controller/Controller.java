@@ -35,50 +35,6 @@ public class Controller {
 
 	private MovingViolationsManager model;
 	
-	/**
-	 * Lista donde se van a cargar los datos de los archivos
-	 */
-	private static IArregloDinamico<VOMovingViolations> movingVOLista;
-	/**
-	 * Numero actual del cuatrimestre cargado
-	 */
-	private static int semestreCargado = -1;
-
-	/**
-	 * X minimo de infraccion
-	 */
-	private static float xMin;
-	/**
-	 * Y minimo de infraccion
-	 */
-	private static float yMin;
-	/**
-	 * X maximo de infraccion
-	 */
-	private static float xMax;
-	/**
-	 * Y maximo de infraccion
-	 */
-	private static float yMax;
-	
-	/*
-	 * Creados en Parte A
-	 */
-	/**
-	 * 1A
-	 */
-	private IColaPrioridad<InfraccionesFranjaHoraria> cpFranjasHorarias;
-	
-	/**
-	 * 2A
-	 */
-	private ITablaHash<Coordenadas, InfraccionesLocalizacion> htLocalizaciones;
-	
-	/**
-	 * 3A
-	 */
-	private ITablaSimOrd<LocalDateTime, InfraccionesFecha> abFechas;
-	
 	/*
 	 * Constructor
 	 */
@@ -125,8 +81,8 @@ public class Controller {
 				case 0:
 					view.printMessage("Ingrese el Semestre (1 -[Enero - Junio], 2[Julio - Diciembre])");
 					int numeroSemestre = sc.nextInt();
-					IArregloDinamico<Integer> resultados0 = loadMovingViolations(numeroSemestre);
-					view.printMovingViolationsLoadInfo(resultados0, xMin,yMin,xMax,yMax,numeroSemestre );
+					EstadisticasCargaInfracciones resultados0 = model.loadMovingViolations(numeroSemestre);
+					view.printResumenLoadMovingViolations(resultados0);
 					break;
 				case 1:
 					view.printMessage("1A. Consultar las N franjas horarias con mas infracciones que desea ver. Ingresar valor de N: ");
@@ -340,104 +296,6 @@ public class Controller {
 		}
 	}
 
-	/**
-	 * Carga los datos del semestre dado
-	 * @param n Numero del semestre del anio (1 � 2)
-	 * @return Cola con el numero de datos cargados por mes del semestre
-	 */
-	public IArregloDinamico<Integer> loadMovingViolations(int n)
-	{
-		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
-		if(n == 1)
-		{
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
-					//					"Moving_Violations_Issued_in_February_2018.csv",
-					//					"Moving_Violations_Issued_in_March_2018.csv",
-					//					"Moving_Violations_Issued_in_April_2018.csv",
-					//					"Moving_Violations_Issued_in_May_2018.csv",
-					//					"Moving_Violations_Issued_in_June_2018.csv"
-			});
-			semestreCargado = 1;
-		}
-		else if(n == 2)
-		{
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
-					"Moving_Violations_Issued_in_August_2018.csv",
-					"Moving_Violations_Issued_in_September_2018.csv", 
-					"Moving_Violations_Issued_in_October_2018.csv",
-					"Moving_Violations_Issued_in_November_2018.csv",
-					"Moving_Violations_Issued_in_December_2018.csv"
-			});
-			semestreCargado = 2;
-		}
-		else
-		{
-			throw new IllegalArgumentException("No existe ese semestre en un annio.");
-		}
-		return numeroDeCargas;
-	}
-
-	/**
-	 * Metodo ayudante
-	 * Carga la informacion sobre infracciones de los archivos a una pila y una cola ordenadas por fecha.
-	 * Dado un arreglo con los nombres de los archivos a cargar
-	 * @returns Cola con el numero de datos cargados por mes del cuatrimestre
-	 */
-	private IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths){
-		CSVReader reader = null;
-		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
-
-		int contadorInf; // Cuenta numero de infracciones en cada archivo
-		try {
-			movingVOLista = new ArregloDinamico<VOMovingViolations>(670000);
-
-			for (String filePath : movingViolationsFilePaths) {
-				reader = new CSVReader(new FileReader("data/"+filePath));
-
-				contadorInf = 0;
-				// Deduce las posiciones de las columnas que se reconocen de acuerdo al header
-				String[] headers = reader.readNext();
-				int[] posiciones = new int[VOMovingViolations.EXPECTEDHEADERS.length];
-				for (int i = 0; i < VOMovingViolations.EXPECTEDHEADERS.length; i++) {
-					posiciones[i] = buscarArray(headers, VOMovingViolations.EXPECTEDHEADERS[i]);
-				}
-
-				// Lee linea a linea el archivo para crear las infracciones y cargarlas a la lista
-				VOMovingViolations infraccion;
-				for (String[] row : reader) {
-					infraccion = new VOMovingViolations(posiciones, row);
-					movingVOLista.agregar(infraccion);
-					contadorInf += 1;
-					if(xMin<=0 || yMin<=0){
-						xMin= infraccion.getXCoord();
-						yMin = infraccion.getYCoord();
-					}
-
-					// Se actualizan las coordenadas extremas
-					xMin = Math.min(xMin, infraccion.getXCoord());
-					xMax = Math.max(xMax, infraccion.getXCoord());
-					yMin = Math.min(yMin, infraccion.getYCoord());
-					yMax = Math.max(yMax, infraccion.getYCoord());			
-				}
-				// Se agrega el numero de infracciones cargadas en este archivo al resultado 
-				numeroDeCargas.agregar(contadorInf);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					return null;
-				}
-			}
-		}
-		return numeroDeCargas;
-	}
-
 	/*
 	 * ************************************************************************************
 	 * Metodos para los requerimientos del proyecto 2
@@ -578,22 +436,7 @@ public class Controller {
 	}
 
 	//
-	/**
-	 * Metodo para buscar strings en un array de strings, usado para deducir la posicion
-	 * de las columnas esperadas en cada archivo.
-	 * @param array
-	 * @param string
-	 * @return
-	 */
-	private int buscarArray(String[] array, String string) {
-		int i = 0;
 
-		while (i < array.length) {
-			if (array[i].equalsIgnoreCase(string)) return i;
-			i += 1;
-		}
-		return -1;
-	}
 	//
 	//
 	//	/**

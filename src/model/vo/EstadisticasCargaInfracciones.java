@@ -1,5 +1,7 @@
 package model.vo;
 
+import model.data_structures.IArregloDinamico;
+
 /**
  * Clase que representa los datos de reporte de la lectura de las infracciones 
  * 
@@ -25,10 +27,12 @@ public class EstadisticasCargaInfracciones {
 	 * @param parametro2 con valor para un dato de la carga de archivos
 	 * 
 	 */
-	public EstadisticasCargaInfracciones()
+	public EstadisticasCargaInfracciones(int totalInfracciones, int numeroMeses, int[] numeroInfraccionesxMes, double[] minimax)
 	{
-		// TODO Definir los parametros del metodo
-		// TODO inicializar valores de atributos con valores de parametros
+		this.totalInfracciones = totalInfracciones;
+		this.numeroMeses = numeroMeses;
+		this.numeroInfraccionesxMes = numeroInfraccionesxMes;
+		this.minimax = minimax;
 	}
 	
 	/**

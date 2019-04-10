@@ -1,16 +1,15 @@
 package model.logic;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Iterator;
 
-import model.data_structures.IArregloDinamico;
-import model.data_structures.IColaPrioridad;
-import model.data_structures.IQueue;
-import model.data_structures.ITablaHash;
-import model.data_structures.ITablaSimOrd;
-import model.data_structures.MaxHeapCP;
+import com.opencsv.CSVReader;
+
+import model.data_structures.*;
 import model.util.Sort;
 import model.vo.Coordenadas;
 import model.vo.EstadisticaInfracciones;
@@ -80,35 +79,125 @@ public class MovingViolationsManager {
 		
 	}
 	
-	/*
-	 * Parte A
-	 */
 	
-	
-	/*
-	 * Parte B
-	 */
+
 	/**
-	 * Cargar las infracciones de un semestre de 2018
-	 * @param numeroSemestre numero del semestre a cargar (1 o 2)
-	 * @return objeto con el resultado de la carga de las infracciones
+	 * Carga los datos del semestre dado
+	 * @param n Numero del semestre del anio (1 � 2)
+	 * @return Cola con el numero de datos cargados por mes del semestre
 	 */
-	public EstadisticasCargaInfracciones loadMovingViolations(int numeroSemestre) {
-		// TODO Realizar la carga de infracciones del semestre
-		
-		return null;
+	public EstadisticasCargaInfracciones loadMovingViolations(int n)
+	{
+		EstadisticasCargaInfracciones numeroDeCargas;
+		if(n == 1)
+		{
+			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
+					//					"Moving_Violations_Issued_in_February_2018.csv",
+					//					"Moving_Violations_Issued_in_March_2018.csv",
+					//					"Moving_Violations_Issued_in_April_2018.csv",
+					//					"Moving_Violations_Issued_in_May_2018.csv",
+					//					"Moving_Violations_Issued_in_June_2018.csv"
+			});
+			semestreCargado = 1;
+		}
+		else if(n == 2)
+		{
+			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
+					"Moving_Violations_Issued_in_August_2018.csv",
+					"Moving_Violations_Issued_in_September_2018.csv", 
+					"Moving_Violations_Issued_in_October_2018.csv",
+					"Moving_Violations_Issued_in_November_2018.csv",
+					"Moving_Violations_Issued_in_December_2018.csv"
+			});
+			semestreCargado = 2;
+		}
+		else
+		{
+			throw new IllegalArgumentException("No existe ese semestre en un annio.");
+		}
+		return numeroDeCargas;
 	}
 
+	/**
+	 * Metodo ayudante
+	 * Carga la informacion sobre infracciones de los archivos a una pila y una cola ordenadas por fecha.
+	 * Dado un arreglo con los nombres de los archivos a cargar
+	 * @returns Cola con el numero de datos cargados por mes del cuatrimestre
+	 */
+	private EstadisticasCargaInfracciones loadMovingViolations(String[] movingViolationsFilePaths){
+		CSVReader reader = null;
+		
+		int totalInf = 0;
+		int contadorInf; // Cuenta numero de infracciones en cada archivo
+		int nMeses = movingViolationsFilePaths.length;
+		int[] infPorMes = new int[nMeses];
+
+		try {
+			movingVOLista = new ArregloDinamico<VOMovingViolations>(670000);
+			
+			int nArchivoActual = 0;
+			for (String filePath : movingViolationsFilePaths) {
+				reader = new CSVReader(new FileReader("data/"+filePath));
+
+				contadorInf = 0;
+				// Deduce las posiciones de las columnas que se reconocen de acuerdo al header
+				String[] headers = reader.readNext();
+				int[] posiciones = new int[VOMovingViolations.EXPECTEDHEADERS.length];
+				for (int i = 0; i < VOMovingViolations.EXPECTEDHEADERS.length; i++) {
+					posiciones[i] = buscarArray(headers, VOMovingViolations.EXPECTEDHEADERS[i]);
+				}
+
+				// Lee linea a linea el archivo para crear las infracciones y cargarlas a la lista
+				VOMovingViolations infraccion;
+				for (String[] row : reader) {
+					infraccion = new VOMovingViolations(posiciones, row);
+					movingVOLista.agregar(infraccion);
+					contadorInf += 1;
+					if(xMin<=0 || yMin<=0){
+						xMin= infraccion.getXCoord();
+						yMin = infraccion.getYCoord();
+					}
+
+					// Se actualizan las coordenadas extremas
+					xMin = Math.min(xMin, infraccion.getXCoord());
+					xMax = Math.max(xMax, infraccion.getXCoord());
+					yMin = Math.min(yMin, infraccion.getYCoord());
+					yMax = Math.max(yMax, infraccion.getYCoord());			
+				}
+				// Se agrega el numero de infracciones cargadas en este archivo al resultado 
+				totalInf += contadorInf;
+				infPorMes[nArchivoActual++] = contadorInf;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return new EstadisticasCargaInfracciones(totalInf, nMeses, infPorMes, new double[] {xMin, yMin, xMax, yMax});
+	}
+
+
+	/*
+	 * Parte A 
+	 */
 	/**
 	  * Requerimiento 1A: Obtener el ranking de las N franjas horarias
 	  * que tengan m�s infracciones. 
 	  * @param int N: N�mero de franjas horarias que tienen m�s infracciones
 	  * @return Cola con objetos InfraccionesFranjaHoraria
 	  */
-	public IQueue<InfraccionesFranjaHoraria> rankingNFranjas(int N)
+	public IQueue<InfraccionesFranjaHoraria> rankingNFranjas(int M)
 	{
-IColaPrioridad<InfraccionesFranjaHoraria> mPrimeras = new MaxHeapCP<InfraccionesFranjaHoraria>();
-		
+		IQueue<InfraccionesFranjaHoraria> mPrimeras = new Queue<InfraccionesFranjaHoraria>();
+	
 		// Crear estructura con la informacion de las 24 franjas horarias
 		if (cpFranjasHorarias == null) {
 			cpFranjasHorarias = new MaxHeapCP<InfraccionesFranjaHoraria>();
@@ -155,7 +244,7 @@ IColaPrioridad<InfraccionesFranjaHoraria> mPrimeras = new MaxHeapCP<Infracciones
 		int i = 0;
 		for (InfraccionesFranjaHoraria estadistica : cpFranjasHorarias) {
 			if (++i > M) break;
-			mPrimeras.agregar(estadistica);
+			mPrimeras.enqueue(estadistica);
 		}
 		
 		return mPrimeras;		
@@ -266,7 +355,7 @@ IColaPrioridad<InfraccionesFranjaHoraria> mPrimeras = new MaxHeapCP<Infracciones
 	  * @return Contenedora de objetos InfraccionesViolationCode.
 	  // TODO Definir la estructura Contenedora
 	  */
-	public Contenedora<InfraccionesViolationCode> ordenarCodigosPorNumeroInfracciones()
+	public ITablaSimOrd<Integer, InfraccionesViolationCode> ordenarCodigosPorNumeroInfracciones()
 	{
 		// TODO completar
 		// TODO Definir la Estructura Contenedora
@@ -274,4 +363,23 @@ IColaPrioridad<InfraccionesFranjaHoraria> mPrimeras = new MaxHeapCP<Infracciones
 	}
 
 
+	/*
+	 * Metodos ayudantes 
+	 */
+	/**
+	 * Metodo para buscar strings en un array de strings, usado para deducir la posicion
+	 * de las columnas esperadas en cada archivo.
+	 * @param array
+	 * @param string
+	 * @return
+	 */
+	private int buscarArray(String[] array, String string) {
+		int i = 0;
+
+		while (i < array.length) {
+			if (array[i].equalsIgnoreCase(string)) return i;
+			i += 1;
+		}
+		return -1;
+	}
 }
