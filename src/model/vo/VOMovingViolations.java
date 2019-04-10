@@ -35,10 +35,10 @@ public class VOMovingViolations {
 	 */
 	private String iD; 
 	private String location;
-	private String addressID;
+	private int addressID;
 	private int streetsegID;
-	private float xCoord;
-	private float yCoord;
+	private double xCoord;
+	private double yCoord;
 	private double totalPaid;
 	private double penalty1;
 	private double penalty2;
@@ -60,13 +60,14 @@ public class VOMovingViolations {
 		
 		location = linea[headerPositions[LOCATION]];
 		
-		/*
-		 * Si se considera ADDRESS_ID como int:
+		
+		// * Si se considera ADDRESS_ID como int:
 		campo = linea[headerPositions[ADDRESS_ID]];
 		if (!campo.equals("")) addressID = Integer.parseInt(campo);
 		else addressID = -1;
-		*/
-		addressID = linea[headerPositions[ADDRESS_ID]];
+		
+		// * Si se considera ADDRESS_ID como String:
+		//addressID = linea[headerPositions[ADDRESS_ID]];
 
 		campo = linea[headerPositions[STREETSEGID]];
 		if (!campo.equals("")) streetsegID = Integer.parseInt(campo);
@@ -128,7 +129,7 @@ public class VOMovingViolations {
 	/**
 	 * @return addressID
 	 */
-	public String getAddressID() {
+	public int getAddressID() {
 		return addressID;
 	}
 	
@@ -143,14 +144,14 @@ public class VOMovingViolations {
 	/**
 	 * @return xCoord
 	 */
-	public float getXCoord() {
+	public double getXCoord() {
 		return xCoord;
 	}
 	
 	/**
 	 * @return yCoord
 	 */
-	public float getYCoord() {
+	public double getYCoord() {
 		return yCoord;
 	}
 	
@@ -281,7 +282,7 @@ public class VOMovingViolations {
 
 		@Override
 		public int compare(VOMovingViolations arg0, VOMovingViolations arg1) {
-			return arg0.getAddressID().compareTo(arg1.getAddressID());
+			return arg0.getAddressID() - arg1.getAddressID();
 		}
 		
 	}

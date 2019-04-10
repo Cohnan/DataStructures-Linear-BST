@@ -39,19 +39,19 @@ public class MovingViolationsManager {
 	/**
 	 * X minimo de infraccion
 	 */
-	private static float xMin;
+	private static double xMin;
 	/**
 	 * Y minimo de infraccion
 	 */
-	private static float yMin;
+	private static double yMin;
 	/**
 	 * X maximo de infraccion
 	 */
-	private static float xMax;
+	private static double xMax;
 	/**
 	 * Y maximo de infraccion
 	 */
-	private static float yMax;
+	private static double yMax;
 	
 	/*
 	 * Creados en Parte A
@@ -64,7 +64,7 @@ public class MovingViolationsManager {
 	/**
 	 * 2A
 	 */
-	private ITablaHash<Coordenadas, InfraccionesLocalizacion> htLocalizaciones;
+	private ITablaHash<Coordenadas, InfraccionesLocalizacion> thLocalizaciones; // Puede que se cambie a TablaSimOrd, pues Coordenadas tiene un orden que mencionan en el enunciado
 	
 	/**
 	 * 3A
@@ -260,8 +260,25 @@ public class MovingViolationsManager {
 	  */
 	public InfraccionesLocalizacion consultarPorLocalizacionHash(double xCoord, double yCoord)
 	{
-		// TODO completar
-		return null;		
+		if(thLocalizaciones == null) {
+			thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
+			
+			Coordenadas curCoord;
+			InfraccionesLocalizacion locActual;
+			
+			for (VOMovingViolations infraccion : movingVOLista) {
+				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
+				locActual = thLocalizaciones.get(curCoord);
+				
+				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
+				
+				locActual.agregarEstadistica(infraccion);
+				System.out.println("Loc Actual: " + locActual);
+				thLocalizaciones.put(curCoord, locActual);
+			}
+		}
+		
+		return thLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
 	}
 	
 	/**

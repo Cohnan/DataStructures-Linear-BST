@@ -93,16 +93,12 @@ public class Controller {
 					break;
 
 				case 2:
-					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 1234,56): ");
-					double xcoord = sc.nextDouble();
-					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 5678,23): ");
-					double ycoord = sc.nextDouble();
-
-					//TODO Completar para la invocación del metodo 2A
-					//model.consultarPorLocalizacionHash(double xCoord, double yCoord)
-
-					//TODO Mostrar resultado de tipo InfraccionesLocalizacion 
-					//view.printReq2A( ... )
+					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 402915.72): ");
+					double xCoord = sc.nextDouble();
+					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
+					double yCoord = sc.nextDouble();
+ 
+					view.printReq2A(model.consultarPorLocalizacionHash(xCoord, yCoord));
 					break;
 
 				case 3:
@@ -134,9 +130,9 @@ public class Controller {
 					break;
 
 				case 5:						
-					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 1234,56): ");
+					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 402915.72): ");
 					xcoord = sc.nextDouble();
-					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 5678,23): ");
+					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
 					ycoord = sc.nextDouble();
 
 					//TODO Completar para la invocación del metodo 2B

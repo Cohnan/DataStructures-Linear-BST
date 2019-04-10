@@ -3,14 +3,13 @@ package model.vo;
 public class Coordenadas implements Comparable<Coordenadas> {
 
 	
-	private float xCoord;
-	private float yCoord;
+	private int xCoord;
+	private int yCoord;
 	
 	
-	public Coordenadas(float x, float y) {
-		xCoord = x;
-		yCoord = y;
-		// TODO Auto-generated constructor stub
+	public Coordenadas(double x, double y) {
+		xCoord = (int) (x*100);
+		yCoord = (int) (y*100);
 	}
 	
 	
@@ -26,12 +25,12 @@ public class Coordenadas implements Comparable<Coordenadas> {
 	}
 
 	
-	public float darX(){
-		return xCoord;
+	public double darX(){
+		return xCoord/100.;
 	}
 	
-	public float darY(){
-		return yCoord;
+	public double darY(){
+		return yCoord/100.;
 	}
 	
 	

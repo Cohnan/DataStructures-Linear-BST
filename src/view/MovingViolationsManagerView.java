@@ -66,7 +66,7 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq2A(InfraccionesLocalizacion resultado) {
-		System.out.println(resultado.toString());
+		System.out.println(resultado);
 		
 		/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 		/*

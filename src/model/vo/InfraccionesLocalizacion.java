@@ -16,9 +16,9 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 				+ getPorcentajeNoAccidentes() + ",\n valorTotal=" + valorTotal + "]\n\n";
 	}
 
-	private double xcoord;
+	private int xcoord;
 	
-	private double ycoord;
+	private int ycoord;
 	
 	private String location;
 	
@@ -36,8 +36,8 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	 */
 	public InfraccionesLocalizacion(double xcoor, double ycoor, String locat, int address, int street) {
 		super();
-		xcoord = xcoor;
-		ycoord = ycoor;
+		xcoord = (int) (xcoor*100);
+		ycoord = (int) (ycoor*100);
 		location = locat;
 		addressID = address;
 		streetID = street;
@@ -51,8 +51,8 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	
 	public InfraccionesLocalizacion(double xcoor, double ycoor, String locat, int address, int street, IQueue<VOMovingViolations> lista) {
 		super(lista);
-		xcoord = xcoor;
-		ycoord = ycoor;
+		xcoord = (int) (xcoor*100);
+		ycoord = (int) (ycoor*100);
 		location = locat;
 		addressID = address;
 		streetID = street;
@@ -69,7 +69,7 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	 * @return the xcoord
 	 */
 	public double getXcoord() {
-		return xcoord;
+		return xcoord/100.;
 	}
 
 
@@ -79,7 +79,7 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	 * @param xcoord the xcoord to set
 	 */
 	public void setXcoord(double xcoord) {
-		this.xcoord = xcoord;
+		this.xcoord = (int) (xcoord*100);
 	}
 
 
@@ -89,7 +89,7 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	 * @return the ycoord
 	 */
 	public double getYcoord() {
-		return ycoord;
+		return ycoord/100.;
 	}
 
 
@@ -99,7 +99,7 @@ public class InfraccionesLocalizacion extends EstadisticaInfracciones {
 	 * @param ycoord the ycoord to set
 	 */
 	public void setYcoord(double ycoord) {
-		this.ycoord = ycoord;
+		this.ycoord = (int) (ycoord*100);
 	}
 
 
