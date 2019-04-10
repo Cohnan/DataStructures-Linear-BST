@@ -32,7 +32,17 @@ public class InfraccionesFranjaHoraria extends EstadisticaInfracciones implement
 	 */
 	
 	public InfraccionesFranjaHoraria(LocalTime fInicial, LocalTime fFinal, IQueue<VOMovingViolations> lista) {
-		super.agregar(lista);
+		super(lista);
+		this.hora_Inicial = fInicial;
+		this.hora_Final = fFinal;		
+	}
+	
+	/**
+	 * Instantiates a new franja horaria
+	 */
+	
+	public InfraccionesFranjaHoraria(LocalTime fInicial, LocalTime fFinal) {
+		super();
 		this.hora_Inicial = fInicial;
 		this.hora_Final = fFinal;		
 	}

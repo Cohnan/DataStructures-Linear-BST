@@ -20,10 +20,6 @@ import model.data_structures.Stack;
 import model.logic.*;
 import model.data_structures.ArregloDinamico;
 import model.data_structures.BlancoRojoBST;
-import model.vo.VOMovingViolations;
-import model.vo.Coordenadas;
-import model.vo.InfraccionesFranjaHoraria;
-import model.vo.VOColeccion;
 import model.vo.*;
 
 import view.MovingViolationsManagerView;
@@ -76,7 +72,7 @@ public class Controller {
 	/**
 	 * 2A
 	 */
-	private ITablaHash<Double[], InfraccionesLocalizacion> htLocalizaciones;
+	private ITablaHash<Coordenadas, InfraccionesLocalizacion> htLocalizaciones;
 	
 	/**
 	 * 3A
@@ -448,15 +444,6 @@ public class Controller {
 	 * ************************************************************************************
 	 */
 	
-	/*
-	 * Parte A
-	 */
-	
-	
-	
-	/*
-	 * Parte B
-	 */
 	private MaxHeapCP<VOColeccion> cargarInfraccionVOViolationCode(){
 		IArregloDinamico<VOMovingViolations> aux = movingVOLista;
 		MaxHeapCP<VOColeccion> aux2 =  new MaxHeapCP<>();
@@ -499,8 +486,6 @@ public class Controller {
 
 		return aux2;
 	}
-
-
 
 	private BlancoRojoBST<Coordenadas, VOColeccion>  cargarInfraccionesCoordenadas(){
 
@@ -547,7 +532,6 @@ public class Controller {
 		return aux2;
 	}
 
-
 	private BlancoRojoBST<Integer, VOColeccion>  cargarInfraccionesValorAcumulado(){
 
 		BlancoRojoBST<Integer, VOColeccion> aux2 = new BlancoRojoBST<>(); 
@@ -592,14 +576,6 @@ public class Controller {
 
 		return aux2;
 	}
-
-
-
-	/*
-	 * Parte C
-	 */
-
-
 
 	//
 	/**
