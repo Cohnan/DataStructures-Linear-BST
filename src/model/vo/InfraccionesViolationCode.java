@@ -7,7 +7,7 @@ import model.data_structures.IQueue;
  * de las respectivas infracciones que poseen el c�digo en menci�n.
  */
 
-public class InfraccionesViolationCode extends EstadisticaInfracciones{
+public class InfraccionesViolationCode extends EstadisticaInfracciones implements Comparable<InfraccionesViolationCode>{
 	
 	@Override
 	public String toString() {
@@ -55,5 +55,17 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones{
 	
 	public String getViolationCode() {
 		return violationCode;
+	}
+
+	
+	/**
+	 * Comparable - By #Infracciones
+	 * @return 0,1 or -1
+	 */
+	@Override
+	public int compareTo(InfraccionesViolationCode arg0) {
+		if(this.totalInfracciones>arg0.totalInfracciones){return 1;}
+		else if(this.totalInfracciones<arg0.totalInfracciones){return -1;}
+		else return 0;
 	}	
 }

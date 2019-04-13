@@ -15,11 +15,7 @@ import java.util.Scanner;
 import model.util.Sort;
 
 import model.data_structures.*;
-import model.data_structures.Queue;
-import model.data_structures.Stack;
 import model.logic.*;
-import model.data_structures.ArregloDinamico;
-import model.data_structures.BlancoRojoBST;
 import model.vo.*;
 
 import view.MovingViolationsManagerView;
@@ -336,6 +332,8 @@ public class Controller {
 		}
 
 		return aux2;
+		// TODO completar
+		return null;	
 	}
 
 	private BlancoRojoBST<Coordenadas, VOColeccion>  cargarInfraccionesCoordenadas(){
