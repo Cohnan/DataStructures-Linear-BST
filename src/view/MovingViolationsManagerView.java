@@ -49,7 +49,7 @@ public class MovingViolationsManagerView
 			mes++;
 		}
 		double [] minimax = resultados.darMinimax();
-		System.out.println("Minimax: [" + minimax[0] + ", " + minimax[1] + "], [" + minimax[2] + ", " + minimax[3] + "]");
+		System.out.println("Min y max: [" + minimax[0] + ", " + minimax[1] + "], [" + minimax[2] + ", " + minimax[3] + "]");
 	}
 	
 	public void printReq1A(IQueue<InfraccionesFranjaHoraria> resultados) {

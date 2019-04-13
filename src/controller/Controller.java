@@ -113,45 +113,42 @@ public class Controller {
 					//view.printReq3A( ... )
 					break;
 
-/*
+
 				case 4:
 					view.printMessage("1B. Consultar los N Tipos con mas infracciones. Ingrese el valor de N: ");
 					int numeroTipos = sc.nextInt();
-
 					//TODO Completar para la invocación del metodo 1B				
-					//model.rankingNViolationCodes(int N)
-					
+					view.printReq1B(model.rankingNViolationCodes(numeroTipos));
 					//TODO Mostrar resultado de tipo Cola con N InfraccionesViolationCode
 					//view.printReq1B( ... )
 					break;
 
 				case 5:						
 					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 402915.72): ");
-					xcoord = sc.nextDouble();
+					double xCoord2 = Double.parseDouble(sc.next());
 					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
-					ycoord = sc.nextDouble();
-
+					double yCoord2 = Double.parseDouble(sc.next());
+					view.printReq2B(model.consultarPorLocalizacionArbol(xCoord2, yCoord2));
+					
 					//TODO Completar para la invocación del metodo 2B
 					//model.consultarPorLocalizacionArbol(double xCoord, double yCoord)
-
 					//TODO Mostrar resultado de tipo InfraccionesLocalizacion 
 					//view.printReq2B( ... )
 					break;
 
 				case 6:
 					view.printMessage("Ingrese la cantidad minima de dinero que deben acumular las infracciones en sus rangos de fecha  (Ej. 1234,56)");
-					double cantidadMinima = sc.nextDouble();
+					double cantidadMinima = Double.parseDouble(sc.next());
 
 					view.printMessage("Ingrese la cantidad maxima de dinero que deben acumular las infracciones en sus rangos de fecha (Ej. 5678,23)");
-					double cantidadMaxima = sc.nextDouble();
+					double cantidadMaxima = Double.parseDouble(sc.next());
 
 					//TODO Completar para la invocación del metodo 3B
-					//model.consultarFranjasAcumuladoEnRango(double valorInicial, double valorFinal)
+					model.consultarFranjasAcumuladoEnRango(cantidadMinima, cantidadMaxima);
 
 					//TODO Mostrar resultado de tipo Cola con InfraccionesFechaHora 
 					//view.printReq3B( ... )
 					break;
-*/
 				case 7:
 					view.printMessage("1C. Consultar las infracciones con Address_Id. Ingresar el valor de Address_Id: ");
 					int addressID = sc.nextInt();
@@ -221,60 +218,6 @@ public class Controller {
 					duration = endTime - startTime;
 					view.printMessage("Tiempo requerimiento 4C: " + duration + " milisegundos");
 					break;
-
-				case 4:
-					MaxHeapCP<VOColeccion> resultador7 = controller.cargarInfraccionVOViolationCode();
-					view.printMessage("Ingrese el n�mero de tipos de infracci�n que desea ver (N):");
-					int n = sc.nextInt();
-					view.requerimiento1B(resultador7, n);
-					break;
-
-				case 5:
-
-
-					BlancoRojoBST<Coordenadas, VOColeccion> respuesta8 = controller.cargarInfraccionesCoordenadas();
-					view.printMessage("Ingrese la coordenda X   (Ej. 398103.16)");
-					float cordX = Float.parseFloat(sc.next());
-					view.printMessage("Ingrese la coordenda Y   (Ej. 143451.72)");
-					float cordY = Float.parseFloat(sc.next());
-					Coordenadas aBuscar = new Coordenadas(cordX, cordY);
-					if(!respuesta8.contains(aBuscar)){
-						System.out.println("La coordenada ingresada no est� registrada en la base de datos");
-						break;
-					}
-					else{
-						VOColeccion respuesta = respuesta8.get(aBuscar);
-						System.out.println("Informaci�n sobre la coordenada: (" +cordX +" , " + cordY+" )");
-						System.out.println("Total Infracciones: "+ respuesta.darTotalInfracciones());
-						System.out.println("Porcentaje Sin Accidente: " + respuesta.darPorcentajeSinInfracciones());
-						System.out.println("Porcentaje Con Accidente: " + respuesta.darPorcentajeConInfracciones());
-						System.out.println("Valor total a pagar: " + respuesta.darTotalPagar() +"$");
-						//FALTAN COSAS PERO PREGUNTAR LABORATORIO
-
-						break;
-					}
-
-				case 6:
-
-					BlancoRojoBST<Integer, VOColeccion> resultado9 = controller.cargarInfraccionesValorAcumulado();
-					System.out.println(resultado9.min());
-					System.out.println(resultado9.max());
-					
-					view.printMessage("Valor Acumulado Inferior (US$):  (MIN = 78.810$)");
-					int valorMin = sc.nextInt();
-
-					view.printMessage("Valor Acumulado Superior (US$):  (MAX = 962.265$) ");
-					int valorMax = sc.nextInt();
-					
-					Iterable aux = resultado9.valuesInRange(valorMin, valorMax);
-					view.requerimiento3B(aux);
-					break;
-
-//				case 10:
-//					double[] resultados10 = controller.percentWithAccidentsByHour();
-//					view.printMovingViolationsByHourReq10(resultados10);
-//					break;
-
 				case 11:
 					fin=true;
 					sc.close();
@@ -285,146 +228,6 @@ public class Controller {
 		}
 	}
 
-	/*
-	 * ************************************************************************************
-	 * Metodos para los requerimientos del proyecto 2
-	 * ************************************************************************************
-	 */
-	
-	private MaxHeapCP<VOColeccion> cargarInfraccionVOViolationCode(){
-		IArregloDinamico<VOMovingViolations> aux = movingVOLista;
-		MaxHeapCP<VOColeccion> aux2 =  new MaxHeapCP<>();
-		Sort.ordenarShellSort(aux, new VOMovingViolations.ViolationCodeOrder());
-		String codigo = null;
-		double inCon = 0;
-		int total = 0;
-		double inSin = 0;
-		int totalDeuda = 0;
-
-		for(VOMovingViolations s: aux){
-
-			if(s.getViolationCode().equals(codigo)){
-				if(s.getAccidentIndicator()){inCon++;}
-				else{inSin++;}
-				totalDeuda +=s.getFineAmount();
-				total++;
-			}else{
-
-				if(total>0){
-					double por1  = inSin/total;
-					double por2 = inCon/total;
-					VOColeccion nuevo = new VOColeccion(codigo,total, por1, por2, totalDeuda);
-					aux2.agregar(nuevo);
-				}
-				if(s.getAccidentIndicator()){inCon = 1; inSin = 0;}
-				else{inSin = 1;inCon = 0;}
-				total = 1;
-				totalDeuda = s.getFineAmount();
-				codigo = s.getViolationCode();
-			}
-		}
-
-		if(total>0){
-			double por1  = inSin/total;
-			double por2 = inCon/total;
-			VOColeccion nuevo = new VOColeccion(codigo,total, por1, por2, totalDeuda);
-			aux2.agregar(nuevo);
-		}
-
-		return aux2;
-		// TODO completar
-		return null;	
-	}
-
-	private BlancoRojoBST<Coordenadas, VOColeccion>  cargarInfraccionesCoordenadas(){
-
-		BlancoRojoBST<Coordenadas, VOColeccion> aux2 = new BlancoRojoBST<>(); 
-		IArregloDinamico<VOMovingViolations> aux = movingVOLista;
-		Sort.ordenarShellSort(aux, new VOMovingViolations.XYCoordOrder());
-
-		Coordenadas actual = new Coordenadas(0, 0);
-		double inCon = 0;
-		int total = 0;
-		double inSin = 0;
-		int totalDeuda = 0;
-
-		for(VOMovingViolations s: aux){
-
-			if(s.darCoordenadas().equals(actual)){
-				if(s.getAccidentIndicator()){inCon++;}
-				else{inSin++;}
-				totalDeuda +=s.getFineAmount();
-				total++;
-			}else{
-
-				if(total>0){
-					double por1  = inSin/total;
-					double por2 = inCon/total;
-					VOColeccion nuevo = new VOColeccion(actual,total, por1, por2, totalDeuda);
-					aux2.put(actual, nuevo);
-				}
-				if(s.getAccidentIndicator()){inCon = 1; inSin = 0;}
-				else{inSin = 1;inCon = 0;}
-				total = 1;
-				totalDeuda = s.getFineAmount();
-				actual= s.darCoordenadas();
-			}
-		}
-
-		if(total>0){
-			double por1  = inSin/total;
-			double por2 = inCon/total;
-			VOColeccion nuevo = new VOColeccion(actual,total, por1, por2, totalDeuda);
-			aux2.put(actual, nuevo);
-		}
-
-		return aux2;
-	}
-
-	private BlancoRojoBST<Integer, VOColeccion>  cargarInfraccionesValorAcumulado(){
-
-		BlancoRojoBST<Integer, VOColeccion> aux2 = new BlancoRojoBST<>(); 
-		IArregloDinamico<VOMovingViolations> aux = movingVOLista;
-		Sort.ordenarShellSort(aux, new VOMovingViolations.TimeOrder());
-
-		double inCon = 0;
-		int total = 0;
-		double inSin = 0;
-		int totalDeuda = 0;
-		int horaMax = 1;
-
-		for(VOMovingViolations s: aux){
-
-			
-			if(s.getTicketIssueDate().getHour()< horaMax){
-				if(s.getAccidentIndicator()){inCon++;}
-				else{inSin++;}
-				totalDeuda +=s.getFineAmount();
-				total++;
-			}else{
-				if(total>0){
-					double por1  = inSin/total;
-					double por2 = inCon/total;
-					VOColeccion nuevo = new VOColeccion(horaMax,total, por1, por2, totalDeuda);
-					aux2.put(totalDeuda, nuevo);
-				}
-				if(s.getAccidentIndicator()){inCon = 1; inSin = 0;}
-				else{inSin = 1;inCon = 0;}
-				total = 1;
-				totalDeuda = s.getFineAmount();
-				horaMax++;
-			}
-		}
-
-		if(total>0){
-			double por1  = inSin/total;
-			double por2 = inCon/total;
-			VOColeccion nuevo = new VOColeccion(horaMax,total, por1, por2, totalDeuda);
-			aux2.put(totalDeuda, nuevo);
-		}
-
-		return aux2;
-	}
 
 	//
 
