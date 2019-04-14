@@ -98,19 +98,15 @@ public class Controller {
 					break;
 
 				case 3:
-					view.printMessage("Ingrese la fecha inicial del rango. Formato año-mes-dia (ej. 2008-06-21)");
+					view.printMessage("Ingrese la fecha inicial del rango. Formato año-mes-dia (ej. 2008-01-21)");
 					String fechaInicialStr = sc.next();
 					LocalDate fechaInicial = ManejoFechaHora.convertirFecha_LD( fechaInicialStr );
 
-					view.printMessage("Ingrese la fecha final del rango. Formato año-mes-dia (ej. 2008-06-30)");
+					view.printMessage("Ingrese la fecha final del rango. Formato año-mes-dia (ej. 2018-02-20)");
 					String fechaFinalStr = sc.next();
 					LocalDate fechaFinal = ManejoFechaHora.convertirFecha_LD( fechaFinalStr );
 
-					//TODO Completar para la invocacion del metodo 3A
-					//model.consultarInfraccionesPorRangoFechas(LocalDate fechaInicial, LocalDate fechaFinal)
-
-					//TODO Mostrar resultado de tipo Cola de InfraccionesFecha
-					//view.printReq3A( ... )
+					view.printReq3A(model.consultarInfraccionesPorRangoFechas(fechaInicial, fechaFinal));
 					break;
 
 

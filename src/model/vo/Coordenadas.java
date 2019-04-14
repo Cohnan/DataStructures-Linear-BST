@@ -37,7 +37,6 @@ public class Coordenadas implements Comparable<Coordenadas> {
           
         // typecast o to Complex so that we can compare data members  
         Coordenadas c = (Coordenadas) o; 
-		System.out.println("Esta mirando que las coordenadas sean iguales " + this.xCoord + " " + c.xCoord + ", " + this.yCoord + " " + c.yCoord);
 		return this.xCoord == c.xCoord && this.yCoord == c.yCoord;
 	}
 	

@@ -2,7 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K, V> {
+public class BlancoRojoBST<K extends Comparable<? super K>, V> implements ITablaSimOrd<K, V> {
 
 
 	/**
@@ -391,7 +391,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * retorna el número de elementos en el árbol 
+	 * retorna el nï¿½mero de elementos en el ï¿½rbol 
 	 */
 	public int darNumeroParejas(){
 		return numElementos;
@@ -411,7 +411,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Se obtiene la altura del árbol 
+	 * Se obtiene la altura del ï¿½rbol 
 	 */
 	public int height() {
 		int maxAltura = -1;
@@ -426,7 +426,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar para obtener la altura dado una llave
+	 * Mï¿½todo auxiliar para obtener la altura dado una llave
 	 */
 	private int getHeightAux(K key){
 		NodoBST<K, V> pNodo = root;

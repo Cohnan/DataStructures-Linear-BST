@@ -72,7 +72,7 @@ public class MovingViolationsManager {
 	/**
 	 * 3A
 	 */
-	private ITablaSimOrd<LocalDateTime, InfraccionesFecha> abFechas;
+	private ITablaSimOrd<LocalDate, InfraccionesFecha> abFechas;
 
 
 
@@ -284,24 +284,29 @@ public class MovingViolationsManager {
 	 * @return Objeto InfraccionesLocalizacion
 	 */
 	public InfraccionesLocalizacion consultarPorLocalizacionHash(double xCoord, double yCoord)
-	{
+	{	
+		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(thLocalizaciones == null) {
 			thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.XYCoordOrder()); // Just for testing
+			
+			// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
+			// a la coordenada actual
 			Coordenadas curCoord;
 			InfraccionesLocalizacion locActual;
 
 			for (VOMovingViolations infraccion : movingVOLista) {
 				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
 				locActual = thLocalizaciones.get(curCoord);
-
+				
+				// Si la coordenada actual aun no esta en la tabla, la crea
 				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-
+				
+				// Actualiza la estadistica correspondiente a esta coordenada
 				locActual.agregarEstadistica(infraccion);
 				thLocalizaciones.put(curCoord, locActual);
 			}
 		}
-
+		// Retorna la informacion deseada desde una tabla de hash
 		return thLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
 	}
 
@@ -313,8 +318,35 @@ public class MovingViolationsManager {
 	 */
 	public IQueue<InfraccionesFecha> consultarInfraccionesPorRangoFechas(LocalDate fechaInicial, LocalDate fechaFinal)
 	{
-		// TODO completar
-		return null;		
+		// En caso de no existir ya la tabla de hash con la informacion, la crea
+		if(abFechas == null) {
+			abFechas = new BlancoRojoBST<LocalDate, InfraccionesFecha>();
+					
+			// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
+			// a la coordenada actual
+			LocalDate fechaAct;
+			InfraccionesFecha estadAct;
+
+			for (VOMovingViolations infraccion : movingVOLista) {
+				fechaAct = infraccion.getTicketIssueDate().toLocalDate();
+				estadAct = abFechas.get(fechaAct);
+					
+				// Si la coordenada actual aun no esta en la tabla, la crea
+				if (estadAct == null) estadAct = new InfraccionesFecha(fechaAct);
+					
+				// Actualiza la estadistica correspondiente a esta coordenada
+				estadAct.agregarEstadistica(infraccion);
+				//System.out.println(estadAct);
+				abFechas.put(fechaAct, estadAct);
+			}
+		}
+		// Retorna la informacion deseada desde una tabla de hash
+		IQueue<InfraccionesFecha> respuesta = new Queue<InfraccionesFecha> ();
+		for (InfraccionesFecha estadistica : abFechas.valuesInRange(fechaInicial, fechaFinal)) { 
+			respuesta.enqueue(estadistica);
+		}
+		
+		return respuesta;
 	}
 
 	/**
@@ -400,7 +432,7 @@ public class MovingViolationsManager {
 			//Se recorre la lista de las infracciones
 			for (VOMovingViolations infraccion : movingVOLista) {
 				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
-				locActual = thLocalizaciones.get(curCoord);
+				locActual = abLocalizaciones.get(curCoord);
 				//Si  la localizaci�n actual no existe, se crea una nueva InfraccionesLocalizaci�n
 				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
 				//Se agrega a la estad�stica la infracci�n actual
