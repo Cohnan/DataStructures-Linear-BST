@@ -287,7 +287,7 @@ public class MovingViolationsManager {
 	{
 		if(thLocalizaciones == null) {
 			thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
-
+			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.XYCoordOrder()); // Just for testing
 			Coordenadas curCoord;
 			InfraccionesLocalizacion locActual;
 
@@ -298,7 +298,6 @@ public class MovingViolationsManager {
 				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
 
 				locActual.agregarEstadistica(infraccion);
-				System.out.println("Loc Actual: " + locActual);
 				thLocalizaciones.put(curCoord, locActual);
 			}
 		}
@@ -332,7 +331,7 @@ public class MovingViolationsManager {
 		if (cpViolationCode == null) {
 			cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
 
-			//Se ordenan por ViolationCode Order para poder crear las estadísticas
+			//Se ordenan por ViolationCode Order para poder crear las estadï¿½sticas
 			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
 			Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
@@ -350,7 +349,7 @@ public class MovingViolationsManager {
 			while(iterador.hasNext()){
 				infrRevisar = iterador.next();
 
-				//Si tienen el mismo VOCode, van en la misma estadística
+				//Si tienen el mismo VOCode, van en la misma estadï¿½stica
 				if(violationCodeActual.equals(infrRevisar.getViolationCode())){
 					voViolation.agregarEstadistica(infrRevisar);
 				}
@@ -364,7 +363,7 @@ public class MovingViolationsManager {
 				}
 			}
 
-			//Para agregar la última referencia
+			//Para agregar la ï¿½ltima referencia
 			cpViolationCode.agregar(voViolation);
 		}	
 
@@ -393,7 +392,7 @@ public class MovingViolationsManager {
 	{
 		//Verifica si ya estan cargados los datos necesarios
 		if(abLocalizaciones == null) {
-			//Se crea el árbol balanceado
+			//Se crea el ï¿½rbol balanceado
 			abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
 			Coordenadas curCoord;
 			InfraccionesLocalizacion locActual;
@@ -402,14 +401,14 @@ public class MovingViolationsManager {
 			for (VOMovingViolations infraccion : movingVOLista) {
 				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
 				locActual = thLocalizaciones.get(curCoord);
-				//Si  la localización actual no existe, se crea una nueva InfraccionesLocalización
+				//Si  la localizaciï¿½n actual no existe, se crea una nueva InfraccionesLocalizaciï¿½n
 				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-				//Se agrega a la estadística la infracción actual
+				//Se agrega a la estadï¿½stica la infracciï¿½n actual
 				locActual.agregarEstadistica(infraccion);
 				abLocalizaciones.put(curCoord, locActual);
 			}
 		}
-		//Se retorna la localización buscada
+		//Se retorna la localizaciï¿½n buscada
 		return abLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
 	}
 
