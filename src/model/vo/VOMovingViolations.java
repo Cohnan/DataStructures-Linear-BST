@@ -235,7 +235,7 @@ public class VOMovingViolations {
 		
 	}
 	
-	public static class TimeOrder implements Comparator<VOMovingViolations> {
+	public static class FranjaHorariaOrder implements Comparator<VOMovingViolations> {
 
 		@Override
 		public int compare(VOMovingViolations arg0, VOMovingViolations arg1) {

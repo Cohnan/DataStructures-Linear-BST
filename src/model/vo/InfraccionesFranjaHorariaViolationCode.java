@@ -108,4 +108,31 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		
 		return resultado;
 	}
+	
+	public InfraccionesFranjaHorariaViolationCode incrementarEstadisticas(InfraccionesFranjaHorariaViolationCode aIncrementar) {
+		// Asegurarse de que ambas franjas empiezan a media noche
+		if (this.getFranjaFinal().equals(aIncrementar.getFranjaInicial().plusSeconds(1))) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
+		
+		
+		LocalTime horaInicial = this.getFranjaInicial();
+		LocalTime horaFinal = aIncrementar.getFranjaFinal();
+		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
+		resultado.totalInfracciones = this.totalInfracciones + resultado.totalInfracciones;
+		this.totalConAccidentes = this.totalConAccidentes + resultado.totalConAccidentes;
+		this.totalSinAccidentes = this.totalSinAccidentes + resultado.totalSinAccidentes;
+		this.valorTotal = this.valorTotal + resultado.valorTotal;
+		
+		InfraccionesViolationCode aSumar;
+		for (String codigo : this.getInfViolationCode()) {
+			aSumar = aIncrementar.getInfViolationCode().get(codigo);
+			
+			if(aSumar == null) {
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
+			} else {
+				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).incrementarEstadisticas(aSumar));
+			}
+		}
+		
+		return resultado;
+	}
 }

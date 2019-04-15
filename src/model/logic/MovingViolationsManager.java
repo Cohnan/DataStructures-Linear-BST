@@ -248,7 +248,7 @@ public class MovingViolationsManager {
 
 			// Se deben las estadisticas completas para cada franja horaria antes de crear la cola de prioridad
 			// pues se necesita saber la prioridad final de cada elemento a agregar
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TimeOrder());
+			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder());
 
 			Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
@@ -577,9 +577,8 @@ public class MovingViolationsManager {
 	 */
 	public InfraccionesFranjaHorariaViolationCode consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
 	{
-		// TODO completar
 		if (thFranjaCode == null) {
-			
+			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
 		}
 		
 		InfraccionesFranjaHorariaViolationCode acumulado = thFranjaCode.get(horaFinal);

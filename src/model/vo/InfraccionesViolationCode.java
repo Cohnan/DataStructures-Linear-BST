@@ -84,4 +84,16 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones implement
 		
 		return respuesta;
 	}
+	
+	public InfraccionesViolationCode incrementarEstadisticas(InfraccionesViolationCode aIncrementar) {
+		if (!aIncrementar.getViolationCode().equals(this.violationCode)) throw new IllegalArgumentException("Para eliminar porciones de una estadistica debe tener el mismo identificador");
+		
+		InfraccionesViolationCode respuesta = new InfraccionesViolationCode (this.violationCode);
+		respuesta.totalInfracciones = this.totalInfracciones + aIncrementar.totalConAccidentes;
+		respuesta.totalConAccidentes = this.totalConAccidentes + aIncrementar.totalConAccidentes;
+		respuesta.totalSinAccidentes = this.totalSinAccidentes + aIncrementar.totalSinAccidentes;
+		respuesta.valorTotal = this.valorTotal + aIncrementar.valorTotal;
+		
+		return respuesta;
+	}
 }
