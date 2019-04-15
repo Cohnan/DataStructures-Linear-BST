@@ -87,7 +87,7 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		// Si las 2 franjas son iguales, entonces simplemente retorne una estadistica vacia
 		//if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) == 0) return new InfraccionesFranjaHorariaViolationCode(LocalTime.of(0, 0), LocalTime.of(0, 0));
 		
-		LocalTime horaInicial = aEliminar.getFranjaFinal().plusSeconds(1);//aEliminar.getFranjaFinal().equals(LocalTime.of(0, 0))? LocalTime.of(0, 0) : aEliminar.getFranjaFinal().minusSeconds(1);
+		LocalTime horaInicial = aEliminar.getFranjaFinal().plusSeconds(1);
 		LocalTime horaFinal = this.getFranjaFinal();
 		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
 		resultado.totalInfracciones = this.totalInfracciones - resultado.totalInfracciones;

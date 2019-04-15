@@ -107,7 +107,7 @@ public class MovingViolationsManager {
 	/**
 	 * 2C
 	 */
-	private ITablaHash<LocalDateTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
+	private ITablaHash<LocalTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
 	
 	/**
 	 * 3C
@@ -582,7 +582,10 @@ public class MovingViolationsManager {
 			
 		}
 		
-		return null;
+		InfraccionesFranjaHorariaViolationCode acumulado = thFranjaCode.get(horaFinal);
+		InfraccionesFranjaHorariaViolationCode aRestar = thFranjaCode.get(horaFinal.equals(LocalTime.of(0, 0))? LocalTime.of(0, 0) : horaFinal.minusSeconds(1));
+		
+		return acumulado.eliminarEstadisticas(aRestar);
 	}
 
 	/**
