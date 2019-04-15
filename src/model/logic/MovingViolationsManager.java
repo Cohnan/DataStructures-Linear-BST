@@ -461,8 +461,6 @@ public class MovingViolationsManager {
 
 	private void crearAbLocalizaciones(){
 
-		boolean primera = true;
-		int contador = 1;
 		abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
 		Coordenadas auxiliar;
 		InfraccionesLocalizacion locActual;
