@@ -288,11 +288,21 @@ public class MovingViolationsManager {
 			cpFranjasHorarias.agregar(voFranja);
 		}
 
-		int i = 0;
-		for (InfraccionesFranjaHoraria estadistica : cpFranjasHorarias) {
-			if (++i > M) break;
-			mPrimeras.enqueue(estadistica);
+		
+		
+		
+		IColaPrioridad<InfraccionesFranjaHoraria> aux = new MaxHeapCP<InfraccionesFranjaHoraria>();
+		for(InfraccionesFranjaHoraria s: cpFranjasHorarias){
+			aux.agregar(s);
 		}
+		
+		for (int j = 0; j < M; j++) {
+			if(aux.delMax()!=null){
+			mPrimeras.enqueue(aux.delMax());
+			}
+		}
+		
+		
 
 		return mPrimeras;		
 	}
@@ -391,9 +401,15 @@ public class MovingViolationsManager {
 		}	
 
 
-		//Selecciona las N primeras infraccionesViolationCode
-		int i = 0;
-		IColaPrioridad<InfraccionesViolationCode> aux = cpViolationCode;
+		//Selecciona las N primeras infraccionesViolationCode en UNA COPIA
+		
+		//SE PUEDE CAMBIAR - NO PUDE
+		
+		IColaPrioridad<InfraccionesViolationCode> aux = new MaxHeapCP<InfraccionesViolationCode>();
+		for(InfraccionesViolationCode s: cpViolationCode){
+			aux.agregar(s);
+		}
+		
 		
 		for (int j = 0; j < N; j++) {
 			if(aux.delMax()!=null){
