@@ -30,7 +30,7 @@ public class Controller {
 	private MovingViolationsManagerView view;
 
 	private MovingViolationsManager model;
-	
+
 	/*
 	 * Constructor
 	 */
@@ -49,7 +49,7 @@ public class Controller {
 		//Controller controller = new Controller();
 		int option = -1;
 		boolean numeroEncontrado = false;
-		
+
 		long startTime;
 		long endTime;
 		long duration;
@@ -93,7 +93,7 @@ public class Controller {
 					double xCoord = sc.nextDouble();
 					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
 					double yCoord = sc.nextDouble();
- 
+
 					view.printReq2A(model.consultarPorLocalizacionHash(xCoord, yCoord));
 					break;
 
@@ -125,7 +125,7 @@ public class Controller {
 					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
 					double yCoord2 = Double.parseDouble(sc.next());
 					view.printReq2B(model.consultarPorLocalizacionArbol(xCoord2, yCoord2));
-					
+
 					//TODO Completar para la invocación del metodo 2B
 					//model.consultarPorLocalizacionArbol(double xCoord, double yCoord)
 					//TODO Mostrar resultado de tipo InfraccionesLocalizacion 
@@ -138,12 +138,7 @@ public class Controller {
 
 					view.printMessage("Ingrese la cantidad maxima de dinero que deben acumular las infracciones en sus rangos de fecha (Ej. 5678,23)");
 					double cantidadMaxima = Double.parseDouble(sc.next());
-
-					//TODO Completar para la invocación del metodo 3B
-					model.consultarFranjasAcumuladoEnRango(cantidadMinima, cantidadMaxima);
-
-					//TODO Mostrar resultado de tipo Cola con InfraccionesFechaHora 
-					//view.printReq3B( ... )
+					view.printReq3B(model.consultarFranjasAcumuladoEnRango(cantidadMinima, cantidadMaxima));
 					break;
 				case 7:
 					view.printMessage("1C. Consultar las infracciones con Address_Id. Ingresar el valor de Address_Id: ");
@@ -154,7 +149,7 @@ public class Controller {
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
-					
+
 					view.printMessage("Tiempo requerimiento 1C: " + duration + " milisegundos");
 
 					view.printReq1C(resultados7);
@@ -192,7 +187,7 @@ public class Controller {
 
 					duration = endTime - startTime;
 					view.printMessage("Tiempo requerimiento 3C: " + duration + " milisegundos");
-					
+
 					view.printReq3C(resultados9);
 					break;
 
@@ -201,7 +196,7 @@ public class Controller {
 					System.out.println("Grafica ASCII con la informacion de las infracciones por ViolationCode");
 
 					startTime = System.currentTimeMillis();
-					
+
 					view.printReq4C(model.ordenarCodigosPorNumeroInfracciones(), model.darNumeroSemestre(), model.darNumeroInfraccionesCargadas());
 					endTime = System.currentTimeMillis();
 

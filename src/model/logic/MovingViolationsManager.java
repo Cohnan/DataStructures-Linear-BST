@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 import javax.management.Query;
@@ -38,7 +39,7 @@ public class MovingViolationsManager {
 	 * Numero actual del semestre cargado
 	 */
 	private static int semestreCargado = -1;
-	
+
 	/**
 	 * Numero infracciones cargadas
 	 */
@@ -96,24 +97,24 @@ public class MovingViolationsManager {
 	/**
 	 * 3B
 	 */
-	private ITablaSimOrd<Double,InfraccionesFranjaHoraria> abValorAcumulado;
+	private ITablaSimOrd<Double,InfraccionesFechaHora> abValorAcumulado;
 
-	
+
 	/**
 	 * 1C
 	 */
 	private LinProbTH<Integer, InfraccionesLocalizacion> thLocAddress;
-	
+
 	/**
 	 * 2C
 	 */
 	private ITablaHash<LocalDateTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
-	
+
 	/**
 	 * 3C
 	 */
 	private IColaPrioridad<InfraccionesLocalizacion> cpLocalizaciones;
-	
+
 	/**
 	 * Metodo constructor
 	 */
@@ -136,10 +137,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
 					"Moving_Violations_Issued_in_February_2018.csv",
-//					"Moving_Violations_Issued_in_March_2018.csv",
-//					"Moving_Violations_Issued_in_April_2018.csv",
-//					"Moving_Violations_Issued_in_May_2018.csv",
-//					"Moving_Violations_Issued_in_June_2018.csv"
+					//					"Moving_Violations_Issued_in_March_2018.csv",
+					//					"Moving_Violations_Issued_in_April_2018.csv",
+					//					"Moving_Violations_Issued_in_May_2018.csv",
+					//					"Moving_Violations_Issued_in_June_2018.csv"
 			});
 			semestreCargado = 1;
 		}
@@ -147,10 +148,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
 					"Moving_Violations_Issued_in_August_2018.csv",
-					"Moving_Violations_Issued_in_September_2018.csv", 
-					"Moving_Violations_Issued_in_October_2018.csv",
-					"Moving_Violations_Issued_in_November_2018.csv",
-					"Moving_Violations_Issued_in_December_2018.csv"
+					//					"Moving_Violations_Issued_in_September_2018.csv", 
+					//					"Moving_Violations_Issued_in_October_2018.csv",
+					//					"Moving_Violations_Issued_in_November_2018.csv",
+					//					"Moving_Violations_Issued_in_December_2018.csv"
 			});
 			semestreCargado = 2;
 		}
@@ -306,7 +307,7 @@ public class MovingViolationsManager {
 	{	
 		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(thLocalizaciones == null) {
-				crearThLocalizaciones();
+			crearThLocalizaciones();
 		}
 		// Retorna la informacion deseada desde una tabla de hash
 		return thLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
@@ -314,7 +315,7 @@ public class MovingViolationsManager {
 
 	private void crearThLocalizaciones() {
 		thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
-		
+
 		// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
 		// a la coordenada actual
 		Coordenadas curCoord;
@@ -323,16 +324,16 @@ public class MovingViolationsManager {
 		for (VOMovingViolations infraccion : movingVOLista) {
 			curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
 			locActual = thLocalizaciones.get(curCoord);
-			
+
 			// Si la coordenada actual aun no esta en la tabla, la crea
 			if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-			
+
 			// Actualiza la estadistica correspondiente a esta coordenada
 			locActual.agregarEstadistica(infraccion);
 			thLocalizaciones.put(curCoord, locActual);
 		}
 	}
-		
+
 	/**
 	 * Requerimiento 3A: Buscar las infracciones por rango de fechas
 	 * @param  LocalDate fechaInicial: Fecha inicial del rango de bï¿½squeda
@@ -344,7 +345,7 @@ public class MovingViolationsManager {
 		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(abFechas == null) {
 			abFechas = new BlancoRojoBST<LocalDate, InfraccionesFecha>();
-					
+
 			// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
 			// a la coordenada actual
 			LocalDate fechaAct;
@@ -353,10 +354,10 @@ public class MovingViolationsManager {
 			for (VOMovingViolations infraccion : movingVOLista) {
 				fechaAct = infraccion.getTicketIssueDate().toLocalDate();
 				estadAct = abFechas.get(fechaAct);
-					
+
 				// Si la coordenada actual aun no esta en la tabla, la crea
 				if (estadAct == null) estadAct = new InfraccionesFecha(fechaAct);
-					
+
 				// Actualiza la estadistica correspondiente a esta coordenada
 				estadAct.agregarEstadistica(infraccion);
 				//System.out.println(estadAct);
@@ -368,7 +369,7 @@ public class MovingViolationsManager {
 		for (InfraccionesFecha estadistica : abFechas.valuesInRange(fechaInicial, fechaFinal)) { 
 			respuesta.enqueue(estadistica);
 		}
-		
+
 		return respuesta;
 	}
 
@@ -401,7 +402,7 @@ public class MovingViolationsManager {
 		return resultado;
 
 	}
-	
+
 	private void crearCpViolationCode() {
 		//Se ordenan por ViolationCode Order para poder crear las estadï¿½sticas
 		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
@@ -454,7 +455,7 @@ public class MovingViolationsManager {
 			abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
 			Coordenadas curCoord;
 			InfraccionesLocalizacion locActual;
-			
+
 			//Se recorre la lista de las infracciones
 			for (VOMovingViolations infraccion : movingVOLista) {
 				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
@@ -477,43 +478,101 @@ public class MovingViolationsManager {
 	 * 		double valorFinal: Valor mï¿½ximo acumulado de las infracciones.
 	 * @return Cola con objetos InfraccionesFechaHora
 	 */
-	public IQueue<InfraccionesFranjaHoraria> consultarFranjasAcumuladoEnRango(double valorInicial, double valorFinal)
+	public IQueue<InfraccionesFechaHora> consultarFranjasAcumuladoEnRango(double valorInicial, double valorFinal)
 	{
 
-		IQueue<InfraccionesFranjaHoraria> respuesta = new Queue<>();
+		//La cola que contiene la respuesta
+		IQueue<InfraccionesFechaHora> respuesta = new Queue<>();
 		
+		//Si no se ha cargado el árbol, se construye
 		if(abValorAcumulado == null){
-			abValorAcumulado = new BlancoRojoBST<Double, InfraccionesFranjaHoraria>();
-			
-			if(cpFranjasHorarias == null) rankingNFranjas(0);
-			
-			for (InfraccionesFranjaHoraria aux:cpFranjasHorarias) {
-				abValorAcumulado.put(aux.getValorTotal(), aux);
-			}
+			crearabValorAcumulado();
 		}
 		
-	
-		Iterator iterador = abValorAcumulado.iterator();
-		double actual =  (double)iterador.next();
 		
-		
-		while(iterador.hasNext()){
-			if(actual>=valorInicial){
-				
-				if(actual<=valorFinal){
-					respuesta.enqueue(abValorAcumulado.get(actual));
-					System.out.println(actual);
-				}
-				else{
-					return respuesta;
-				}
-				
+		//Se verifica, para cada uno de los valores, si esta en el rango o no
+		for(double s: abValorAcumulado){
+			//Si esta en el rango se añade a la cola
+			if(s>=valorInicial && s<=valorFinal){
+				respuesta.enqueue(abValorAcumulado.get(s));
+				System.out.println(s);
 			}
-			actual = (double)iterador.next();
+		}
+	
+	return respuesta;
+
+	}
+
+
+	private void crearabValorAcumulado(){
+
+		//Se ordenan por TicketIssueOrder Order para poder crear las estadï¿½sticas
+		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TicketIssueOrder());
+
+		//Se recorren todas las infracciones ya ordenadas
+		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
+		abValorAcumulado = new BlancoRojoBST<Double, InfraccionesFechaHora>();
+
+		// Si no hay datos, entonces retorna una cola vacia
+		if (!iterador.hasNext()) return ;
+
+
+
+		VOMovingViolations infrRevisar = iterador.next();
+		LocalDateTime fechaHoraActual = infrRevisar.getTicketIssueDate();
+		LocalDateTime inicio;
+		//Dependiendo del semestre, se empieza la hora min y max
+		if(darNumeroSemestre() == 1){
+			inicio = LocalDateTime.of(2018,1,1,0, 0, 0);
+		}else{
+			inicio = LocalDateTime.of(2018,7,1,0, 0, 0);
 		}
 
-		return respuesta;
-		
+		//Esta por franjas de una hora o de 59:59 minutos
+		LocalDateTime fin = inicio.plusMinutes(59);
+		fin = fin.plusSeconds(59);
+
+
+		InfraccionesFechaHora voViolation = new InfraccionesFechaHora(inicio, fin);
+		//		voViolation.agregarEstadistica(infrRevisar);
+
+		while(infrRevisar!=null){
+
+			fechaHoraActual = infrRevisar.getTicketIssueDate();
+			boolean agrego = false;
+			//Se recorren las fechas hasta que se agregue la infraccion
+			while(!agrego){
+
+				//Si esta en el rango de fechas se agrega a la estadística
+				if(fechaHoraActual.compareTo(inicio)>=0 && fechaHoraActual.compareTo(fin)<=0){
+					voViolation.agregarEstadistica(infrRevisar);
+					agrego = true;
+
+				}
+				else{
+
+					//Si no, se agrega al arbol y se reincia
+					abValorAcumulado.put(voViolation.getValorTotal(), voViolation);
+					System.out.println("PASO");
+					if(inicio.getHour()<23){
+						inicio = inicio.plusHours(01);
+					}
+					else{
+						inicio = inicio.plusDays(1);
+						inicio = inicio.minusHours(23);
+					}
+					fin = inicio.plusMinutes(59);
+					fin = fin.plusSeconds(59);
+
+					//Se crea la nueva estadística
+					voViolation = new InfraccionesFechaHora(inicio, fin);
+				}
+			}
+
+			//Se pasa a la siguiente infracción
+			infrRevisar = iterador.next();
+		}
+
 	}
 
 	/**
@@ -526,11 +585,11 @@ public class MovingViolationsManager {
 		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(thLocAddress == null) {
 			thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4); //TODO check that the maxloadfactor is loooow
-			
+
 			if (thLocalizaciones == null && abLocalizaciones == null) {
 				crearThLocAdd();
-				
-			// En caso de que thLocalizaciones o abLocalizaciones ya existan
+
+				// En caso de que thLocalizaciones o abLocalizaciones ya existan
 			} else if(thLocalizaciones != null) {
 				InfraccionesLocalizacion localizacion;
 				for (Coordenadas coordenada : thLocalizaciones) {
@@ -548,7 +607,7 @@ public class MovingViolationsManager {
 		// Retorna la informacion deseada desde una tabla de hash
 		return thLocAddress.get(addressID);
 	}
-	
+
 	private void crearThLocAdd() {
 		// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
 		// a la coordenada actual
@@ -558,10 +617,10 @@ public class MovingViolationsManager {
 		for (VOMovingViolations infraccion : movingVOLista) {
 			adressAct = infraccion.getAddressID();
 			estadisticaAct = thLocAddress.get(adressAct);
-			
+
 			// Si la coordenada actual aun no esta en la tabla, la crea
 			if (estadisticaAct == null) estadisticaAct = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-				
+
 			// Actualiza la estadistica correspondiente a esta coordenada
 			estadisticaAct.agregarEstadistica(infraccion);
 			thLocAddress.put(adressAct, estadisticaAct);
@@ -579,9 +638,9 @@ public class MovingViolationsManager {
 	{
 		// TODO completar
 		if (thFranjaCode == null) {
-			
+
 		}
-		
+
 		return null;
 	}
 
@@ -596,36 +655,36 @@ public class MovingViolationsManager {
 		if (cpLocalizaciones == null) {
 			cpLocalizaciones = new MaxHeapCP<InfraccionesLocalizacion>();
 			Iterable<InfraccionesLocalizacion> iterable;
-			
+
 			if (thLocAddress != null) { // Primera opcion pues es una estructura usada en la parte C tambien
 				iterable = thLocAddress.iteratorValues();
-				
+
 			} else if (thLocalizaciones != null) { // Segunda opcion pues la tabla de hash es mas rapida que un arbol balanceado
 				iterable =  thLocalizaciones.iteratorValues();
-				
+
 			} else if (abLocalizaciones != null) {
 				iterable = abLocalizaciones.valuesInRange(abLocalizaciones.min(), abLocalizaciones.max());
-				
+
 			} else { // Si ninguna estructura con la informacion deseada se encuentra, crea la estructura del 1C
 				thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4);
 				crearThLocAdd();
-				
+
 				iterable =  thLocAddress.iteratorValues();
 			}
-			
+
 			// Itera sobre los valores de la estructura seleccionada para crear la cola de prioridad completa
 			for (InfraccionesLocalizacion estadistica : iterable) cpLocalizaciones.agregar(estadistica);
 		}
-		
+
 		// Se eligen los primeros N valores de la cola de prioridad
 		IQueue<InfraccionesLocalizacion> rankingN = new Queue<>();
-		
+
 		int i = 0;
 		for (InfraccionesLocalizacion estadistica : cpLocalizaciones) {
 			if(i++ >= N) break;
 			rankingN.enqueue(estadistica);
 		}
-		
+
 		return rankingN;
 	}
 
@@ -641,11 +700,11 @@ public class MovingViolationsManager {
 		}
 		return cpViolationCode;		
 	}
-	
+
 	public int darNumeroInfraccionesCargadas() {
 		return nInfraccionesCargadas;
 	}
-	
+
 	public int darNumeroSemestre() {
 		return semestreCargado;
 	}
