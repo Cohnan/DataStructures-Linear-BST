@@ -78,7 +78,7 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		
 	}
 	
-	public void eliminarEstadisticas(InfraccionesFranjaHorariaViolationCode aEliminar) {
-		
+	public InfraccionesFranjaHorariaViolationCode eliminarEstadisticas(InfraccionesFranjaHorariaViolationCode aEliminar) {
+		return null;
 	}
 }

@@ -578,7 +578,11 @@ public class MovingViolationsManager {
 	public InfraccionesFranjaHorariaViolationCode consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
 	{
 		// TODO completar
+		if (thFranjaCode == null) {
+			
+		}
 		
+		return null;
 	}
 
 	/**
