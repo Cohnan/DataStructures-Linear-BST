@@ -170,15 +170,15 @@ public class Controller {
 					LocalTime horaFinal = ManejoFechaHora.convertirHora_LT(horaFinalStr);
 
 					startTime = System.currentTimeMillis();
-					//TODO Completar para la invocacion del metodo 2C
-					//model.consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
+					
+					InfraccionesFranjaHorariaViolationCode resultados8= model.consultarPorRangoHoras(horaInicial, horaFinal);
 
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
 					view.printMessage("Tiempo requerimiento 2C: " + duration + " milisegundos");
-					//TODO Mostrar resultado de tipo InfraccionesFranjaHorarioViolationCode
-					//view.printReq2C( ... )
+					
+					view.printReq2C(resultados8);
 					break;
 
 				case 9:

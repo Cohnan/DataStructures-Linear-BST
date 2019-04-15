@@ -578,7 +578,34 @@ public class MovingViolationsManager {
 	public InfraccionesFranjaHorariaViolationCode consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
 	{
 		if (thFranjaCode == null) {
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
+			//Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
+			LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode> thTimeCode = new LinProbTH<>(4);
+			
+			LocalTime tiempoAct;
+			InfraccionesFranjaHorariaViolationCode estadAct;
+			for (VOMovingViolations infraccion : movingVOLista) {
+				tiempoAct = infraccion.getTicketIssueDate().toLocalTime();
+				
+				estadAct = thTimeCode.get(tiempoAct);
+				
+				if (estadAct == null) estadAct = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct);
+				
+				estadAct.agregarEstadistica(infraccion);
+				thTimeCode.put(tiempoAct, estadAct);
+			}
+			
+			thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(5);
+			tiempoAct = LocalTime.of(0, 0, 0);
+			estadAct = thTimeCode.get(tiempoAct);
+			while(true) {
+				thFranjaCode.put(tiempoAct, estadAct);
+				
+				tiempoAct = tiempoAct.plusSeconds(1);
+				estadAct = estadAct.incrementarEstadisticas(thTimeCode.get(tiempoAct));
+				
+				if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break;
+			}
+			
 		}
 		
 		InfraccionesFranjaHorariaViolationCode acumulado = thFranjaCode.get(horaFinal);

@@ -72,7 +72,11 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 	@Override
 	public void agregarEstadistica(VOMovingViolations nuevaInfraccion) {
 		super.agregarEstadistica(nuevaInfraccion);
+		
 		InfraccionesViolationCode estadVOCode = infViolationCode.get(nuevaInfraccion.getViolationCode());
+		
+		if (estadVOCode == null) estadVOCode = new InfraccionesViolationCode(nuevaInfraccion.getViolationCode());
+		
 		estadVOCode.agregarEstadistica(nuevaInfraccion);
 		infViolationCode.put(nuevaInfraccion.getViolationCode(), estadVOCode); //TODO check if this si necessary
 		
@@ -110,18 +114,19 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 	}
 	
 	public InfraccionesFranjaHorariaViolationCode incrementarEstadisticas(InfraccionesFranjaHorariaViolationCode aIncrementar) {
-		// Asegurarse de que ambas franjas empiezan a media noche
-		if (this.getFranjaFinal().equals(aIncrementar.getFranjaInicial().plusSeconds(1))) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
+		// Asegurarse de que son estadisticas de franjas contiguas
+		if (this.getFranjaFinal().plusSeconds(1).equals(aIncrementar.getFranjaInicial())) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
 		
 		
 		LocalTime horaInicial = this.getFranjaInicial();
 		LocalTime horaFinal = aIncrementar.getFranjaFinal();
 		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
-		resultado.totalInfracciones = this.totalInfracciones + resultado.totalInfracciones;
-		this.totalConAccidentes = this.totalConAccidentes + resultado.totalConAccidentes;
-		this.totalSinAccidentes = this.totalSinAccidentes + resultado.totalSinAccidentes;
-		this.valorTotal = this.valorTotal + resultado.valorTotal;
+		resultado.totalInfracciones = this.totalInfracciones + aIncrementar.totalInfracciones;
+		resultado.totalConAccidentes = this.totalConAccidentes + aIncrementar.totalConAccidentes;
+		resultado.totalSinAccidentes = this.totalSinAccidentes + aIncrementar.totalSinAccidentes;
+		resultado.valorTotal = this.valorTotal + aIncrementar.valorTotal;
 		
+		// Crear nueva tabla de InfraccionesViolationCode
 		InfraccionesViolationCode aSumar;
 		for (String codigo : this.getInfViolationCode()) {
 			aSumar = aIncrementar.getInfViolationCode().get(codigo);

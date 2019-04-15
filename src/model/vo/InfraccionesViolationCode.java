@@ -77,7 +77,7 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones implement
 		if (aEliminar.getTotalInfracciones() > this.totalInfracciones) throw new IllegalArgumentException("No pueden eliminarse mas infracciones de las presentes");
 		
 		InfraccionesViolationCode respuesta = new InfraccionesViolationCode (this.violationCode);
-		respuesta.totalInfracciones = this.totalInfracciones - aEliminar.totalConAccidentes;
+		respuesta.totalInfracciones = this.totalInfracciones - aEliminar.totalInfracciones;
 		respuesta.totalConAccidentes = this.totalConAccidentes - aEliminar.totalConAccidentes;
 		respuesta.totalSinAccidentes = this.totalSinAccidentes - aEliminar.totalSinAccidentes;
 		respuesta.valorTotal = this.valorTotal - aEliminar.valorTotal;
@@ -89,7 +89,7 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones implement
 		if (!aIncrementar.getViolationCode().equals(this.violationCode)) throw new IllegalArgumentException("Para eliminar porciones de una estadistica debe tener el mismo identificador");
 		
 		InfraccionesViolationCode respuesta = new InfraccionesViolationCode (this.violationCode);
-		respuesta.totalInfracciones = this.totalInfracciones + aIncrementar.totalConAccidentes;
+		respuesta.totalInfracciones = this.totalInfracciones + aIncrementar.totalInfracciones;
 		respuesta.totalConAccidentes = this.totalConAccidentes + aIncrementar.totalConAccidentes;
 		respuesta.totalSinAccidentes = this.totalSinAccidentes + aIncrementar.totalSinAccidentes;
 		respuesta.valorTotal = this.valorTotal + aIncrementar.valorTotal;
