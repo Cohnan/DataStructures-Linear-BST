@@ -90,6 +90,7 @@ public class InfraccionesViolationCode extends EstadisticaInfracciones implement
 		
 		InfraccionesViolationCode respuesta = new InfraccionesViolationCode (this.violationCode);
 		respuesta.totalInfracciones = this.totalInfracciones + aIncrementar.totalInfracciones;
+		if (respuesta.totalInfracciones == 0) return null;
 		respuesta.totalConAccidentes = this.totalConAccidentes + aIncrementar.totalConAccidentes;
 		respuesta.totalSinAccidentes = this.totalSinAccidentes + aIncrementar.totalSinAccidentes;
 		respuesta.valorTotal = this.valorTotal + aIncrementar.valorTotal;

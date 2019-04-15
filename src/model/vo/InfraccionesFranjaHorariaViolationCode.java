@@ -94,10 +94,10 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		LocalTime horaInicial = aEliminar.getFranjaFinal().plusSeconds(1);
 		LocalTime horaFinal = this.getFranjaFinal();
 		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
-		resultado.totalInfracciones = this.totalInfracciones - resultado.totalInfracciones;
-		this.totalConAccidentes = this.totalConAccidentes - resultado.totalConAccidentes;
-		this.totalSinAccidentes = this.totalSinAccidentes - resultado.totalSinAccidentes;
-		this.valorTotal = this.valorTotal - resultado.valorTotal;
+		resultado.totalInfracciones = this.totalInfracciones - aEliminar.totalInfracciones;
+		resultado.totalConAccidentes = this.totalConAccidentes - aEliminar.totalConAccidentes;
+		resultado.totalSinAccidentes = this.totalSinAccidentes - aEliminar.totalSinAccidentes;
+		resultado.valorTotal = this.valorTotal - aEliminar.valorTotal;
 		
 		InfraccionesViolationCode aRestar;
 		for (String codigo : this.getInfViolationCode()) {
