@@ -78,7 +78,61 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		
 	}
 	
+	// A restar tiene que se estrictamente mejor en tiempo
 	public InfraccionesFranjaHorariaViolationCode eliminarEstadisticas(InfraccionesFranjaHorariaViolationCode aEliminar) {
-		return null;
+		// Asegurarse de que ambas franjas empiezan a media noche
+		if (!this.getFranjaInicial().equals(LocalTime.of(0, 0)) || !aEliminar.getFranjaInicial().equals(LocalTime.of(0, 0))) throw new IllegalArgumentException("Solo se pueden restar estadisticas si ambas inician a la misma hora");
+		// Asegurarse de que la franja a eliminar termina mas tarde
+		if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) <= 0) throw new IllegalArgumentException("No se puede restar la estadistica de una franja que termina mas tarde");
+		// Si las 2 franjas son iguales, entonces simplemente retorne una estadistica vacia
+		//if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) == 0) return new InfraccionesFranjaHorariaViolationCode(LocalTime.of(0, 0), LocalTime.of(0, 0));
+		
+		LocalTime horaInicial = aEliminar.getFranjaFinal().plusSeconds(1);
+		LocalTime horaFinal = this.getFranjaFinal();
+		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
+		resultado.totalInfracciones = this.totalInfracciones - resultado.totalInfracciones;
+		this.totalConAccidentes = this.totalConAccidentes - resultado.totalConAccidentes;
+		this.totalSinAccidentes = this.totalSinAccidentes - resultado.totalSinAccidentes;
+		this.valorTotal = this.valorTotal - resultado.valorTotal;
+		
+		InfraccionesViolationCode aRestar;
+		for (String codigo : this.getInfViolationCode()) {
+			aRestar = aEliminar.getInfViolationCode().get(codigo);
+			
+			if(aRestar == null) {
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
+			} else {
+				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).eliminarEstadisticas(aRestar));
+			}
+		}
+		
+		return resultado;
+	}
+	
+	public InfraccionesFranjaHorariaViolationCode incrementarEstadisticas(InfraccionesFranjaHorariaViolationCode aIncrementar) {
+		// Asegurarse de que ambas franjas empiezan a media noche
+		if (this.getFranjaFinal().equals(aIncrementar.getFranjaInicial().plusSeconds(1))) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
+		
+		
+		LocalTime horaInicial = this.getFranjaInicial();
+		LocalTime horaFinal = aIncrementar.getFranjaFinal();
+		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
+		resultado.totalInfracciones = this.totalInfracciones + resultado.totalInfracciones;
+		this.totalConAccidentes = this.totalConAccidentes + resultado.totalConAccidentes;
+		this.totalSinAccidentes = this.totalSinAccidentes + resultado.totalSinAccidentes;
+		this.valorTotal = this.valorTotal + resultado.valorTotal;
+		
+		InfraccionesViolationCode aSumar;
+		for (String codigo : this.getInfViolationCode()) {
+			aSumar = aIncrementar.getInfViolationCode().get(codigo);
+			
+			if(aSumar == null) {
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
+			} else {
+				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).incrementarEstadisticas(aSumar));
+			}
+		}
+		
+		return resultado;
 	}
 }
