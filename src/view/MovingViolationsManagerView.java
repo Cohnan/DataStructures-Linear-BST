@@ -197,35 +197,4 @@ public class MovingViolationsManagerView
 		System.out.println("Cada X representa " + vX*100 + "%"); 
 	}
 
-	public void requerimiento1B(MaxHeapCP<VOColeccion> datos, int n){
-		
-		if(n>datos.darNumElementos()){
-			System.out.println("No hay suficientes tipos de infracciones intente con un valor menor a: " +datos.darNumElementos());
-			return;
-		}
-		
-		
-		System.out.println(datos.darNumElementos());
-		System.out.println("C�digo"+"\t"+"\t"+"Infracciones"+"\t"+"\t"+"%conAccidente"+"\t"+"\t"+"%SinAccidente"+"\t"+"\t"+"A Pagar");
-
-		for (int i = 0; i < n; i++) {
-			VOColeccion s = datos.delMax();
-			System.out.println(s.darCodigo()+"\t"+"\t"+s.darTotalInfracciones()+"\t"+"\t"+"\t"+"\t"+s.darPorcentajeConInfracciones()+"\t"+"\t"+s.darPorcentajeSinInfracciones()+"\t"+"\t"+"\t"+s.darTotalPagar()+"$");
-		}
-		
-	}
-	
-	
-	public void requerimiento3B(Iterable<VOColeccion> resultados){
-		
-		System.out.println("Franja"+ "\t"+ "ValorAcumulado"+ "\t"+"TotalInfracciones"+ "\t"+"%SinAcc"+ "\t"+"%ConAcc");
-		
-		
-		for (VOColeccion s: resultados) {
-			System.out.println(s.darFranja()+ "\t"+s.darTotalPagar()+s.darTotalInfracciones()+s.darPorcentajeSinInfracciones()+s.darPorcentajeConInfracciones());
-		}
-		
-		
-	}
-
 }
