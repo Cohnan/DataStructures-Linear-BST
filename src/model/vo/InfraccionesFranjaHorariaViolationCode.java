@@ -115,7 +115,7 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 	
 	public InfraccionesFranjaHorariaViolationCode incrementarEstadisticas(InfraccionesFranjaHorariaViolationCode aIncrementar) {
 		// Asegurarse de que son estadisticas de franjas contiguas
-		if (this.getFranjaFinal().plusSeconds(1).equals(aIncrementar.getFranjaInicial())) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
+		if (!this.getFranjaFinal().plusSeconds(1).equals(aIncrementar.getFranjaInicial())) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
 		
 		
 		LocalTime horaInicial = this.getFranjaInicial();
@@ -136,6 +136,12 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 			} else {
 				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).incrementarEstadisticas(aSumar));
 			}
+		}
+		// Agregar las del segundo que no estan en el primero
+		for (String codigo : aIncrementar.getInfViolationCode()) {			
+			if(this.infViolationCode.get(codigo) == null) {
+				resultado.infViolationCode.put(codigo, aIncrementar.infViolationCode.get(codigo));
+			} 
 		}
 		
 		return resultado;

@@ -688,11 +688,14 @@ public class MovingViolationsManager {
 			thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(5);
 			tiempoAct = LocalTime.of(0, 0, 0);
 			estadAct = thTimeCode.get(tiempoAct);
+			InfraccionesFranjaHorariaViolationCode estadAAgregar;
 			while(true) {
 				thFranjaCode.put(tiempoAct, estadAct);
 				
 				tiempoAct = tiempoAct.plusSeconds(1);
-				estadAct = estadAct.incrementarEstadisticas(thTimeCode.get(tiempoAct));
+				estadAAgregar = thTimeCode.get(tiempoAct);
+				if (estadAAgregar == null) estadAAgregar = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct); 
+				estadAct = estadAct.incrementarEstadisticas(estadAAgregar);
 				
 				if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break;
 			}
