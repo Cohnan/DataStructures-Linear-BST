@@ -138,10 +138,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
 					"Moving_Violations_Issued_in_February_2018.csv",
-					//					"Moving_Violations_Issued_in_March_2018.csv",
-					//					"Moving_Violations_Issued_in_April_2018.csv",
-					//					"Moving_Violations_Issued_in_May_2018.csv",
-					//					"Moving_Violations_Issued_in_June_2018.csv"
+										"Moving_Violations_Issued_in_March_2018.csv",
+										"Moving_Violations_Issued_in_April_2018.csv",
+										"Moving_Violations_Issued_in_May_2018.csv",
+										"Moving_Violations_Issued_in_June_2018.csv"
 			});
 			semestreCargado = 1;
 		}
@@ -149,10 +149,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
 					"Moving_Violations_Issued_in_August_2018.csv",
-					//					"Moving_Violations_Issued_in_September_2018.csv", 
-					//					"Moving_Violations_Issued_in_October_2018.csv",
-					//					"Moving_Violations_Issued_in_November_2018.csv",
-					//					"Moving_Violations_Issued_in_December_2018.csv"
+										"Moving_Violations_Issued_in_September_2018.csv", 
+										"Moving_Violations_Issued_in_October_2018.csv",
+										"Moving_Violations_Issued_in_November_2018.csv",
+										"Moving_Violations_Issued_in_December_2018.csv"
 			});
 			semestreCargado = 2;
 		}
@@ -160,6 +160,13 @@ public class MovingViolationsManager {
 		{
 			throw new IllegalArgumentException("No existe ese semestre en un annio.");
 		}
+		// Las siguientes 3 lineas pueden ser comentadas o eliminadas sin modificar el correcto funcionamiento del programa
+		// Crear al momento de la carga de datos las estructuras usadas en la parte C
+		crearThLocAdd();
+		crearCpViolationCode();
+		crearThFranjaCode();
+		rankingNLocalizaciones(0);
+		
 		return numeroDeCargas;
 	}
 
@@ -388,7 +395,6 @@ public class MovingViolationsManager {
 
 		//Verifica si los datos ya fueron cargados anteriormente
 		if (cpViolationCode == null) {
-			cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
 			crearCpViolationCode();
 		}	
 
@@ -408,6 +414,7 @@ public class MovingViolationsManager {
 	}
 
 	private void crearCpViolationCode() {
+		cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
 		//Se ordenan por ViolationCode Order para poder crear las estad�sticas
 		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
 		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
@@ -599,7 +606,7 @@ public class MovingViolationsManager {
 	{
 		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(thLocAddress == null) {
-			thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4); //TODO check that the maxloadfactor is loooow
+			thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(5); //TODO check that the maxloadfactor is loooow
 
 			if (thLocalizaciones == null && abLocalizaciones == null) {
 				crearThLocAdd();
@@ -626,6 +633,9 @@ public class MovingViolationsManager {
 	private void crearThLocAdd() {
 		// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
 		// a la coordenada actual
+		
+		if (thLocAddress == null) thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(101);
+		
 		Integer adressAct;
 		InfraccionesLocalizacion estadisticaAct;
 
@@ -652,36 +662,7 @@ public class MovingViolationsManager {
 	public InfraccionesFranjaHorariaViolationCode consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
 	{
 		if (thFranjaCode == null) {
-			//Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
-			LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode> thTimeCode = new LinProbTH<>(4);
-			
-			LocalTime tiempoAct;
-			InfraccionesFranjaHorariaViolationCode estadAct;
-			for (VOMovingViolations infraccion : movingVOLista) {
-				tiempoAct = infraccion.getTicketIssueDate().toLocalTime();
-				
-				estadAct = thTimeCode.get(tiempoAct);
-				
-				if (estadAct == null) estadAct = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct);
-				
-				estadAct.agregarEstadistica(infraccion);
-				thTimeCode.put(tiempoAct, estadAct);
-			}
-			
-			thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(5);
-			tiempoAct = LocalTime.of(0, 0, 0);
-			estadAct = thTimeCode.get(tiempoAct);
-			InfraccionesFranjaHorariaViolationCode estadAAgregar;
-			while(true) {
-				thFranjaCode.put(tiempoAct, estadAct);
-				
-				tiempoAct = tiempoAct.plusSeconds(1);
-				estadAAgregar = thTimeCode.get(tiempoAct);
-				if (estadAAgregar == null) estadAAgregar = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct); 
-				estadAct = estadAct.incrementarEstadisticas(estadAAgregar);
-				
-				if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break;
-			}
+			crearThFranjaCode();
 		}
 		
 		
@@ -691,6 +672,40 @@ public class MovingViolationsManager {
 		return acumulado.eliminarEstadisticas(aRestar);
 	}
 
+	private void crearThFranjaCode() {
+		// Tabla de hash auxiliar que contiene las estadisticas de cada segundo del dia
+		LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode> thTimeCode = new LinProbTH<>(101);
+		
+		LocalTime tiempoAct;
+		InfraccionesFranjaHorariaViolationCode estadAct;
+		for (VOMovingViolations infraccion : movingVOLista) {
+			tiempoAct = infraccion.getTicketIssueDate().toLocalTime();
+			
+			estadAct = thTimeCode.get(tiempoAct);
+			
+			if (estadAct == null) estadAct = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct);
+			
+			estadAct.agregarEstadistica(infraccion);
+			thTimeCode.put(tiempoAct, estadAct);
+		}
+		
+		// Se crea una tabla de hash que contiene las estadisticas desde las 0 hasta los demas segundos del dia
+		thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(5);
+		tiempoAct = LocalTime.of(0, 0, 0);
+		estadAct = thTimeCode.get(tiempoAct);
+		InfraccionesFranjaHorariaViolationCode estadAAgregar;
+		while(true) {
+			thFranjaCode.put(tiempoAct, estadAct);
+			
+			tiempoAct = tiempoAct.plusSeconds(1);
+			estadAAgregar = thTimeCode.get(tiempoAct);
+			if (estadAAgregar == null) estadAAgregar = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct); 
+			estadAct = estadAct.incrementarEstadisticas(estadAAgregar);
+			
+			if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break;
+		}
+	}
+	
 	/**
 	 * Requerimiento 3C: Obtener  el  ranking  de  las  N localizaciones geogr�ficas
 	 * (Xcoord,  Ycoord)  con  la mayor  cantidad  de  infracciones.
