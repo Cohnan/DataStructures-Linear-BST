@@ -108,13 +108,9 @@ public class MovingViolationsManager {
 	/**
 	 * 2C
 	 */
-<<<<<<< HEAD
-	private ITablaHash<LocalDateTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
 
-=======
 	private ITablaHash<LocalTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
 	
->>>>>>> 98f0626557aee29c7337fba7b4d9fed16e9b795e
 	/**
 	 * 3C
 	 */
@@ -648,20 +644,17 @@ public class MovingViolationsManager {
 	public InfraccionesFranjaHorariaViolationCode consultarPorRangoHoras(LocalTime horaInicial, LocalTime horaFinal)
 	{
 		if (thFranjaCode == null) {
-<<<<<<< HEAD
 
 		}
 
 		return null;
-=======
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
-		}
+		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.FranjaHorariaOrder()); // TODO puedo eliminar este sorting?
+		
 		
 		InfraccionesFranjaHorariaViolationCode acumulado = thFranjaCode.get(horaFinal);
 		InfraccionesFranjaHorariaViolationCode aRestar = thFranjaCode.get(horaFinal.equals(LocalTime.of(0, 0))? LocalTime.of(0, 0) : horaFinal.minusSeconds(1));
 		
 		return acumulado.eliminarEstadisticas(aRestar);
->>>>>>> 98f0626557aee29c7337fba7b4d9fed16e9b795e
 	}
 
 	/**
