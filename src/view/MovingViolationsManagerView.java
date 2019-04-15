@@ -104,7 +104,7 @@ public class MovingViolationsManagerView
 	public void printReq2B(InfraccionesLocalizacion resultado) {
 		
 		if(resultado!=null){System.out.println(resultado);}
-		else{System.out.println("No se encontró información asociada a dicha coordenada.");}
+		else{System.out.println("No se encontrï¿½ informaciï¿½n asociada a dicha coordenada.");}
 		
 		
 		/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
@@ -120,7 +120,7 @@ public class MovingViolationsManagerView
 		
 		
 		if(resultados == null){
-			System.out.println("No hay información en el rango indicado.");
+			System.out.println("No hay informaciï¿½n en el rango indicado.");
 			return;
 		}
 		
@@ -183,11 +183,11 @@ public class MovingViolationsManagerView
 	
 	
 	public void printReq4C(IColaPrioridad<InfraccionesViolationCode> resultados, int semestre, int totalInfracciones) {
-		double vX = 0.01; 
+		double vX = 0.005; 
 		
 		System.out.println("Ranking de tipo de infracciones por porcentaje de infracciones. AÃ±o 2018 semestre " + semestre);
 		System.out.println("Codigo Infraccion | Porcentaje");
-		for (InfraccionesViolationCode estadistica : resultados) {
+		for (InfraccionesViolationCode estadistica : resultados.iterableEnOrden()) {
 			System.out.printf("%17s |", estadistica.getViolationCode());
 			for (int k = 0; k < (int) (estadistica.getTotalInfracciones()/(totalInfracciones * vX)); k++) {
 				System.out.print("X");

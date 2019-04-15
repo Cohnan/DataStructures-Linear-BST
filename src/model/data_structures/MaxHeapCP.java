@@ -47,6 +47,7 @@ public class MaxHeapCP <T extends Comparable<T>> implements IColaPrioridad<T>{
 	public void agregar(T t){
 		cp.agregar(t);
 		swim(darNumElementos());
+		ordenado = null;
 	}
 
 	public T delMax() {
@@ -57,6 +58,7 @@ public class MaxHeapCP <T extends Comparable<T>> implements IColaPrioridad<T>{
 		exch(1,darNumElementos());
 		cp.eliminarEnPos(darNumElementos());
 		sink(1);
+		ordenado = null;
 		
 		return max;
 	}

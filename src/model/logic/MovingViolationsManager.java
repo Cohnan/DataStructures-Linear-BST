@@ -287,23 +287,15 @@ public class MovingViolationsManager {
 			// Agregar la ultima referencia
 			cpFranjasHorarias.agregar(voFranja);
 		}
-
 		
-		
-		
-		IColaPrioridad<InfraccionesFranjaHoraria> aux = new MaxHeapCP<InfraccionesFranjaHoraria>();
-		for(InfraccionesFranjaHoraria s: cpFranjasHorarias){
-			aux.agregar(s);
+		int nAgregados = 0;
+		for (InfraccionesFranjaHoraria estadistica : cpFranjasHorarias.iterableEnOrden()) {
+			if (nAgregados >= M) break;
+			
+			mPrimeras.enqueue(estadistica);
+			nAgregados++;
 		}
 		
-		for (int j = 0; j < M; j++) {
-			if(aux.delMax()!=null){
-			mPrimeras.enqueue(aux.delMax());
-			}
-		}
-		
-		
-
 		return mPrimeras;		
 	}
 
@@ -403,23 +395,14 @@ public class MovingViolationsManager {
 
 		//Selecciona las N primeras infraccionesViolationCode en UNA COPIA
 		
-		//SE PUEDE CAMBIAR - NO PUDE
-		
-		IColaPrioridad<InfraccionesViolationCode> aux = new MaxHeapCP<InfraccionesViolationCode>();
-		for(InfraccionesViolationCode s: cpViolationCode){
-			aux.agregar(s);
+		int nAgregados = 0;
+		for (InfraccionesViolationCode estadistica : cpViolationCode.iterableEnOrden()) {
+			if (nAgregados >= N) break;
+			
+			resultado.enqueue(estadistica);
+			nAgregados++;
 		}
-		
-		
-		for (int j = 0; j < N; j++) {
-			if(aux.delMax()!=null){
-			resultado.enqueue(aux.delMax());
-			}
-		}
-		
-		
-		//Devuelve el resultado
-		System.out.println("Tama�o Original: "+ cpViolationCode.darNumElementos());
+
 		return resultado;
 
 	}
@@ -744,7 +727,7 @@ public class MovingViolationsManager {
 		IQueue<InfraccionesLocalizacion> rankingN = new Queue<>();
 
 		int i = 0;
-		for (InfraccionesLocalizacion estadistica : cpLocalizaciones) {
+		for (InfraccionesLocalizacion estadistica : cpLocalizaciones.iterableEnOrden()) {
 			if(i++ >= N) break;
 			rankingN.enqueue(estadistica);
 		}
