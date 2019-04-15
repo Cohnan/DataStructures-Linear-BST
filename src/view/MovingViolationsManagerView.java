@@ -1,6 +1,7 @@
 package view;
 
 import model.data_structures.IArregloDinamico;
+import model.data_structures.IColaPrioridad;
 import model.data_structures.IQueue;
 import model.data_structures.IStack;
 import model.data_structures.ITablaSimOrd;
@@ -170,9 +171,19 @@ public class MovingViolationsManagerView
 	}
 	
 	
-	public void printReq4C(ITablaSimOrd<Integer, InfraccionesViolationCode> resultados) {
-		//TODO La estructura Contenedora depende del metodo que retorna el resultado
-		//TODO Imprimir grafica ASCII con los codigos ordenados (de mayor a menor) por el total de sus infracciones 
+	public void printReq4C(IColaPrioridad<InfraccionesViolationCode> resultados, int semestre, int totalInfracciones) {
+		double vX = 0.01; 
+		
+		System.out.println("Ranking de tipo de infracciones por porcentaje de infracciones. Año 2018 semestre " + semestre);
+		System.out.println("Codigo Infraccion | Porcentaje");
+		for (InfraccionesViolationCode estadistica : resultados) {
+			System.out.printf("%17s |", estadistica.getViolationCode());
+			for (int k = 0; k < (int) (estadistica.getTotalInfracciones()/(totalInfracciones * vX)); k++) {
+				System.out.print("X");
+			}
+			System.out.println("");
+		}
+		System.out.println("Cada X representa " + vX*100 + "%"); 
 	}
 
 	public void requerimiento1B(MaxHeapCP<VOColeccion> datos, int n){

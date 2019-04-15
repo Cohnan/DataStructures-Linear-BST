@@ -35,9 +35,14 @@ public class MovingViolationsManager {
 	private static IArregloDinamico<VOMovingViolations> movingVOLista;
 
 	/**
-	 * Numero actual del cuatrimestre cargado
+	 * Numero actual del semestre cargado
 	 */
 	private static int semestreCargado = -1;
+	
+	/**
+	 * Numero infracciones cargadas
+	 */
+	private static int nInfraccionesCargadas = -1;
 
 	/**
 	 * X minimo de infraccion
@@ -201,6 +206,7 @@ public class MovingViolationsManager {
 				totalInf += contadorInf;
 				infPorMes[nArchivoActual++] = contadorInf;
 			}
+			nInfraccionesCargadas = totalInf;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -375,40 +381,7 @@ public class MovingViolationsManager {
 		if (cpViolationCode == null) {
 			cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
 
-			//Se ordenan por ViolationCode Order para poder crear las estad�sticas
-			Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
-			Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
-
-			// Si no hay datos, entonces retorna una cola vacia
-			if (!iterador.hasNext()) return resultado;
-
-
-			//Se recorren las infracciones tomando la referencia de su violationCode
-			VOMovingViolations infrRevisar = iterador.next();
-			String violationCodeActual = infrRevisar.getViolationCode();
-
-			InfraccionesViolationCode voViolation = new InfraccionesViolationCode(violationCodeActual);
-			voViolation.agregarEstadistica(infrRevisar);
-
-			while(iterador.hasNext()){
-				infrRevisar = iterador.next();
-
-				//Si tienen el mismo VOCode, van en la misma estad�stica
-				if(violationCodeActual.equals(infrRevisar.getViolationCode())){
-					voViolation.agregarEstadistica(infrRevisar);
-				}
-				else{
-
-					//Si no, se agrega al MAXHEAP y se reincia
-					cpViolationCode.agregar(voViolation);
-					violationCodeActual = infrRevisar.getViolationCode();
-					voViolation = new InfraccionesViolationCode(violationCodeActual);
-					voViolation.agregarEstadistica(infrRevisar);
-				}
-			}
-
-			//Para agregar la �ltima referencia
-			cpViolationCode.agregar(voViolation);
+			crearCpViolationCode();
 		}	
 
 
@@ -423,7 +396,43 @@ public class MovingViolationsManager {
 		return resultado;
 
 	}
+	
+	private void crearCpViolationCode() {
+		//Se ordenan por ViolationCode Order para poder crear las estad�sticas
+		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
+		// Si no hay datos, entonces retorna una cola vacia
+		if (!iterador.hasNext()) return ;
+
+
+		//Se recorren las infracciones tomando la referencia de su violationCode
+		VOMovingViolations infrRevisar = iterador.next();
+		String violationCodeActual = infrRevisar.getViolationCode();
+
+		InfraccionesViolationCode voViolation = new InfraccionesViolationCode(violationCodeActual);
+		voViolation.agregarEstadistica(infrRevisar);
+
+		while(iterador.hasNext()){
+			infrRevisar = iterador.next();
+
+			//Si tienen el mismo VOCode, van en la misma estad�stica
+			if(violationCodeActual.equals(infrRevisar.getViolationCode())){
+				voViolation.agregarEstadistica(infrRevisar);
+			}
+			else{
+
+				//Si no, se agrega al MAXHEAP y se reincia
+				cpViolationCode.agregar(voViolation);
+				violationCodeActual = infrRevisar.getViolationCode();
+				voViolation = new InfraccionesViolationCode(violationCodeActual);
+				voViolation.agregarEstadistica(infrRevisar);
+			}
+		}
+
+		//Para agregar la �ltima referencia
+		cpViolationCode.agregar(voViolation);
+	}
 
 	/**
 	 * Requerimiento 2B: Consultar las  infracciones  por  
@@ -614,15 +623,23 @@ public class MovingViolationsManager {
 	/**
 	 * Requerimiento 4C: Obtener la  informaci�n  de  los c�digos (ViolationCode) ordenados por su numero de infracciones.
 	 * @return Contenedora de objetos InfraccionesViolationCode.
-	  // TODO Definir la estructura Contenedora
 	 */
-	public ITablaSimOrd<Integer, InfraccionesViolationCode> ordenarCodigosPorNumeroInfracciones()
+	public IColaPrioridad<InfraccionesViolationCode> ordenarCodigosPorNumeroInfracciones()
 	{
-		// TODO completar
-		// TODO Definir la Estructura Contenedora
-		return null;		
+		if (cpViolationCode == null) {
+			cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
+			crearCpViolationCode();
+		}
+		return cpViolationCode;		
 	}
-
+	
+	public int darNumeroInfraccionesCargadas() {
+		return nInfraccionesCargadas;
+	}
+	
+	public int darNumeroSemestre() {
+		return semestreCargado;
+	}
 
 	/*
 	 * Metodos ayudantes 

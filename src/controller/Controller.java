@@ -46,7 +46,7 @@ public class Controller {
 	public void run() {
 		Scanner sc = new Scanner(System.in);
 		boolean fin = false;
-		Controller controller = new Controller();
+		//Controller controller = new Controller();
 		int option = -1;
 		boolean numeroEncontrado = false;
 		
@@ -201,11 +201,8 @@ public class Controller {
 					System.out.println("Grafica ASCII con la informacion de las infracciones por ViolationCode");
 
 					startTime = System.currentTimeMillis();
-					//TODO Completar para la invocacion del metodo 4C
-					//model.ordenarCodigosPorNumeroInfracciones()
-
-					//TODO Mostrar grafica a partir del resultado del metodo anterior
-					//view.printReq4C( ... )
+					
+					view.printReq4C(model.ordenarCodigosPorNumeroInfracciones(), model.darNumeroSemestre(), model.darNumeroInfraccionesCargadas());
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
@@ -220,33 +217,6 @@ public class Controller {
 				e.printStackTrace(); System.out.println("Ocurrio un error. Se recomienda reiniciar el programa.");}
 		}
 	}
-
-
-	//
-
-	//
-	//
-	//	/**
-	//	 * Convertir fecha a un objeto LocalDate
-	//	 * @param fecha fecha en formato dd/mm/aaaa con dd para dia, mm para mes y aaaa para agno
-	//	 * @return objeto LD con fecha
-	//	 */
-	//	private static LocalDate convertirFecha(String fecha)
-	//	{
-	//		return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	//	}
-	//
-	//
-	//	/**
-	//	 * Convertir fecha y hora a un objeto LocalDateTime
-	//	 * @param fecha fecha en formato yyyy-MM-dd'T'HH:mm:ss'.000Z' con dd para dia, mm para mes y yyy para agno, HH para hora, mm para minutos y ss para segundos
-	//	 * @return objeto LDT con fecha y hora integrados
-	//	 */
-	//	private static LocalDateTime convertirFecha_Hora_LDT(String fechaHora)
-	//	{
-	//		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm:ss"));
-	//
-	//	}
 
 }
 
