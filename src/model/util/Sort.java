@@ -12,6 +12,8 @@ public class Sort {
 		ordenarShellSort(datos, Comparator.<T>naturalOrder());
 	}
 	
+	
+	
 	public static <T extends Comparable<? super T>> void ordenarMergeSort(IArregloDinamico<T> datos) {
 		ordenarMergeSort(datos, Comparator.<T>naturalOrder());
 	}
@@ -19,6 +21,8 @@ public class Sort {
 	public static <T extends Comparable<? super T>> void ordenarQuickSort(IArregloDinamico<T> datos) {
 		ordenarQuickSort(datos, Comparator.<T>naturalOrder());
 	}
+	
+	
 	
 	/*
 	 * **********************************************************************************************
