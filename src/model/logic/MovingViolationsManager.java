@@ -502,7 +502,7 @@ public class MovingViolationsManager {
 		}
 
 
-		
+		//Se itera sobre los valores en el rango
 		Iterator<Double> aux = abValorAcumulado.keysInRange(valorInicial, valorFinal).iterator();
 		double actual = aux.next();
 		respuesta.enqueue(abValorAcumulado.get(actual));
@@ -513,11 +513,9 @@ public class MovingViolationsManager {
 		}
 		
 
-		//Se verifica, para cada uno de los valores, si esta en el rango o no
-	
-		
-		
 
+		
+		
 		return respuesta;
 
 	}
