@@ -79,7 +79,7 @@ public class MovingViolationsManagerView
 	
 	public void printReq3A(IQueue<InfraccionesFecha> resultados) {
 		for(InfraccionesFecha infraFechas: resultados) {
-			System.out.println(infraFechas.toString());
+			System.out.println(infraFechas);
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraFechas.getListaInfracciones()) {
@@ -91,7 +91,7 @@ public class MovingViolationsManagerView
 	
 	public void printReq1B(IQueue<InfraccionesViolationCode> resultados) {
 		for(InfraccionesViolationCode infraVioCode: resultados) {
-			System.out.println(infraVioCode.toString());
+			System.out.println(infraVioCode);
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraVioCode.getListaInfracciones()) {
@@ -102,7 +102,7 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq2B(InfraccionesLocalizacion resultado) {
-		System.out.println(resultado.toString());
+		System.out.println(resultado);
 		/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 		/*
 		for(VOMovingViolations v: resultado.getListaInfracciones()) {
@@ -114,7 +114,7 @@ public class MovingViolationsManagerView
 	
 	public void printReq3B(IQueue<InfraccionesFechaHora> resultados) {
 		for(InfraccionesFechaHora infraFechas: resultados) {
-			System.out.println(infraFechas.toString());
+			System.out.println(infraFechas);
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraFechas.getListaInfracciones()) {
@@ -125,7 +125,7 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq1C(InfraccionesLocalizacion resultado) {
-		System.out.println(resultado.toString());
+		System.out.println(resultado);
 		/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 		/*		
 		for(VOMovingViolations v: resultado.getListaInfracciones()) {
@@ -135,11 +135,11 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq2C(InfraccionesFranjaHorariaViolationCode resultado) {
-		System.out.println(resultado.toString());
+		System.out.println(resultado);
 		
 		
-		for(InfraccionesViolationCode v: resultado.getInfViolationCode()) {
-			System.out.println(v.toString());
+		for(InfraccionesViolationCode v: resultado.getInfViolationCode().iteratorValues()) {
+			System.out.println(v);
 
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
@@ -160,7 +160,7 @@ public class MovingViolationsManagerView
 	
 	public void printReq3C(IQueue<InfraccionesLocalizacion> resultados) {
 		for(InfraccionesLocalizacion infraLoc: resultados) {
-			System.out.println(infraLoc.toString());
+			System.out.println(infraLoc);
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*		
 			for(VOMovingViolations vo: infraLoc.getListaInfracciones()) {
@@ -215,22 +215,6 @@ public class MovingViolationsManagerView
 		}
 		
 		
-	}
-
-	public String ObtenerMes(int pMes){
-
-		if(pMes == 1){ return "Enero";}
-		else if(pMes == 2){ return "Febrero";}
-		else if(pMes == 3){ return "Marzo";}
-		else if(pMes == 4){ return "Abril";}
-		else if(pMes == 5){ return "Mayo";}
-		else if(pMes == 6){ return "Junio";}
-		else if(pMes == 7){ return "Julio";}
-		else if(pMes == 8){ return "Agosto";}
-		else if(pMes == 9){ return "Septiembre";}
-		else if(pMes == 10){ return "Octubre";}
-		else if(pMes == 11){ return "Noviembre";}
-		else{ return "Diciembre";}
 	}
 
 }

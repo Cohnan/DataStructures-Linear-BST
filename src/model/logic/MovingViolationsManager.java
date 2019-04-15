@@ -103,7 +103,12 @@ public class MovingViolationsManager {
 	 * 1C
 	 */
 	private LinProbTH<Integer, InfraccionesLocalizacion> thLocAddress;
-
+	
+	/**
+	 * 2C
+	 */
+	private ITablaHash<LocalDateTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
+	
 	/**
 	 * 3C
 	 */

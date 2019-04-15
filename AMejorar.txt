@@ -1,0 +1,7 @@
+ - debo volver a hacer put?
+ - iteratorValues en ITablaHash y la otra tabla de hash (o eliminarla) para cambiarla las creo que 3 tablas de hash que desde el principio tuve que poner como LinProbTH
+ - En la CP del C solo crear las que se necesitan y poder empezar desde donde se dejo 
+ - 
+
+ - Implementacion del 3B es incorrecta
+ - Los resultados del 1B y 3B no se dan al view como propone el esqueleto. No esta mal, pero no es dificil dejarlo como proponen
