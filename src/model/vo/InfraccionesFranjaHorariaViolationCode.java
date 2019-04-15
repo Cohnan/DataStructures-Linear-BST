@@ -77,4 +77,8 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		infViolationCode.put(nuevaInfraccion.getViolationCode(), estadVOCode); //TODO check if this si necessary
 		
 	}
+	
+	public void eliminarEstadisticas(InfraccionesFranjaHorariaViolationCode aEliminar) {
+		
+	}
 }
