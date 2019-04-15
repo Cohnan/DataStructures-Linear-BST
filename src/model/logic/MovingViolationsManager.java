@@ -451,24 +451,40 @@ public class MovingViolationsManager {
 	{
 		//Verifica si ya estan cargados los datos necesarios
 		if(abLocalizaciones == null) {
-			//Se crea el ï¿½rbol balanceado
-			abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
-			Coordenadas curCoord;
-			InfraccionesLocalizacion locActual;
-
-			//Se recorre la lista de las infracciones
-			for (VOMovingViolations infraccion : movingVOLista) {
-				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
-				locActual = abLocalizaciones.get(curCoord);
-				//Si  la localizaciï¿½n actual no existe, se crea una nueva InfraccionesLocalizaciï¿½n
-				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-				//Se agrega a la estadï¿½stica la infracciï¿½n actual
-				locActual.agregarEstadistica(infraccion);
-				abLocalizaciones.put(curCoord, locActual);
-			}
+			crearAbLocalizaciones();
 		}
 		//Se retorna la localizaciï¿½n buscada
 		return abLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
+	}
+
+
+	private void crearAbLocalizaciones(){
+
+		boolean primera = true;
+
+		abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
+		Coordenadas auxiliar;
+		InfraccionesLocalizacion locActual;
+
+		//Se recorre la lista de las infracciones
+		for (VOMovingViolations infraccion : movingVOLista) {
+			auxiliar = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
+			locActual = abLocalizaciones.get(auxiliar);
+			//Si  la localizaciï¿½n actual no existe, se crea una nueva InfraccionesLocalizaciï¿½n
+			if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
+			//Se agrega a la estadï¿½stica la infracciï¿½n actual
+			locActual.agregarEstadistica(infraccion);
+			abLocalizaciones.put(auxiliar, locActual);
+			if(primera){
+				System.out.println(auxiliar);
+				System.out.println(infraccion.getXCoord());
+				System.out.println(infraccion.getYCoord());
+				
+				primera = false;
+			}
+			
+		}
+
 	}
 
 	/**
@@ -483,23 +499,22 @@ public class MovingViolationsManager {
 
 		//La cola que contiene la respuesta
 		IQueue<InfraccionesFechaHora> respuesta = new Queue<>();
-		
+
 		//Si no se ha cargado el árbol, se construye
 		if(abValorAcumulado == null){
 			crearabValorAcumulado();
 		}
-		
-		
+
+
 		//Se verifica, para cada uno de los valores, si esta en el rango o no
 		for(double s: abValorAcumulado){
 			//Si esta en el rango se añade a la cola
 			if(s>=valorInicial && s<=valorFinal){
 				respuesta.enqueue(abValorAcumulado.get(s));
-				System.out.println(s);
 			}
 		}
-	
-	return respuesta;
+
+		return respuesta;
 
 	}
 
