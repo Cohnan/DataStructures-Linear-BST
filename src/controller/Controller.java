@@ -120,9 +120,9 @@ public class Controller {
 					break;
 
 				case 5:						
-					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 402915.72): ");
+					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 393185.81): ");
 					double xCoord2 = Double.parseDouble(sc.next());
-					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
+					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138316.9): ");
 					double yCoord2 = Double.parseDouble(sc.next());
 					view.printReq2B(model.consultarPorLocalizacionArbol(xCoord2, yCoord2));
 

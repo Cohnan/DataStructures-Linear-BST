@@ -461,7 +461,7 @@ public class MovingViolationsManager {
 	private void crearAbLocalizaciones(){
 
 		boolean primera = true;
-
+		int contador = 1;
 		abLocalizaciones = new BlancoRojoBST<Coordenadas, InfraccionesLocalizacion>();
 		Coordenadas auxiliar;
 		InfraccionesLocalizacion locActual;
@@ -475,14 +475,6 @@ public class MovingViolationsManager {
 			//Se agrega a la estad�stica la infracci�n actual
 			locActual.agregarEstadistica(infraccion);
 			abLocalizaciones.put(auxiliar, locActual);
-			if(primera){
-				System.out.println(auxiliar);
-				System.out.println(infraccion.getXCoord());
-				System.out.println(infraccion.getYCoord());
-				
-				primera = false;
-			}
-			
 		}
 
 	}
@@ -568,7 +560,6 @@ public class MovingViolationsManager {
 
 					//Si no, se agrega al arbol y se reincia
 					abValorAcumulado.put(voViolation.getValorTotal(), voViolation);
-					System.out.println("PASO");
 					if(inicio.getHour()<23){
 						inicio = inicio.plusHours(01);
 					}

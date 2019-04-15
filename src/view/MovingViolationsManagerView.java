@@ -102,7 +102,11 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq2B(InfraccionesLocalizacion resultado) {
-		System.out.println(resultado);
+		
+		if(resultado!=null){System.out.println(resultado);}
+		else{System.out.println("No se encontró información asociada a dicha coordenada.");}
+		
+		
 		/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 		/*
 		for(VOMovingViolations v: resultado.getListaInfracciones()) {
@@ -113,6 +117,13 @@ public class MovingViolationsManagerView
 	
 	
 	public void printReq3B(IQueue<InfraccionesFechaHora> resultados) {
+		
+		
+		if(resultados == null){
+			System.out.println("No hay información en el rango indicado.");
+			return;
+		}
+		
 		for(InfraccionesFechaHora infraFechas: resultados) {
 			System.out.println(infraFechas);
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
