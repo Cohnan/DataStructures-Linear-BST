@@ -387,19 +387,23 @@ public class MovingViolationsManager {
 		//Verifica si los datos ya fueron cargados anteriormente
 		if (cpViolationCode == null) {
 			cpViolationCode = new MaxHeapCP<InfraccionesViolationCode>();
-
 			crearCpViolationCode();
 		}	
 
 
 		//Selecciona las N primeras infraccionesViolationCode
 		int i = 0;
-		for (InfraccionesViolationCode act:cpViolationCode) {
-			if(++i>N) break;
-			resultado.enqueue(act);
+		IColaPrioridad<InfraccionesViolationCode> aux = cpViolationCode;
+		
+		for (int j = 0; j < N; j++) {
+			if(aux.delMax()!=null){
+			resultado.enqueue(aux.delMax());
+			}
 		}
-
+		
+		
 		//Devuelve el resultado
+		System.out.println("Tamaño Original: "+ cpViolationCode.darNumElementos());
 		return resultado;
 
 	}
@@ -489,28 +493,37 @@ public class MovingViolationsManager {
 	{
 
 		//La cola que contiene la respuesta
+		
 		IQueue<InfraccionesFechaHora> respuesta = new Queue<>();
 
 		//Si no se ha cargado el árbol, se construye
 		if(abValorAcumulado == null){
-			crearabValorAcumulado();
+			crearAbValorAcumulado();
 		}
 
+
+		
+		Iterator<Double> aux = abValorAcumulado.keysInRange(valorInicial, valorFinal).iterator();
+		double actual = aux.next();
+		respuesta.enqueue(abValorAcumulado.get(actual));
+		
+		while(aux.hasNext()){
+			actual = aux.next();
+			respuesta.enqueue(abValorAcumulado.get(actual));
+		}
+		
 
 		//Se verifica, para cada uno de los valores, si esta en el rango o no
-		for(double s: abValorAcumulado){
-			//Si esta en el rango se añade a la cola
-			if(s>=valorInicial && s<=valorFinal){
-				respuesta.enqueue(abValorAcumulado.get(s));
-			}
-		}
+	
+		
+		
 
 		return respuesta;
 
 	}
 
 
-	private void crearabValorAcumulado(){
+	private void crearAbValorAcumulado(){
 
 		//Se ordenan por TicketIssueOrder Order para poder crear las estadï¿½sticas
 		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.TicketIssueOrder());

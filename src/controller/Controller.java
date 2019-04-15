@@ -89,10 +89,10 @@ public class Controller {
 					break;
 
 				case 2:
-					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 402915.72): ");
-					double xCoord = sc.nextDouble();
-					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138864.78): ");
-					double yCoord = sc.nextDouble();
+					view.printMessage("Ingrese la coordenada en X de la localizacion geografica (Ej. 393185.81): ");
+					double xCoord = Double.parseDouble(sc.next());
+					view.printMessage("Ingrese la coordenada en Y de la localizacion geografica (Ej. 138316.9): ");
+					double yCoord = Double.parseDouble(sc.next());
 
 					view.printReq2A(model.consultarPorLocalizacionHash(xCoord, yCoord));
 					break;
