@@ -93,8 +93,11 @@ public class MovingViolationsManager {
 	 */
 	private ITablaSimOrd<Double,InfraccionesFranjaHoraria> abValorAcumulado;
 
-
-
+	
+	/**
+	 * 1C
+	 */
+	private ITablaHash<Integer, InfraccionesLocalizacion> thLocAddress;
 
 	/**
 	 * Metodo constructor
@@ -497,8 +500,46 @@ public class MovingViolationsManager {
 	 */
 	public InfraccionesLocalizacion consultarPorAddressId(int addressID)
 	{
-		// TODO completar
-		return null;		
+		// En caso de no existir ya la tabla de hash con la informacion, la crea
+		if(thLocAddress == null) {
+			thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4); //TODO check that the maxloadfactor is loooow
+			
+			if (thLocalizaciones == null && abLocalizaciones == null) {
+					
+				// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
+				// a la coordenada actual
+				Integer adressAct;
+				InfraccionesLocalizacion estadisticaAct;
+
+				for (VOMovingViolations infraccion : movingVOLista) {
+					adressAct = infraccion.getAddressID();
+					estadisticaAct = thLocAddress.get(adressAct);
+					
+					// Si la coordenada actual aun no esta en la tabla, la crea
+					if (estadisticaAct == null) estadisticaAct = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
+						
+					// Actualiza la estadistica correspondiente a esta coordenada
+					estadisticaAct.agregarEstadistica(infraccion);
+					thLocAddress.put(adressAct, estadisticaAct);
+				}
+				
+			// En caso de que thLocalizaciones o abLocalizaciones ya existan
+			} else if(thLocalizaciones != null) {
+				InfraccionesLocalizacion localizacion;
+				for (Coordenadas coordenada : thLocalizaciones) {
+					localizacion = thLocalizaciones.get(coordenada);
+					thLocAddress.put(localizacion.getAdressID(), localizacion);
+				}
+			} else {
+				InfraccionesLocalizacion localizacion;
+				for (Coordenadas coordenada : abLocalizaciones) {
+					localizacion = abLocalizaciones.get(coordenada);
+					thLocAddress.put(localizacion.getAdressID(), localizacion);
+				}
+			}
+		}
+		// Retorna la informacion deseada desde una tabla de hash
+		return thLocAddress.get(addressID);
 	}
 
 	/**

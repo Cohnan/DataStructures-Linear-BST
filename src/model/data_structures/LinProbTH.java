@@ -26,7 +26,7 @@ public class LinProbTH<K, V> implements ITablaHash<K, V> {
 	/**
 	 * Factor de carga m�xmio
 	 */
-	public final double factorCargaMax = 0.75; // Made public for the tests
+	public final double factorCargaMax = 0.5; // Made public for the tests
 	/**
 	 * Factor de carga minimo
 	 */

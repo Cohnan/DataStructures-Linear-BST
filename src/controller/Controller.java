@@ -150,16 +150,14 @@ public class Controller {
 					int addressID = sc.nextInt();
 
 					startTime = System.currentTimeMillis();
-					//TODO Completar para la invocación del metodo 1C
-					//model.consultarPorAddressId(int addressID)
-
+					InfraccionesLocalizacion resultados = model.consultarPorAddressId(addressID);
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
+					
 					view.printMessage("Tiempo requerimiento 1C: " + duration + " milisegundos");
 
-					//TODO Mostrar resultado de tipo InfraccionesLocalizacion 	
-					//view.printReq1C( ... )
+					view.printReq1C(resultados);
 					break;
 
 				case 8:
