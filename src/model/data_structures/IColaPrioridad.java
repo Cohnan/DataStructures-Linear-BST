@@ -30,4 +30,6 @@ public interface IColaPrioridad<T extends Comparable<? super T>> extends Iterabl
 	 * @return el el elemento de mayor prioridad. null en caso de estar vacia
 	 */
 	public T max();
+	
+	public Iterable<T> iterableEnOrden();
 }

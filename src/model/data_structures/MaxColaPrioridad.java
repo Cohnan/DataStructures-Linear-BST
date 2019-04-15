@@ -59,4 +59,16 @@ public class MaxColaPrioridad<T extends Comparable<T>> implements IColaPrioridad
 	public Iterator<T> iterator() {
 		return cola.iterator();
 	}
+
+	@Override
+	public Iterable<T> iterableEnOrden() {
+		return new Iterable<T>() {
+
+			@Override
+			public Iterator<T> iterator() {
+				return this.iterator();
+			}
+			
+		};
+	}
 }
