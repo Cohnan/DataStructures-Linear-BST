@@ -67,7 +67,7 @@ public class MovingViolationsManager {
 	/**
 	 * 2A
 	 */
-	private ITablaHash<Coordenadas, InfraccionesLocalizacion> thLocalizaciones; // Puede que se cambie a TablaSimOrd, pues Coordenadas tiene un orden que mencionan en el enunciado
+	private LinProbTH<Coordenadas, InfraccionesLocalizacion> thLocalizaciones; // Puede que se cambie a TablaSimOrd, pues Coordenadas tiene un orden que mencionan en el enunciado
 
 	/**
 	 * 3A
@@ -97,8 +97,13 @@ public class MovingViolationsManager {
 	/**
 	 * 1C
 	 */
-	private ITablaHash<Integer, InfraccionesLocalizacion> thLocAddress;
+	private LinProbTH<Integer, InfraccionesLocalizacion> thLocAddress;
 
+	/**
+	 * 3C
+	 */
+	private IColaPrioridad<InfraccionesLocalizacion> cpLocalizaciones;
+	
 	/**
 	 * Metodo constructor
 	 */
@@ -290,29 +295,33 @@ public class MovingViolationsManager {
 	{	
 		// En caso de no existir ya la tabla de hash con la informacion, la crea
 		if(thLocalizaciones == null) {
-			thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
-			
-			// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
-			// a la coordenada actual
-			Coordenadas curCoord;
-			InfraccionesLocalizacion locActual;
-
-			for (VOMovingViolations infraccion : movingVOLista) {
-				curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
-				locActual = thLocalizaciones.get(curCoord);
-				
-				// Si la coordenada actual aun no esta en la tabla, la crea
-				if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-				
-				// Actualiza la estadistica correspondiente a esta coordenada
-				locActual.agregarEstadistica(infraccion);
-				thLocalizaciones.put(curCoord, locActual);
-			}
+				crearThLocalizaciones();
 		}
 		// Retorna la informacion deseada desde una tabla de hash
 		return thLocalizaciones.get(new Coordenadas(xCoord, yCoord));		
 	}
 
+	private void crearThLocalizaciones() {
+		thLocalizaciones = new LinProbTH<Coordenadas, InfraccionesLocalizacion>(4);
+		
+		// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
+		// a la coordenada actual
+		Coordenadas curCoord;
+		InfraccionesLocalizacion locActual;
+
+		for (VOMovingViolations infraccion : movingVOLista) {
+			curCoord = new Coordenadas(infraccion.getXCoord(), infraccion.getYCoord());
+			locActual = thLocalizaciones.get(curCoord);
+			
+			// Si la coordenada actual aun no esta en la tabla, la crea
+			if (locActual == null) locActual = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
+			
+			// Actualiza la estadistica correspondiente a esta coordenada
+			locActual.agregarEstadistica(infraccion);
+			thLocalizaciones.put(curCoord, locActual);
+		}
+	}
+		
 	/**
 	 * Requerimiento 3A: Buscar las infracciones por rango de fechas
 	 * @param  LocalDate fechaInicial: Fecha inicial del rango de b�squeda
@@ -505,23 +514,7 @@ public class MovingViolationsManager {
 			thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4); //TODO check that the maxloadfactor is loooow
 			
 			if (thLocalizaciones == null && abLocalizaciones == null) {
-					
-				// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
-				// a la coordenada actual
-				Integer adressAct;
-				InfraccionesLocalizacion estadisticaAct;
-
-				for (VOMovingViolations infraccion : movingVOLista) {
-					adressAct = infraccion.getAddressID();
-					estadisticaAct = thLocAddress.get(adressAct);
-					
-					// Si la coordenada actual aun no esta en la tabla, la crea
-					if (estadisticaAct == null) estadisticaAct = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
-						
-					// Actualiza la estadistica correspondiente a esta coordenada
-					estadisticaAct.agregarEstadistica(infraccion);
-					thLocAddress.put(adressAct, estadisticaAct);
-				}
+				crearThLocAdd();
 				
 			// En caso de que thLocalizaciones o abLocalizaciones ya existan
 			} else if(thLocalizaciones != null) {
@@ -540,6 +533,25 @@ public class MovingViolationsManager {
 		}
 		// Retorna la informacion deseada desde una tabla de hash
 		return thLocAddress.get(addressID);
+	}
+	
+	private void crearThLocAdd() {
+		// Revisa la lista de infracciones una a una, actualizando las estadisticas que corresponden 
+		// a la coordenada actual
+		Integer adressAct;
+		InfraccionesLocalizacion estadisticaAct;
+
+		for (VOMovingViolations infraccion : movingVOLista) {
+			adressAct = infraccion.getAddressID();
+			estadisticaAct = thLocAddress.get(adressAct);
+			
+			// Si la coordenada actual aun no esta en la tabla, la crea
+			if (estadisticaAct == null) estadisticaAct = new InfraccionesLocalizacion(infraccion.getXCoord(), infraccion.getYCoord(), infraccion.getLocation(), infraccion.getAddressID(), infraccion.getStreetsegID());
+				
+			// Actualiza la estadistica correspondiente a esta coordenada
+			estadisticaAct.agregarEstadistica(infraccion);
+			thLocAddress.put(adressAct, estadisticaAct);
+		}
 	}
 
 	/**
@@ -562,9 +574,41 @@ public class MovingViolationsManager {
 	 * @return Cola de objetos InfraccionesLocalizacion
 	 */
 	public IQueue<InfraccionesLocalizacion> rankingNLocalizaciones(int N)
-	{
-		// TODO completar
-		return null;		
+	{		
+		if (cpLocalizaciones == null) {
+			cpLocalizaciones = new MaxHeapCP<InfraccionesLocalizacion>();
+			Iterable<InfraccionesLocalizacion> iterable;
+			
+			if (thLocAddress != null) { // Primera opcion pues es una estructura usada en la parte C tambien
+				iterable = thLocAddress.iteratorValues();
+				
+			} else if (thLocalizaciones != null) { // Segunda opcion pues la tabla de hash es mas rapida que un arbol balanceado
+				iterable =  thLocalizaciones.iteratorValues();
+				
+			} else if (abLocalizaciones != null) {
+				iterable = abLocalizaciones.valuesInRange(abLocalizaciones.min(), abLocalizaciones.max());
+				
+			} else { // Si ninguna estructura con la informacion deseada se encuentra, crea la estructura del 1C
+				thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4);
+				crearThLocAdd();
+				
+				iterable =  thLocAddress.iteratorValues();
+			}
+			
+			// Itera sobre los valores de la estructura seleccionada para crear la cola de prioridad completa
+			for (InfraccionesLocalizacion estadistica : iterable) cpLocalizaciones.agregar(estadistica);
+		}
+		
+		// Se eligen los primeros N valores de la cola de prioridad
+		IQueue<InfraccionesLocalizacion> rankingN = new Queue<>();
+		
+		int i = 0;
+		for (InfraccionesLocalizacion estadistica : cpLocalizaciones) {
+			if(i++ >= N) break;
+			rankingN.enqueue(estadistica);
+		}
+		
+		return rankingN;
 	}
 
 	/**

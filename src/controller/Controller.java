@@ -150,14 +150,14 @@ public class Controller {
 					int addressID = sc.nextInt();
 
 					startTime = System.currentTimeMillis();
-					InfraccionesLocalizacion resultados = model.consultarPorAddressId(addressID);
+					InfraccionesLocalizacion resultados7 = model.consultarPorAddressId(addressID);
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
 					
 					view.printMessage("Tiempo requerimiento 1C: " + duration + " milisegundos");
 
-					view.printReq1C(resultados);
+					view.printReq1C(resultados7);
 					break;
 
 				case 8:
@@ -186,15 +186,14 @@ public class Controller {
 					int numeroLocalizaciones = sc.nextInt();
 
 					startTime = System.currentTimeMillis();
-					//TODO Completar para la invocación del metodo 3C
-					//model.rankingNLocalizaciones(int N)
+					IQueue<InfraccionesLocalizacion> resultados9 =  model.rankingNLocalizaciones(numeroLocalizaciones);
 
 					endTime = System.currentTimeMillis();
 
 					duration = endTime - startTime;
 					view.printMessage("Tiempo requerimiento 3C: " + duration + " milisegundos");
-					//TODO Mostrar resultado de tipo Cola con InfraccionesLocalizacion
-					//view.printReq3C( ... )
+					
+					view.printReq3C(resultados9);
 					break;
 
 				case 10:

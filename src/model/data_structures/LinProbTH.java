@@ -69,7 +69,35 @@ public class LinProbTH<K, V> implements ITablaHash<K, V> {
 
 	}
 
+	/**
+	 * Iterador de la tabla por los val
+	 */
+	public Iterable<V> iteratorValues() {
+		return new Iterable<V>() {
+			@Override
+			public Iterator<V> iterator() {
+				return new Iterator<V>() {
+					int iActual = siguienteNoNulo(0); // Guarda el indice del elemento a devolver -1 si no hay mas
+					@Override
 
+					//M�todo has next -> Si existe un elemento despu�s o no
+					public boolean hasNext() {
+						return (iActual != -1);
+					}
+					@Override
+					// Devuelve el siguiente elemento
+					public V next() {
+						if (iActual == -1) return null;
+						V llaveAct = values[iActual];
+						iActual = siguienteNoNulo(iActual + 1);
+						return llaveAct;
+					}
+				};
+			}
+			
+		};
+	}
+	
 	/**
 	 * Para insertar un dato en la tabla
 	 * Si ya existe la llave, se reemplaza el valor

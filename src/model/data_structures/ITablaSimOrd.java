@@ -2,7 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public interface ITablaSimOrd<K extends Comparable<? super K>, V> extends Iterable<K> {
+public interface ITablaSimOrd<K extends Comparable<? super K>, V> extends Iterable<K> {// extends ITablaHash<K, V> {
 	
 	
 	/**
