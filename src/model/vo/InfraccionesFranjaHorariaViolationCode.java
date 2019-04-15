@@ -88,8 +88,6 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		if (!this.getFranjaInicial().equals(LocalTime.of(0, 0)) || !aEliminar.getFranjaInicial().equals(LocalTime.of(0, 0))) throw new IllegalArgumentException("Solo se pueden restar estadisticas si ambas inician a la misma hora");
 		// Asegurarse de que la franja a eliminar termina mas tarde
 		if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) <= 0) throw new IllegalArgumentException("No se puede restar la estadistica de una franja que termina mas tarde");
-		// Si las 2 franjas son iguales, entonces simplemente retorne una estadistica vacia
-		//if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) == 0) return new InfraccionesFranjaHorariaViolationCode(LocalTime.of(0, 0), LocalTime.of(0, 0));
 		
 		LocalTime horaInicial = aEliminar.getFranjaFinal().plusSeconds(1);
 		LocalTime horaFinal = this.getFranjaFinal();
@@ -100,13 +98,15 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		resultado.valorTotal = this.valorTotal - aEliminar.valorTotal;
 		
 		InfraccionesViolationCode aRestar;
+		InfraccionesViolationCode estResultante;
 		for (String codigo : this.getInfViolationCode()) {
 			aRestar = aEliminar.getInfViolationCode().get(codigo);
 			
 			if(aRestar == null) {
 				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
 			} else {
-				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).eliminarEstadisticas(aRestar));
+				estResultante = infViolationCode.get(codigo).eliminarEstadisticas(aRestar);
+				if (estResultante.getTotalInfracciones() != 0) resultado.infViolationCode.put(codigo, estResultante);
 			}
 		}
 		
