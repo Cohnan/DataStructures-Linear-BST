@@ -223,4 +223,27 @@ public class Sort {
             exchange(datos, i, r);
         }
 	}
+
+	/**
+	 * Ordena un arreglo dinamico que esta ya heap-ordenado, Comparator<T> comparator 
+	 * @param <T>
+	 * @param copiaOrdenada
+	 */
+	public static <T extends Comparable<? super T>> void ordenarHeapSorted(ArregloDinamico<T> datosHS) {
+		int N = datosHS.darTamano(); // Cuantos datos faltan por ordenar
+		int k;
+		while (N > 1) {
+			exchange(datosHS, 1 -1, N -1);
+			N--;
+			// sink(1, N)
+			k = 1;
+			while(2*k <= N){
+				int j = 2*k;
+				if(j < N && less(datosHS.darObjeto(j -1), datosHS.darObjeto(j+1 -1), Comparator.<T>naturalOrder())) j++;
+				if(!less(datosHS.darObjeto(k -1), datosHS.darObjeto(j -1), Comparator.<T>naturalOrder())) break;
+				exchange(datosHS, k -1 , j -1);
+				k = j;
+			}
+		}
+	}
 }

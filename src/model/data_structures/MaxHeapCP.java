@@ -2,6 +2,8 @@ package model.data_structures;
 
 import java.util.Iterator;
 
+import model.util.Sort;
+
 public class MaxHeapCP <T extends Comparable<T>> implements IColaPrioridad<T>{
 
 	
@@ -95,7 +97,53 @@ private ArregloDinamico<T> cp;
 	cp.cambiarEnPos(j, auxiliar);
 	}
 
+	public Iterable<T> iterableEnOrden(){
+		return new Iterable<T>() {
+			
+			@Override
+			public Iterator<T> iterator() {
+				return new Iterator<T>() {
+					
+					ArregloDinamico<T> ordenado = copiaOrdenada();
+					int iSiguiente = ordenado.darTamano() - 1;
+					
+					@Override
+					public boolean hasNext() {
+						return iSiguiente >= 0;
+					}
 
+					@Override
+					public T next() {
+						return ordenado.darObjeto(iSiguiente--);
+					}
+					
+					private ArregloDinamico<T> copiaOrdenada(){
+						ArregloDinamico<T> copiaOrdenada = new ArregloDinamico<T>(cp.darTamano());
+						
+						// Crea una copia del arreglo en el sentido que contiene los mismos objetos, pero si utilizo cambiarEnPos o agregar en cp, no me afecta en nada esta copia 
+						for (T dato : cp){
+							if (dato != null) copiaOrdenada.agregar(dato);
+						}
+						int n = copiaOrdenada.darTamano();
+						
+						// Ordena de menor a mayor
+						Sort.ordenarHeapSorted(copiaOrdenada);
+						
+						// Reversa el arreglo
+						//T temp;
+						//for (int i = 0; i < copiaOrdenada.darTamano()/2; i++) {
+						//	temp = copiaOrdenada.darObjeto(i);
+						//	copiaOrdenada.cambiarEnPos(i, copiaOrdenada.darObjeto(n-1 - i));
+						//	copiaOrdenada.cambiarEnPos(n-1 -i, temp);
+						//}
+						
+						return copiaOrdenada;
+					}
+					
+				};
+			}
+		};
+	}
 	
 	
 }
