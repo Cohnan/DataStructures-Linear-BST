@@ -180,6 +180,30 @@ public class Sort {
 		ordenarQuickSort(datos, min, indLastLeq - 1, c);
 		ordenarQuickSort(datos, indFirstGr, max, c);
 	}
+	
+	public static <T> void ordenarQuick3(IArregloDinamico<T> datos, Comparator<T> c) {
+		if (datos.darTamano() == 0) return;
+		// Desordenar: basado shuffle() de la libreria StdRandom del libro
+		shuffle(datos);
+		sortQuick3(datos, 0, datos.darTamano()-1, c);
+	}
+	
+	 private static <T> void sortQuick3(IArregloDinamico<T> a, int lo, int hi, Comparator<T> c) { 
+	        if (hi <= lo) return;
+	        int lt = lo, gt = hi;
+	        T v = a.darObjeto(lo);
+	        int i = lo + 1;
+	        while (i <= gt) {
+	            int cmp = c.compare(a.darObjeto(i),v);
+	            if      (cmp < 0) exchange(a, lt++, i++);
+	            else if (cmp > 0) exchange(a, i, gt--);
+	            else              i++;
+	        }
+
+	        // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]. 
+	        sortQuick3(a, lo, lt-1, c);
+	        sortQuick3(a, gt+1, hi, c);
+	    }
 	/*
 	 * **********************************************************************************************
 	 */
