@@ -54,8 +54,11 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq1A(IQueue<InfraccionesFranjaHoraria> resultados) {
+		int nImpresos = 0;
 		for(InfraccionesFranjaHoraria vinfraFranjas: resultados) {
 			System.out.println(vinfraFranjas);
+			
+			if (++nImpresos >= N) break;
 			
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
@@ -78,8 +81,11 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq3A(IQueue<InfraccionesFecha> resultados) {
+		int nImpresos = 0;
 		for(InfraccionesFecha infraFechas: resultados) {
 			System.out.println(infraFechas);
+			
+			if (++nImpresos >= N) break;
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraFechas.getListaInfracciones()) {
@@ -90,8 +96,11 @@ public class MovingViolationsManagerView
 	}
 	
 	public void printReq1B(IQueue<InfraccionesViolationCode> resultados) {
+		int nImpresos = 0;
 		for(InfraccionesViolationCode infraVioCode: resultados) {
 			System.out.println(infraVioCode);
+			
+			if (++nImpresos >= N) break;
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraVioCode.getListaInfracciones()) {
@@ -124,8 +133,11 @@ public class MovingViolationsManagerView
 			return;
 		}
 		
+		int nImpresos = 0;
 		for(InfraccionesFechaHora infraFechas: resultados) {
 			System.out.println(infraFechas);
+			
+			if (++nImpresos >= N) break;
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vo: infraFechas.getListaInfracciones()) {
@@ -148,10 +160,11 @@ public class MovingViolationsManagerView
 	public void printReq2C(InfraccionesFranjaHorariaViolationCode resultado) {
 		System.out.println(resultado);
 		
-		
+		int nImpresos = 0;
 		for(InfraccionesViolationCode v: resultado.getInfViolationCode().iteratorValues()) {
 			System.out.println(v);
 
+			if (++nImpresos >= N) break;
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*
 			for(VOMovingViolations vv: v.getListaInfracciones()) {
@@ -170,8 +183,11 @@ public class MovingViolationsManagerView
 	
 	
 	public void printReq3C(IQueue<InfraccionesLocalizacion> resultados) {
+		int nImpresos = 0;
 		for(InfraccionesLocalizacion infraLoc: resultados) {
 			System.out.println(infraLoc);
+			
+			if (++nImpresos >= N) break;
 			/* Detalle de las infracciones (Se requiere SOLO en caso de validacion)*/
 			/*		
 			for(VOMovingViolations vo: infraLoc.getListaInfracciones()) {
