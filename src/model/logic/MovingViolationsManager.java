@@ -107,6 +107,7 @@ public class MovingViolationsManager {
 
 	/**
 	 * 2C
+	 * Tabla de hash que contiene las estadisticas desde las 00:00 hasta cada uno de los demas segundos del dia referenciados por el segundo final
 	 */
 
 	private ITablaHash<LocalTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
@@ -668,15 +669,17 @@ public class MovingViolationsManager {
 		
 		
 		InfraccionesFranjaHorariaViolationCode acumulado = thFranjaCode.get(horaFinal);
-		InfraccionesFranjaHorariaViolationCode aRestar = thFranjaCode.get(horaFinal.equals(LocalTime.of(0, 0))? LocalTime.of(0, 0) : horaFinal.minusSeconds(1));
+		if (horaInicial.equals(LocalTime.of(0, 0))) return acumulado;
+		InfraccionesFranjaHorariaViolationCode aRestar = thFranjaCode.get(horaInicial.minusSeconds(1));
 		
 		return acumulado.eliminarEstadisticas(aRestar);
 	}
 
 	private void crearThFranjaCode() {
 		// Tabla de hash auxiliar que contiene las estadisticas de cada segundo del dia
-		LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode> thTimeCode = new LinProbTH<>(101);
+		LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode> thTimeCode = new LinProbTH<>(3600*24*2+1);
 		
+		// La tabla se llena recorriendo las infracciones y actualizando las estadisticas del segundo correspondiente a la infraccion actual
 		LocalTime tiempoAct;
 		InfraccionesFranjaHorariaViolationCode estadAct;
 		for (VOMovingViolations infraccion : movingVOLista) {
@@ -684,26 +687,30 @@ public class MovingViolationsManager {
 			
 			estadAct = thTimeCode.get(tiempoAct);
 			
+			// Si este tiempo no ha sido registrado en la tabla, crea una estadistica vacia
 			if (estadAct == null) estadAct = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct);
 			
 			estadAct.agregarEstadistica(infraccion);
 			thTimeCode.put(tiempoAct, estadAct);
 		}
 		
-		// Se crea una tabla de hash que contiene las estadisticas desde las 0 hasta los demas segundos del dia
-		thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(5);
+		// Se crea una tabla de hash que contiene las estadisticas desde las 00:00 hasta cada uno de los demas segundos del dia
+		// referenciados por el segundo final
+		thFranjaCode = new LinProbTH<LocalTime, InfraccionesFranjaHorariaViolationCode>(3600*24*2+1);
 		tiempoAct = LocalTime.of(0, 0, 0);
-		estadAct = thTimeCode.get(tiempoAct);
-		InfraccionesFranjaHorariaViolationCode estadAAgregar;
+		estadAct = thTimeCode.get(tiempoAct); // Estadistica completa a guardar para el tiempo actual
+		if (estadAct == null) estadAct = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct);
+		InfraccionesFranjaHorariaViolationCode estadAAgregar; // Estadistica para actualizar la estadistica completa
+		
 		while(true) {
 			thFranjaCode.put(tiempoAct, estadAct);
 			
 			tiempoAct = tiempoAct.plusSeconds(1);
+			if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break; // Al dar la vuelta entera
+			
 			estadAAgregar = thTimeCode.get(tiempoAct);
 			if (estadAAgregar == null) estadAAgregar = new InfraccionesFranjaHorariaViolationCode(tiempoAct, tiempoAct); 
 			estadAct = estadAct.incrementarEstadisticas(estadAAgregar);
-			
-			if (tiempoAct.compareTo(LocalTime.of(0, 0, 0)) == 0) break;
 		}
 	}
 	
@@ -729,7 +736,7 @@ public class MovingViolationsManager {
 				iterable = abLocalizaciones.valuesInRange(abLocalizaciones.min(), abLocalizaciones.max());
 
 			} else { // Si ninguna estructura con la informacion deseada se encuentra, crea la estructura del 1C
-				thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(4);
+				thLocAddress = new LinProbTH<Integer, InfraccionesLocalizacion>(101);
 				crearThLocAdd();
 
 				iterable =  thLocAddress.iteratorValues();
