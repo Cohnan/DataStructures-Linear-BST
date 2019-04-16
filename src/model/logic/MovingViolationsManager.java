@@ -97,7 +97,7 @@ public class MovingViolationsManager {
 	/**
 	 * 3B Tabla de simbolos ordenada para el valor acumulado por infraccion en una fecha-hora
 	 */
-	private ITablaSimOrd<Double,InfraccionesFechaHora> abValorAcumulado;
+	private ITablaSimOrd<Double, IArregloDinamico<InfraccionesFechaHora>> abValorAcumulado;
 
 
 	/**
@@ -512,15 +512,17 @@ public class MovingViolationsManager {
 		}
 
 		//Se itera sobre los valores en el rango
-		IArregloDinamico<Double> aux = new ArregloDinamico<>();
+		IArregloDinamico<InfraccionesFechaHora> aux = new ArregloDinamico<>();
 		
 		for (Double valor : abValorAcumulado.keysInRange(valorInicial, valorFinal)) {
-			aux.agregar(valor);
+			for (InfraccionesFechaHora estadistica : abValorAcumulado.get(valor)) {
+				aux.agregar(estadistica);
+			}
 		}
-		Sort.ordenarShellSort(aux);
+		Sort.ordenarShellSort(aux, new InfraccionesFechaHora.NInfraccionesOrder());
 		
-		for (Double valor : aux) {
-			respuesta.enqueue(abValorAcumulado.get(valor));
+		for (InfraccionesFechaHora estadistica : aux) {
+			respuesta.enqueue(estadistica);
 		}
 				
 		return respuesta;
@@ -535,7 +537,7 @@ public class MovingViolationsManager {
 
 		//Se recorren todas las infracciones ya ordenadas
 		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
-		abValorAcumulado = new BlancoRojoBST<Double, InfraccionesFechaHora>();
+		abValorAcumulado = new BlancoRojoBST<Double, IArregloDinamico<InfraccionesFechaHora>>();
 
 		// Si no hay datos, entonces retorna una cola vacia
 		if (!iterador.hasNext()) return ;
@@ -576,7 +578,12 @@ public class MovingViolationsManager {
 				else{
 
 					//Si no, se agrega al arbol y se reincia
-					abValorAcumulado.put(voViolation.getValorTotal(), voViolation);
+					IArregloDinamico<InfraccionesFechaHora> estadActual = abValorAcumulado.get(voViolation.getValorTotal());
+					if (estadActual == null) {
+						estadActual = new ArregloDinamico<>();
+						abValorAcumulado.put(voViolation.getValorTotal(), estadActual);
+					}
+					estadActual.agregar(voViolation);
 					if(inicio.getHour()<23){
 						inicio = inicio.plusHours(01);
 					}
