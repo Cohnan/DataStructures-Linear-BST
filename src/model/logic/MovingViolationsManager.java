@@ -409,7 +409,9 @@ public class MovingViolationsManager {
 
 	private void crearCpViolationCode() {
 		//Se ordenan por ViolationCode Order para poder crear las estad�sticas
-		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+//		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+		Sort.ordenarQuick3(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+		
 		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
 		// Si no hay datos, entonces retorna una cola vacia
