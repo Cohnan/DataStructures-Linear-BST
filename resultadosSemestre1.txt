@@ -1,0 +1,2158 @@
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+0
+Ingrese el Semestre (1 -[Enero - Junio], 2[Julio - Diciembre])
+1
+Total de Infracciones :599207
+Infracciones mes:1 = 86685
+Infracciones mes:2 = 74985
+Infracciones mes:3 = 104218
+Infracciones mes:4 = 107655
+Infracciones mes:5 = 108943
+Infracciones mes:6 = 116721
+Min y max: [390325.25, 127319.9921875], [407828.6875, 147155.109375]
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+10
+Grafica ASCII con la informacion de las infracciones por ViolationCode
+Ranking de tipo de infracciones por porcentaje de infracciones. Año 2018 semestre 1
+Codigo Infraccion | Numero | Porcentaje
+             T119 | 427025 | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+             T120 |  79876 | XXXXXXXXXXXXXXXXXXXXXXXXXX
+             T128 |  26200 | XXXXXXXX
+             T113 |  22960 | XXXXXXX
+             T121 |  12687 | XXXX
+             T334 |  11114 | XXX
+             T122 |   3570 | X
+             T333 |   1145 | 
+             T711 |   1034 | 
+             T112 |   1006 | 
+             T713 |    993 | 
+             T591 |    745 | 
+             T013 |    688 | 
+             T658 |    457 | 
+             T639 |    414 | 
+             T404 |    372 | 
+             T107 |    363 | 
+             T184 |    343 | 
+             T058 |    338 | 
+             T065 |    326 | 
+             T185 |    309 | 
+             T667 |    305 | 
+             T082 |    297 | 
+             T183 |    264 | 
+             T758 |    247 | 
+             T335 |    245 | 
+             T080 |    240 | 
+             T571 |    232 | 
+             T059 |    229 | 
+             T710 |    218 | 
+             T745 |    202 | 
+             T127 |    189 | 
+             T043 |    187 | 
+             T115 |    176 | 
+             T590 |    169 | 
+             T118 |    142 | 
+             T181 |    138 | 
+             T008 |    131 | 
+             T202 |    127 | 
+             T210 |    113 | 
+             T206 |    112 | 
+             T219 |    112 | 
+             T005 |    111 | 
+             T400 |    109 | 
+             T672 |    109 | 
+             T656 |    108 | 
+             T150 |    106 | 
+             T018 |     96 | 
+             T125 |     93 | 
+             T178 |     82 | 
+             T679 |     76 | 
+             T759 |     76 | 
+             T227 |     75 | 
+             T117 |     74 | 
+             T638 |     73 | 
+             T654 |     69 | 
+             T200 |     68 | 
+             T116 |     65 | 
+             T585 |     64 | 
+             T705 |     59 | 
+             T806 |     57 | 
+             T083 |     55 | 
+             T559 |     51 | 
+             T915 |     48 | 
+             T747 |     47 | 
+             T633 |     43 | 
+             T637 |     42 | 
+             T715 |     40 | 
+             T035 |     37 | 
+             T539 |     36 | 
+             T640 |     35 | 
+             T201 |     35 | 
+             T748 |     34 | 
+             T151 |     33 | 
+             T124 |     31 | 
+             T712 |     30 | 
+             T205 |     29 | 
+             T126 |     29 | 
+             T088 |     28 | 
+             T742 |     26 | 
+             T011 |     26 | 
+             T684 |     24 | 
+             T671 |     23 | 
+             T101 |     21 | 
+             T636 |     21 | 
+             T746 |     20 | 
+             T939 |     19 | 
+             T051 |     18 | 
+             T057 |     18 | 
+             T751 |     18 | 
+             T363 |     17 | 
+             T039 |     17 | 
+             T096 |     17 | 
+             T129 |     17 | 
+             T155 |     15 | 
+             T050 |     15 | 
+             T401 |     14 | 
+             T019 |     14 | 
+             T668 |     14 | 
+             T109 |     13 | 
+             T299 |     13 | 
+             T351 |     12 | 
+             T095 |     12 | 
+             T815 |     12 | 
+             T760 |     12 | 
+             T934 |     12 | 
+             T666 |     11 | 
+             T749 |     11 | 
+             T940 |     11 | 
+             T012 |     10 | 
+             T214 |     10 | 
+             T362 |      9 | 
+             T168 |      9 | 
+             T605 |      9 | 
+             T625 |      9 | 
+             T048 |      9 | 
+             T632 |      9 | 
+             T247 |      9 | 
+             T674 |      9 | 
+             T144 |      8 | 
+             T523 |      8 | 
+             T630 |      8 | 
+             T192 |      8 | 
+             T218 |      8 | 
+             T224 |      8 | 
+             T744 |      8 | 
+             T782 |      8 | 
+             T706 |      7 | 
+             T936 |      7 | 
+             T938 |      7 | 
+             T204 |      6 | 
+             T217 |      6 | 
+             T700 |      6 | 
+             T139 |      6 | 
+             T676 |      5 | 
+             T765 |      5 | 
+             T269 |      5 | 
+             T805 |      5 | 
+             T504 |      4 | 
+             T170 |      4 | 
+             T702 |      4 | 
+             T600 |      4 | 
+             T024 |      4 | 
+             T653 |      4 | 
+             T659 |      4 | 
+             T670 |      4 | 
+             T686 |      4 | 
+             T766 |      4 | 
+             T273 |      4 | 
+             T250 |      4 | 
+             T216 |      3 | 
+             T512 |      3 | 
+             T167 |      3 | 
+             T525 |      3 | 
+             T763 |      3 | 
+             T542 |      3 | 
+             T169 |      3 | 
+             T669 |      3 | 
+             T106 |      3 | 
+             T687 |      3 | 
+             T649 |      3 | 
+             T655 |      3 | 
+             T657 |      3 | 
+             T071 |      3 | 
+             T347 |      3 | 
+             T133 |      3 | 
+             T913 |      3 | 
+             T138 |      3 | 
+             T787 |      3 | 
+             T337 |      2 | 
+             T108 |      2 | 
+             T675 |      2 | 
+             T607 |      2 | 
+             T779 |      2 | 
+             T346 |      2 | 
+             T189 |      2 | 
+             T755 |      2 | 
+             T114 |      2 | 
+             T193 |      2 | 
+             T212 |      2 | 
+             T673 |      2 | 
+             T038 |      2 | 
+             T282 |      2 | 
+             T685 |      2 | 
+             T768 |      2 | 
+             T017 |      2 | 
+             T014 |      1 | 
+             T530 |      1 | 
+             T603 |      1 | 
+             T232 |      1 | 
+             T933 |      1 | 
+             T277 |      1 | 
+             T237 |      1 | 
+             T645 |      1 | 
+             T047 |      1 | 
+             T194 |      1 | 
+             T661 |      1 | 
+             T788 |      1 | 
+             T524 |      1 | 
+             T234 |      1 | 
+             T343 |      1 | 
+             T097 |      1 | 
+             T350 |      1 | 
+             T690 |      1 | 
+             T800 |      1 | 
+             T664 |      1 | 
+             T171 |      1 | 
+             T366 |      1 | 
+             T665 |      1 | 
+             T049 |      1 | 
+             T251 |      1 | 
+             T254 |      1 | 
+             T526 |      1 | 
+             T268 |      1 | 
+             T045 |      1 | 
+             T190 |      1 | 
+             T130 |      1 | 
+             T225 |      1 | 
+             T937 |      1 | 
+             T790 |      1 | 
+             T105 |      1 | 
+             T344 |      1 | 
+             T626 |      1 | 
+             T026 |      1 | 
+             T660 |      1 | 
+             T402 |      1 | 
+             T609 |      1 | 
+             T697 |      1 | 
+             T042 |      1 | 
+             T935 |      1 | 
+             T191 |      1 | 
+             T560 |      1 | 
+             T680 |      1 | 
+             T034 |      1 | 
+             T564 |      1 | 
+             T287 |      1 | 
+             T230 |      1 | 
+             T634 |      1 | 
+             T228 |      1 | 
+             T803 |      1 | 
+             T235 |      1 | 
+             T036 |      1 | 
+             T517 |      1 | 
+             T142 |      1 | 
+             T792 |      1 | 
+             T262 |      1 | 
+             T165 |      1 | 
+Cada X representa 0.5%
+Tiempo requerimiento 4C: 82 milisegundos
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+8
+Ingrese la hora inicial del rango. Formato HH:MM:SS (ej. 09:30:00)
+00:00:00
+Ingrese la hora final del rango. Formato HH:MM:SS (ej. 16:00:00)
+00:59:59
+Tiempo requerimiento 2C: 0 milisegundos
+InfraccionesFranjaHorariaViolationCode [totalInfracciones=20751,
+ porcentajeAccidentes=0.0104573273577177,
+ porcentajeNoAccidentes=0.9895426726422824,
+ valorTotal=1277090.0]
+
+InfraccionesViolationCode [violationCode=T782,
+ totalInfracciones=1,
+ porcentajeAccidentes=1.0,
+ porcentajeNoAccidentes=0.0,
+ valorTotal=250.0]
+
+
+InfraccionesViolationCode [violationCode=T120,
+ totalInfracciones=2949,
+ porcentajeAccidentes=3.3909799932180403E-4,
+ porcentajeNoAccidentes=0.9996609020006781,
+ valorTotal=241300.0]
+
+
+InfraccionesViolationCode [violationCode=T121,
+ totalInfracciones=493,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=46170.0]
+
+
+InfraccionesViolationCode [violationCode=T122,
+ totalInfracciones=171,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=19200.0]
+
+
+InfraccionesViolationCode [violationCode=T124,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T125,
+ totalInfracciones=11,
+ porcentajeAccidentes=0.36363636363636365,
+ porcentajeNoAccidentes=0.6363636363636364,
+ valorTotal=200.0]
+
+
+InfraccionesViolationCode [violationCode=T126,
+ totalInfracciones=3,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=300.0]
+
+
+InfraccionesViolationCode [violationCode=T127,
+ totalInfracciones=15,
+ porcentajeAccidentes=0.13333333333333333,
+ porcentajeNoAccidentes=0.8666666666666667,
+ valorTotal=100.0]
+
+
+InfraccionesViolationCode [violationCode=T128,
+ totalInfracciones=559,
+ porcentajeAccidentes=0.01073345259391771,
+ porcentajeNoAccidentes=0.9892665474060823,
+ valorTotal=14140.0]
+
+
+InfraccionesViolationCode [violationCode=T129,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=150.0]
+
+
+InfraccionesViolationCode [violationCode=T080,
+ totalInfracciones=18,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=125.0]
+
+
+InfraccionesViolationCode [violationCode=T082,
+ totalInfracciones=21,
+ porcentajeAccidentes=0.09523809523809523,
+ porcentajeNoAccidentes=0.9047619047619048,
+ valorTotal=1100.0]
+
+
+InfraccionesViolationCode [violationCode=T083,
+ totalInfracciones=4,
+ porcentajeAccidentes=0.5,
+ porcentajeNoAccidentes=0.5,
+ valorTotal=50.0]
+
+
+InfraccionesViolationCode [violationCode=T571,
+ totalInfracciones=23,
+ porcentajeAccidentes=0.08695652173913043,
+ porcentajeNoAccidentes=0.9130434782608695,
+ valorTotal=550.0]
+
+
+InfraccionesViolationCode [violationCode=T133,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T400,
+ totalInfracciones=6,
+ porcentajeAccidentes=0.16666666666666666,
+ porcentajeNoAccidentes=0.8333333333333334,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T404,
+ totalInfracciones=22,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=200.0]
+
+
+InfraccionesViolationCode [violationCode=T095,
+ totalInfracciones=1,
+ porcentajeAccidentes=1.0,
+ porcentajeNoAccidentes=0.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T096,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T585,
+ totalInfracciones=3,
+ porcentajeAccidentes=0.3333333333333333,
+ porcentajeNoAccidentes=0.6666666666666666,
+ valorTotal=500.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+8
+Ingrese la hora inicial del rango. Formato HH:MM:SS (ej. 09:30:00)
+01:00:00
+Ingrese la hora final del rango. Formato HH:MM:SS (ej. 16:00:00)
+01:59:59
+Tiempo requerimiento 2C: 1 milisegundos
+InfraccionesFranjaHorariaViolationCode [totalInfracciones=8703,
+ porcentajeAccidentes=0.011145581983224176,
+ porcentajeNoAccidentes=0.9888544180167759,
+ valorTotal=525692.5]
+
+InfraccionesViolationCode [violationCode=T711,
+ totalInfracciones=32,
+ porcentajeAccidentes=0.1875,
+ porcentajeNoAccidentes=0.8125,
+ valorTotal=500.0]
+
+
+InfraccionesViolationCode [violationCode=T712,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T713,
+ totalInfracciones=9,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=100.0]
+
+
+InfraccionesViolationCode [violationCode=T671,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T672,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.5,
+ porcentajeNoAccidentes=0.5,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T934,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T679,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=50.0]
+
+
+InfraccionesViolationCode [violationCode=T939,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T571,
+ totalInfracciones=12,
+ porcentajeAccidentes=0.08333333333333333,
+ porcentajeNoAccidentes=0.9166666666666666,
+ valorTotal=150.0]
+
+
+InfraccionesViolationCode [violationCode=T400,
+ totalInfracciones=3,
+ porcentajeAccidentes=0.6666666666666666,
+ porcentajeNoAccidentes=0.3333333333333333,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T039,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T404,
+ totalInfracciones=5,
+ porcentajeAccidentes=0.8,
+ porcentajeNoAccidentes=0.2,
+ valorTotal=200.0]
+
+
+InfraccionesViolationCode [violationCode=T685,
+ totalInfracciones=1,
+ porcentajeAccidentes=1.0,
+ porcentajeNoAccidentes=0.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T626,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T043,
+ totalInfracciones=2,
+ porcentajeAccidentes=1.0,
+ porcentajeNoAccidentes=0.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T150,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T151,
+ totalInfracciones=5,
+ porcentajeAccidentes=0.4,
+ porcentajeNoAccidentes=0.6,
+ valorTotal=100.0]
+
+
+InfraccionesViolationCode [violationCode=T048,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T632,
+ totalInfracciones=1,
+ porcentajeAccidentes=1.0,
+ porcentajeNoAccidentes=0.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T200,
+ totalInfracciones=5,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=100.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+8
+Ingrese la hora inicial del rango. Formato HH:MM:SS (ej. 09:30:00)
+11:00:00
+Ingrese la hora final del rango. Formato HH:MM:SS (ej. 16:00:00)
+11:59:59
+Tiempo requerimiento 2C: 0 milisegundos
+InfraccionesFranjaHorariaViolationCode [totalInfracciones=48504,
+ porcentajeAccidentes=0.0022060036285667163,
+ porcentajeNoAccidentes=0.9977939963714333,
+ valorTotal=3333597.0]
+
+InfraccionesViolationCode [violationCode=T088,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=25.0]
+
+
+InfraccionesViolationCode [violationCode=T710,
+ totalInfracciones=26,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=3600.0]
+
+
+InfraccionesViolationCode [violationCode=T711,
+ totalInfracciones=23,
+ porcentajeAccidentes=0.2608695652173913,
+ porcentajeNoAccidentes=0.7391304347826086,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T712,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T713,
+ totalInfracciones=40,
+ porcentajeAccidentes=0.05,
+ porcentajeNoAccidentes=0.95,
+ valorTotal=1300.0]
+
+
+InfraccionesViolationCode [violationCode=T672,
+ totalInfracciones=5,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=100.0]
+
+
+InfraccionesViolationCode [violationCode=T138,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T934,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T676,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T937,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T938,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T679,
+ totalInfracciones=12,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=375.0]
+
+
+InfraccionesViolationCode [violationCode=T351,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T571,
+ totalInfracciones=4,
+ porcentajeAccidentes=0.5,
+ porcentajeNoAccidentes=0.5,
+ valorTotal=150.0]
+
+
+InfraccionesViolationCode [violationCode=T035,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T400,
+ totalInfracciones=7,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+InfraccionesViolationCode [violationCode=T144,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=100.0]
+
+
+InfraccionesViolationCode [violationCode=T404,
+ totalInfracciones=19,
+ porcentajeAccidentes=0.05263157894736842,
+ porcentajeNoAccidentes=0.9473684210526315,
+ valorTotal=200.0]
+
+
+InfraccionesViolationCode [violationCode=T940,
+ totalInfracciones=2,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=300.0]
+
+
+InfraccionesViolationCode [violationCode=T684,
+ totalInfracciones=1,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=0.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+9
+Consultar las N localizaciones geograficas con mas infracciones. Ingrese el valor de N: 
+24
+Tiempo requerimiento 3C: 4 milisegundos
+InfraccionesLocalizacion [xcoord=395664.9, ycoord=137186.89,
+ location=2200 BLK K ST NW W/B,
+ addressID=805065,
+ streetID=4361,
+ totalInfracciones=53487,
+ porcentajeAccidentes=1.8696131770336716E-5,
+ porcentajeNoAccidentes=0.9999813038682297,
+ valorTotal=4525471.0]
+
+
+InfraccionesLocalizacion [xcoord=398500.81, ycoord=127983.29,
+ location=DC295 SW .2 MILES S/O EXIT 1 N/B,
+ addressID=-1,
+ streetID=14693,
+ totalInfracciones=50275,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=3618335.0]
+
+
+InfraccionesLocalizacion [xcoord=404478.84, ycoord=136788.89,
+ location=600 BLK KENILWORTH AVE NE S/B,
+ addressID=813891,
+ streetID=11963,
+ totalInfracciones=38393,
+ porcentajeAccidentes=1.3023207355507515E-4,
+ porcentajeNoAccidentes=0.9998697679264449,
+ valorTotal=2428381.0]
+
+
+InfraccionesLocalizacion [xcoord=400381.06, ycoord=138273.43,
+ location=600 BLK NEW YORK AVENUE NE W/B,
+ addressID=288753,
+ streetID=14658,
+ totalInfracciones=26365,
+ porcentajeAccidentes=3.4136165370756685E-4,
+ porcentajeNoAccidentes=0.9996586383462924,
+ valorTotal=2114325.0]
+
+
+InfraccionesLocalizacion [xcoord=398406.31, ycoord=127737.13,
+ location=DC295 SW .7 MILES S/O EXIT 1 S/B,
+ addressID=810381,
+ streetID=6993,
+ totalInfracciones=24838,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1929367.0]
+
+
+InfraccionesLocalizacion [xcoord=398788.15, ycoord=136798.65,
+ location=3RD ST TUNNEL NW N/B BY MA AVE,
+ addressID=814983,
+ streetID=6364,
+ totalInfracciones=24351,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1745640.0]
+
+
+InfraccionesLocalizacion [xcoord=403477.9, ycoord=133227.75,
+ location=1900 BLK BRANCH AVE SE N/B,
+ addressID=800638,
+ streetID=675,
+ totalInfracciones=19659,
+ porcentajeAccidentes=1.5260186174271325E-4,
+ porcentajeNoAccidentes=0.9998473981382573,
+ valorTotal=1196570.0]
+
+
+InfraccionesLocalizacion [xcoord=393653.43, ycoord=139589.56,
+ location=2600 BLK WISCONSIN AVE NW S/B,
+ addressID=801693,
+ streetID=1408,
+ totalInfracciones=14792,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1112475.0]
+
+
+InfraccionesLocalizacion [xcoord=394888.56, ycoord=143655.53,
+ location=2900 BLK MILITARY RD NW E/B,
+ addressID=261675,
+ streetID=9921,
+ totalInfracciones=14207,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1099096.0]
+
+
+InfraccionesLocalizacion [xcoord=398778.93, ycoord=136745.57,
+ location=3RD ST TUNNEL NW S/B BY 3RD ST,
+ addressID=807662,
+ streetID=6364,
+ totalInfracciones=13630,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=916180.0]
+
+
+InfraccionesLocalizacion [xcoord=398728.31, ycoord=139835.9,
+ location=100 MICHIGAN AVE NW,
+ addressID=815694,
+ streetID=1405,
+ totalInfracciones=12910,
+ porcentajeAccidentes=4.6475600309837337E-4,
+ porcentajeNoAccidentes=0.9995352439969016,
+ valorTotal=838819.0]
+
+
+InfraccionesLocalizacion [xcoord=399211.59, ycoord=133853.09,
+ location=1400 BLK S CAPITOL ST SW S/B,
+ addressID=815777,
+ streetID=13794,
+ totalInfracciones=12907,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=771852.0]
+
+
+InfraccionesLocalizacion [xcoord=399697.56, ycoord=143158.71,
+ location=200 BLK RIGGS RD NE E/B,
+ addressID=300679,
+ streetID=6946,
+ totalInfracciones=12781,
+ porcentajeAccidentes=1.5648227838197323E-4,
+ porcentajeNoAccidentes=0.9998435177216181,
+ valorTotal=831638.0]
+
+
+InfraccionesLocalizacion [xcoord=403599.78, ycoord=139127.65,
+ location=2200 BLK SOUTH DAKOTA AVE NE SE/B,
+ addressID=286707,
+ streetID=9851,
+ totalInfracciones=12198,
+ porcentajeAccidentes=8.198065256599443E-5,
+ porcentajeNoAccidentes=0.999918019347434,
+ valorTotal=807760.0]
+
+
+InfraccionesLocalizacion [xcoord=404133.53, ycoord=132428.01,
+ location=3700 BLK SOUTHERN AVE SE SW/B,
+ addressID=31943,
+ streetID=1435,
+ totalInfracciones=11585,
+ porcentajeAccidentes=8.631851532153647E-5,
+ porcentajeNoAccidentes=0.9999136814846785,
+ valorTotal=604306.0]
+
+
+InfraccionesLocalizacion [xcoord=399257.68, ycoord=133847.29,
+ location=1400 BLK S CAPITOL ST SE N/B,
+ addressID=277954,
+ streetID=-1,
+ totalInfracciones=11012,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=679705.0]
+
+
+InfraccionesLocalizacion [xcoord=403510.5, ycoord=139610.56,
+ location=FORT LINCOLN DR S/B @ 31ST PL NE,
+ addressID=906180,
+ streetID=21,
+ totalInfracciones=9265,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=257971.0]
+
+
+InfraccionesLocalizacion [xcoord=398103.15, ycoord=143451.71,
+ location=600 BLK MISSOURI AVE NW SE/B,
+ addressID=812484,
+ streetID=10729,
+ totalInfracciones=9229,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=625352.0]
+
+
+InfraccionesLocalizacion [xcoord=392081.03, ycoord=141514.09,
+ location=4600 BLK MASSACHUSETTS AVE NW NW/B,
+ addressID=301549,
+ streetID=12665,
+ totalInfracciones=9182,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=778925.0]
+
+
+InfraccionesLocalizacion [xcoord=403222.46, ycoord=132652.17,
+ location=3100 BLK ALABAMA AVE SE NE/B,
+ addressID=40689,
+ streetID=7087,
+ totalInfracciones=8568,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=332690.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+7
+1C. Consultar las infracciones con Address_Id. Ingresar el valor de Address_Id: 
+286707
+Tiempo requerimiento 1C: 0 milisegundos
+InfraccionesLocalizacion [xcoord=403599.78, ycoord=139127.65,
+ location=2200 BLK SOUTH DAKOTA AVE NE SE/B,
+ addressID=286707,
+ streetID=9851,
+ totalInfracciones=12198,
+ porcentajeAccidentes=8.198065256599443E-5,
+ porcentajeNoAccidentes=0.999918019347434,
+ valorTotal=807760.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+7
+1C. Consultar las infracciones con Address_Id. Ingresar el valor de Address_Id: 
+-1
+Tiempo requerimiento 1C: 0 milisegundos
+InfraccionesLocalizacion [xcoord=398500.81, ycoord=127983.29,
+ location=DC295 SW .2 MILES S/O EXIT 1 N/B,
+ addressID=-1,
+ streetID=14693,
+ totalInfracciones=50275,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=3618335.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+6
+Ingrese la cantidad minima de dinero que deben acumular las infracciones en sus rangos de fecha  (Ej. 1234,56)
+1234
+Ingrese la cantidad maxima de dinero que deben acumular las infracciones en sus rangos de fecha (Ej. 5678,23)
+10000
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-06T03:00,
+ fecha_hora_final=2018-06-06T03:59:59,
+ totalInfracciones=22,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1250.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-02-24T19:00,
+ fecha_hora_final=2018-02-24T19:59:59,
+ totalInfracciones=60,
+ porcentajeAccidentes=0.016666666666666666,
+ porcentajeNoAccidentes=0.9833333333333333,
+ valorTotal=1265.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-30T05:00,
+ fecha_hora_final=2018-05-30T05:59:59,
+ totalInfracciones=41,
+ porcentajeAccidentes=0.024390243902439025,
+ porcentajeNoAccidentes=0.975609756097561,
+ valorTotal=1275.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-28T23:00,
+ fecha_hora_final=2018-05-28T23:59:59,
+ totalInfracciones=86,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1280.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-01T03:00,
+ fecha_hora_final=2018-06-01T03:59:59,
+ totalInfracciones=22,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1300.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-17T23:00,
+ fecha_hora_final=2018-05-17T23:59:59,
+ totalInfracciones=28,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1325.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-02-28T16:00,
+ fecha_hora_final=2018-02-28T16:59:59,
+ totalInfracciones=179,
+ porcentajeAccidentes=0.00558659217877095,
+ porcentajeNoAccidentes=0.994413407821229,
+ valorTotal=1330.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-13T02:00,
+ fecha_hora_final=2018-06-13T02:59:59,
+ totalInfracciones=24,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1350.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-01-03T02:00,
+ fecha_hora_final=2018-01-03T02:59:59,
+ totalInfracciones=17,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1370.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-07T03:00,
+ fecha_hora_final=2018-05-07T03:59:59,
+ totalInfracciones=27,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1375.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-02-22T00:00,
+ fecha_hora_final=2018-02-22T00:59:59,
+ totalInfracciones=52,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1385.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-21T04:00,
+ fecha_hora_final=2018-06-21T04:59:59,
+ totalInfracciones=18,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1400.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-13T03:00,
+ fecha_hora_final=2018-06-13T03:59:59,
+ totalInfracciones=18,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1450.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-26T22:00,
+ fecha_hora_final=2018-05-26T22:59:59,
+ totalInfracciones=83,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1475.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-05T04:00,
+ fecha_hora_final=2018-06-05T04:59:59,
+ totalInfracciones=21,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1500.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-04-19T21:00,
+ fecha_hora_final=2018-04-19T21:59:59,
+ totalInfracciones=29,
+ porcentajeAccidentes=0.034482758620689655,
+ porcentajeNoAccidentes=0.9655172413793104,
+ valorTotal=1503.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-16T03:00,
+ fecha_hora_final=2018-05-16T03:59:59,
+ totalInfracciones=26,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1525.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-05-30T22:00,
+ fecha_hora_final=2018-05-30T22:59:59,
+ totalInfracciones=51,
+ porcentajeAccidentes=0.0196078431372549,
+ porcentajeNoAccidentes=0.9803921568627451,
+ valorTotal=1550.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-03-01T20:00,
+ fecha_hora_final=2018-03-01T20:59:59,
+ totalInfracciones=19,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1575.0]
+
+
+InfraccionesFechaHora [fecha_hora_inicial=2018-06-01T01:00,
+ fecha_hora_final=2018-06-01T01:59:59,
+ totalInfracciones=25,
+ porcentajeAccidentes=0.04,
+ porcentajeNoAccidentes=0.96,
+ valorTotal=1600.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+
+5
+Ingrese la coordenada en X de la localizacion geografica (Ej. 393185.81): 
+398103.15
+Ingrese la coordenada en Y de la localizacion geografica (Ej. 138316.9): 
+143451.71
+InfraccionesLocalizacion [xcoord=398103.15, ycoord=143451.71,
+ location=600 BLK MISSOURI AVE NW SE/B,
+ addressID=812484,
+ streetID=10729,
+ totalInfracciones=9229,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=625352.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+4
+1B. Consultar los N Tipos con mas infracciones. Ingrese el valor de N: 
+30
+InfraccionesViolationCode [violationCode=T119,
+ totalInfracciones=427025,
+ porcentajeAccidentes=1.4050699607751303E-5,
+ porcentajeNoAccidentes=0.9999859493003922,
+ valorTotal=2.713630003E7]
+
+
+InfraccionesViolationCode [violationCode=T120,
+ totalInfracciones=79876,
+ porcentajeAccidentes=2.50388101557414E-5,
+ porcentajeNoAccidentes=0.9999749611898443,
+ valorTotal=7047377.0]
+
+
+InfraccionesViolationCode [violationCode=T128,
+ totalInfracciones=26200,
+ porcentajeAccidentes=0.00316793893129771,
+ porcentajeNoAccidentes=0.9968320610687023,
+ valorTotal=781080.0]
+
+
+InfraccionesViolationCode [violationCode=T113,
+ totalInfracciones=22960,
+ porcentajeAccidentes=0.00426829268292683,
+ porcentajeNoAccidentes=0.9957317073170732,
+ valorTotal=1872275.0]
+
+
+InfraccionesViolationCode [violationCode=T121,
+ totalInfracciones=12687,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1351150.0]
+
+
+InfraccionesViolationCode [violationCode=T334,
+ totalInfracciones=11114,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=326130.0]
+
+
+InfraccionesViolationCode [violationCode=T122,
+ totalInfracciones=3570,
+ porcentajeAccidentes=2.8011204481792715E-4,
+ porcentajeNoAccidentes=0.9997198879551821,
+ valorTotal=462240.0]
+
+
+InfraccionesViolationCode [violationCode=T333,
+ totalInfracciones=1145,
+ porcentajeAccidentes=0.16419213973799127,
+ porcentajeNoAccidentes=0.8358078602620087,
+ valorTotal=6595.0]
+
+
+InfraccionesViolationCode [violationCode=T711,
+ totalInfracciones=1034,
+ porcentajeAccidentes=0.23500967117988394,
+ porcentajeNoAccidentes=0.7649903288201161,
+ valorTotal=18465.0]
+
+
+InfraccionesViolationCode [violationCode=T112,
+ totalInfracciones=1006,
+ porcentajeAccidentes=0.02485089463220676,
+ porcentajeNoAccidentes=0.9751491053677932,
+ valorTotal=39560.0]
+
+
+InfraccionesViolationCode [violationCode=T713,
+ totalInfracciones=993,
+ porcentajeAccidentes=0.02014098690835851,
+ porcentajeNoAccidentes=0.9798590130916415,
+ valorTotal=22425.0]
+
+
+InfraccionesViolationCode [violationCode=T591,
+ totalInfracciones=745,
+ porcentajeAccidentes=0.012080536912751677,
+ porcentajeNoAccidentes=0.9879194630872483,
+ valorTotal=25850.0]
+
+
+InfraccionesViolationCode [violationCode=T013,
+ totalInfracciones=688,
+ porcentajeAccidentes=0.6831395348837209,
+ porcentajeNoAccidentes=0.3168604651162791,
+ valorTotal=9648.0]
+
+
+InfraccionesViolationCode [violationCode=T658,
+ totalInfracciones=457,
+ porcentajeAccidentes=0.07658643326039387,
+ porcentajeNoAccidentes=0.9234135667396062,
+ valorTotal=5080.0]
+
+
+InfraccionesViolationCode [violationCode=T639,
+ totalInfracciones=414,
+ porcentajeAccidentes=0.026570048309178744,
+ porcentajeNoAccidentes=0.9734299516908212,
+ valorTotal=7350.0]
+
+
+InfraccionesViolationCode [violationCode=T404,
+ totalInfracciones=372,
+ porcentajeAccidentes=0.11021505376344086,
+ porcentajeNoAccidentes=0.8897849462365591,
+ valorTotal=15500.0]
+
+
+InfraccionesViolationCode [violationCode=T107,
+ totalInfracciones=363,
+ porcentajeAccidentes=0.6942148760330579,
+ porcentajeNoAccidentes=0.30578512396694213,
+ valorTotal=11545.0]
+
+
+InfraccionesViolationCode [violationCode=T184,
+ totalInfracciones=343,
+ porcentajeAccidentes=0.03206997084548105,
+ porcentajeNoAccidentes=0.967930029154519,
+ valorTotal=5345.0]
+
+
+InfraccionesViolationCode [violationCode=T058,
+ totalInfracciones=338,
+ porcentajeAccidentes=0.42011834319526625,
+ porcentajeNoAccidentes=0.5798816568047337,
+ valorTotal=12215.0]
+
+
+InfraccionesViolationCode [violationCode=T065,
+ totalInfracciones=326,
+ porcentajeAccidentes=0.08282208588957055,
+ porcentajeNoAccidentes=0.9171779141104295,
+ valorTotal=6957.5]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+4
+1B. Consultar los N Tipos con mas infracciones. Ingrese el valor de N: 
+30
+InfraccionesViolationCode [violationCode=T119,
+ totalInfracciones=427025,
+ porcentajeAccidentes=1.4050699607751303E-5,
+ porcentajeNoAccidentes=0.9999859493003922,
+ valorTotal=2.713630003E7]
+
+
+InfraccionesViolationCode [violationCode=T120,
+ totalInfracciones=79876,
+ porcentajeAccidentes=2.50388101557414E-5,
+ porcentajeNoAccidentes=0.9999749611898443,
+ valorTotal=7047377.0]
+
+
+InfraccionesViolationCode [violationCode=T128,
+ totalInfracciones=26200,
+ porcentajeAccidentes=0.00316793893129771,
+ porcentajeNoAccidentes=0.9968320610687023,
+ valorTotal=781080.0]
+
+
+InfraccionesViolationCode [violationCode=T113,
+ totalInfracciones=22960,
+ porcentajeAccidentes=0.00426829268292683,
+ porcentajeNoAccidentes=0.9957317073170732,
+ valorTotal=1872275.0]
+
+
+InfraccionesViolationCode [violationCode=T121,
+ totalInfracciones=12687,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=1351150.0]
+
+
+InfraccionesViolationCode [violationCode=T334,
+ totalInfracciones=11114,
+ porcentajeAccidentes=0.0,
+ porcentajeNoAccidentes=1.0,
+ valorTotal=326130.0]
+
+
+InfraccionesViolationCode [violationCode=T122,
+ totalInfracciones=3570,
+ porcentajeAccidentes=2.8011204481792715E-4,
+ porcentajeNoAccidentes=0.9997198879551821,
+ valorTotal=462240.0]
+
+
+InfraccionesViolationCode [violationCode=T333,
+ totalInfracciones=1145,
+ porcentajeAccidentes=0.16419213973799127,
+ porcentajeNoAccidentes=0.8358078602620087,
+ valorTotal=6595.0]
+
+
+InfraccionesViolationCode [violationCode=T711,
+ totalInfracciones=1034,
+ porcentajeAccidentes=0.23500967117988394,
+ porcentajeNoAccidentes=0.7649903288201161,
+ valorTotal=18465.0]
+
+
+InfraccionesViolationCode [violationCode=T112,
+ totalInfracciones=1006,
+ porcentajeAccidentes=0.02485089463220676,
+ porcentajeNoAccidentes=0.9751491053677932,
+ valorTotal=39560.0]
+
+
+InfraccionesViolationCode [violationCode=T713,
+ totalInfracciones=993,
+ porcentajeAccidentes=0.02014098690835851,
+ porcentajeNoAccidentes=0.9798590130916415,
+ valorTotal=22425.0]
+
+
+InfraccionesViolationCode [violationCode=T591,
+ totalInfracciones=745,
+ porcentajeAccidentes=0.012080536912751677,
+ porcentajeNoAccidentes=0.9879194630872483,
+ valorTotal=25850.0]
+
+
+InfraccionesViolationCode [violationCode=T013,
+ totalInfracciones=688,
+ porcentajeAccidentes=0.6831395348837209,
+ porcentajeNoAccidentes=0.3168604651162791,
+ valorTotal=9648.0]
+
+
+InfraccionesViolationCode [violationCode=T658,
+ totalInfracciones=457,
+ porcentajeAccidentes=0.07658643326039387,
+ porcentajeNoAccidentes=0.9234135667396062,
+ valorTotal=5080.0]
+
+
+InfraccionesViolationCode [violationCode=T639,
+ totalInfracciones=414,
+ porcentajeAccidentes=0.026570048309178744,
+ porcentajeNoAccidentes=0.9734299516908212,
+ valorTotal=7350.0]
+
+
+InfraccionesViolationCode [violationCode=T404,
+ totalInfracciones=372,
+ porcentajeAccidentes=0.11021505376344086,
+ porcentajeNoAccidentes=0.8897849462365591,
+ valorTotal=15500.0]
+
+
+InfraccionesViolationCode [violationCode=T107,
+ totalInfracciones=363,
+ porcentajeAccidentes=0.6942148760330579,
+ porcentajeNoAccidentes=0.30578512396694213,
+ valorTotal=11545.0]
+
+
+InfraccionesViolationCode [violationCode=T184,
+ totalInfracciones=343,
+ porcentajeAccidentes=0.03206997084548105,
+ porcentajeNoAccidentes=0.967930029154519,
+ valorTotal=5345.0]
+
+
+InfraccionesViolationCode [violationCode=T058,
+ totalInfracciones=338,
+ porcentajeAccidentes=0.42011834319526625,
+ porcentajeNoAccidentes=0.5798816568047337,
+ valorTotal=12215.0]
+
+
+InfraccionesViolationCode [violationCode=T065,
+ totalInfracciones=326,
+ porcentajeAccidentes=0.08282208588957055,
+ porcentajeNoAccidentes=0.9171779141104295,
+ valorTotal=6957.5]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+3
+Ingrese la fecha inicial del rango. Formato año-mes-dia (ej. 2008-01-21)
+2018-03-21
+Ingrese la fecha final del rango. Formato año-mes-dia (ej. 2018-02-20)
+2018-04-21
+InfraccionesFecha [fecha=2018-03-21,
+ totalInfracciones=1615,
+ porcentajeAccidentes=0.00804953560371517,
+ porcentajeNoAccidentes=0.9919504643962849,
+ valorTotal=121490.0]
+
+
+InfraccionesFecha [fecha=2018-03-22,
+ totalInfracciones=2735,
+ porcentajeAccidentes=0.003656307129798903,
+ porcentajeNoAccidentes=0.9963436928702011,
+ valorTotal=199520.0]
+
+
+InfraccionesFecha [fecha=2018-03-23,
+ totalInfracciones=3179,
+ porcentajeAccidentes=0.007234979553318654,
+ porcentajeNoAccidentes=0.9927650204466814,
+ valorTotal=236300.0]
+
+
+InfraccionesFecha [fecha=2018-03-24,
+ totalInfracciones=4620,
+ porcentajeAccidentes=0.004112554112554113,
+ porcentajeNoAccidentes=0.9958874458874459,
+ valorTotal=366851.0]
+
+
+InfraccionesFecha [fecha=2018-03-25,
+ totalInfracciones=4567,
+ porcentajeAccidentes=0.003065469673746442,
+ porcentajeNoAccidentes=0.9969345303262536,
+ valorTotal=366872.0]
+
+
+InfraccionesFecha [fecha=2018-03-26,
+ totalInfracciones=2865,
+ porcentajeAccidentes=0.005584642233856894,
+ porcentajeNoAccidentes=0.9944153577661431,
+ valorTotal=215665.0]
+
+
+InfraccionesFecha [fecha=2018-03-27,
+ totalInfracciones=2778,
+ porcentajeAccidentes=0.003599712023038157,
+ porcentajeNoAccidentes=0.9964002879769619,
+ valorTotal=200400.0]
+
+
+InfraccionesFecha [fecha=2018-03-28,
+ totalInfracciones=2981,
+ porcentajeAccidentes=0.0057027843005702785,
+ porcentajeNoAccidentes=0.9942972156994297,
+ valorTotal=228180.0]
+
+
+InfraccionesFecha [fecha=2018-03-29,
+ totalInfracciones=3674,
+ porcentajeAccidentes=0.005988023952095809,
+ porcentajeNoAccidentes=0.9940119760479041,
+ valorTotal=285530.0]
+
+
+InfraccionesFecha [fecha=2018-03-30,
+ totalInfracciones=3906,
+ porcentajeAccidentes=0.005120327700972862,
+ porcentajeNoAccidentes=0.9948796722990272,
+ valorTotal=285890.0]
+
+
+InfraccionesFecha [fecha=2018-03-31,
+ totalInfracciones=5414,
+ porcentajeAccidentes=0.004802364240857037,
+ porcentajeNoAccidentes=0.995197635759143,
+ valorTotal=419900.0]
+
+
+InfraccionesFecha [fecha=2018-04-01,
+ totalInfracciones=5136,
+ porcentajeAccidentes=0.002336448598130841,
+ porcentajeNoAccidentes=0.9976635514018691,
+ valorTotal=399595.0]
+
+
+InfraccionesFecha [fecha=2018-04-02,
+ totalInfracciones=3499,
+ porcentajeAccidentes=0.004572735067162046,
+ porcentajeNoAccidentes=0.995427264932838,
+ valorTotal=261995.0]
+
+
+InfraccionesFecha [fecha=2018-04-03,
+ totalInfracciones=3012,
+ porcentajeAccidentes=0.009628154050464808,
+ porcentajeNoAccidentes=0.9903718459495352,
+ valorTotal=226980.0]
+
+
+InfraccionesFecha [fecha=2018-04-04,
+ totalInfracciones=3329,
+ porcentajeAccidentes=0.006007810153199159,
+ porcentajeNoAccidentes=0.9939921898468008,
+ valorTotal=249925.0]
+
+
+InfraccionesFecha [fecha=2018-04-05,
+ totalInfracciones=3424,
+ porcentajeAccidentes=0.007593457943925234,
+ porcentajeNoAccidentes=0.9924065420560748,
+ valorTotal=255450.0]
+
+
+InfraccionesFecha [fecha=2018-04-06,
+ totalInfracciones=3714,
+ porcentajeAccidentes=0.003769520732364028,
+ porcentajeNoAccidentes=0.996230479267636,
+ valorTotal=281910.0]
+
+
+InfraccionesFecha [fecha=2018-04-07,
+ totalInfracciones=4908,
+ porcentajeAccidentes=0.0018337408312958435,
+ porcentajeNoAccidentes=0.9981662591687042,
+ valorTotal=375425.0]
+
+
+InfraccionesFecha [fecha=2018-04-08,
+ totalInfracciones=5505,
+ porcentajeAccidentes=0.0038147138964577656,
+ porcentajeNoAccidentes=0.9961852861035423,
+ valorTotal=421720.0]
+
+
+InfraccionesFecha [fecha=2018-04-09,
+ totalInfracciones=2891,
+ porcentajeAccidentes=0.0034590107229332413,
+ porcentajeNoAccidentes=0.9965409892770668,
+ valorTotal=211285.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+2
+Ingrese la coordenada en X de la localizacion geografica (Ej. 393185.81): 
+393185.81
+Ingrese la coordenada en Y de la localizacion geografica (Ej. 138316.9): 
+138316.9
+InfraccionesLocalizacion [xcoord=393185.81, ycoord=138316.9,
+ location=4300 BLK RESERVOIR RD NW E/B,
+ addressID=812695,
+ streetID=10916,
+ totalInfracciones=3680,
+ porcentajeAccidentes=5.434782608695652E-4,
+ porcentajeNoAccidentes=0.9994565217391305,
+ valorTotal=314975.0]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+1
+1A. Consultar las N franjas horarias con mas infracciones que desea ver. Ingresar valor de N: 
+30
+InfraccionesFranjaHoraria [hora_Inicial=11:00,
+ hora_Final=11:59:59,
+ totalInfracciones=48504,
+ porcentajeAccidentes=0.0022060036285667163,
+ porcentajeNoAccidentes=0.9977939963714333,
+ valorTotal=3333597.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=12:00,
+ hora_Final=12:59:59,
+ totalInfracciones=48089,
+ porcentajeAccidentes=0.003327164216348853,
+ porcentajeNoAccidentes=0.9966728357836512,
+ valorTotal=3238925.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=13:00,
+ hora_Final=13:59:59,
+ totalInfracciones=47078,
+ porcentajeAccidentes=0.0024639959216619226,
+ porcentajeNoAccidentes=0.9975360040783381,
+ valorTotal=3097903.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=10:00,
+ hora_Final=10:59:59,
+ totalInfracciones=45957,
+ porcentajeAccidentes=0.002872250146876428,
+ porcentajeNoAccidentes=0.9971277498531236,
+ valorTotal=3150031.57]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=14:00,
+ hora_Final=14:59:59,
+ totalInfracciones=43879,
+ porcentajeAccidentes=0.0025752637936142576,
+ porcentajeNoAccidentes=0.9974247362063857,
+ valorTotal=2865048.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=15:00,
+ hora_Final=15:59:59,
+ totalInfracciones=41096,
+ porcentajeAccidentes=0.0043313217831419115,
+ porcentajeNoAccidentes=0.9956686782168581,
+ valorTotal=2641460.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=16:00,
+ hora_Final=16:59:59,
+ totalInfracciones=37444,
+ porcentajeAccidentes=0.006970409144322188,
+ porcentajeNoAccidentes=0.9930295908556778,
+ valorTotal=2390652.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=09:00,
+ hora_Final=09:59:59,
+ totalInfracciones=34878,
+ porcentajeAccidentes=0.0036986065714777225,
+ porcentajeNoAccidentes=0.9963013934285223,
+ valorTotal=2357678.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=08:00,
+ hora_Final=08:59:59,
+ totalInfracciones=32741,
+ porcentajeAccidentes=0.004275984239943801,
+ porcentajeNoAccidentes=0.9957240157600562,
+ valorTotal=2176571.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=17:00,
+ hora_Final=17:59:59,
+ totalInfracciones=31481,
+ porcentajeAccidentes=0.008004828309138845,
+ porcentajeNoAccidentes=0.9919951716908612,
+ valorTotal=2065708.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=18:00,
+ hora_Final=18:59:59,
+ totalInfracciones=28724,
+ porcentajeAccidentes=0.008947221835398969,
+ porcentajeNoAccidentes=0.991052778164601,
+ valorTotal=1880439.46]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=07:00,
+ hora_Final=07:59:59,
+ totalInfracciones=24773,
+ porcentajeAccidentes=0.003673354054817745,
+ porcentajeNoAccidentes=0.9963266459451823,
+ valorTotal=1653200.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=00:00,
+ hora_Final=00:59:59,
+ totalInfracciones=20751,
+ porcentajeAccidentes=0.0104573273577177,
+ porcentajeNoAccidentes=0.9895426726422824,
+ valorTotal=1277090.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=19:00,
+ hora_Final=19:59:59,
+ totalInfracciones=17250,
+ porcentajeAccidentes=0.007478260869565217,
+ porcentajeNoAccidentes=0.9925217391304347,
+ valorTotal=1114901.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=06:00,
+ hora_Final=06:59:59,
+ totalInfracciones=13570,
+ porcentajeAccidentes=0.0040530582166543845,
+ porcentajeNoAccidentes=0.9959469417833456,
+ valorTotal=946199.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=20:00,
+ hora_Final=20:59:59,
+ totalInfracciones=13186,
+ porcentajeAccidentes=0.013347489761868649,
+ porcentajeNoAccidentes=0.9866525102381314,
+ valorTotal=848390.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=21:00,
+ hora_Final=21:59:59,
+ totalInfracciones=11258,
+ porcentajeAccidentes=0.011636169834784153,
+ porcentajeNoAccidentes=0.9883638301652159,
+ valorTotal=697313.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=22:00,
+ hora_Final=22:59:59,
+ totalInfracciones=10912,
+ porcentajeAccidentes=0.012646627565982404,
+ porcentajeNoAccidentes=0.9873533724340176,
+ valorTotal=673815.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=23:00,
+ hora_Final=23:59:59,
+ totalInfracciones=10597,
+ porcentajeAccidentes=0.014626781164480513,
+ porcentajeNoAccidentes=0.9853732188355195,
+ valorTotal=644812.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=01:00,
+ hora_Final=01:59:59,
+ totalInfracciones=8703,
+ porcentajeAccidentes=0.011145581983224176,
+ porcentajeNoAccidentes=0.9888544180167759,
+ valorTotal=525692.5]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+1
+1A. Consultar las N franjas horarias con mas infracciones que desea ver. Ingresar valor de N: 
+30
+InfraccionesFranjaHoraria [hora_Inicial=11:00,
+ hora_Final=11:59:59,
+ totalInfracciones=48504,
+ porcentajeAccidentes=0.0022060036285667163,
+ porcentajeNoAccidentes=0.9977939963714333,
+ valorTotal=3333597.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=12:00,
+ hora_Final=12:59:59,
+ totalInfracciones=48089,
+ porcentajeAccidentes=0.003327164216348853,
+ porcentajeNoAccidentes=0.9966728357836512,
+ valorTotal=3238925.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=13:00,
+ hora_Final=13:59:59,
+ totalInfracciones=47078,
+ porcentajeAccidentes=0.0024639959216619226,
+ porcentajeNoAccidentes=0.9975360040783381,
+ valorTotal=3097903.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=10:00,
+ hora_Final=10:59:59,
+ totalInfracciones=45957,
+ porcentajeAccidentes=0.002872250146876428,
+ porcentajeNoAccidentes=0.9971277498531236,
+ valorTotal=3150031.57]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=14:00,
+ hora_Final=14:59:59,
+ totalInfracciones=43879,
+ porcentajeAccidentes=0.0025752637936142576,
+ porcentajeNoAccidentes=0.9974247362063857,
+ valorTotal=2865048.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=15:00,
+ hora_Final=15:59:59,
+ totalInfracciones=41096,
+ porcentajeAccidentes=0.0043313217831419115,
+ porcentajeNoAccidentes=0.9956686782168581,
+ valorTotal=2641460.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=16:00,
+ hora_Final=16:59:59,
+ totalInfracciones=37444,
+ porcentajeAccidentes=0.006970409144322188,
+ porcentajeNoAccidentes=0.9930295908556778,
+ valorTotal=2390652.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=09:00,
+ hora_Final=09:59:59,
+ totalInfracciones=34878,
+ porcentajeAccidentes=0.0036986065714777225,
+ porcentajeNoAccidentes=0.9963013934285223,
+ valorTotal=2357678.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=08:00,
+ hora_Final=08:59:59,
+ totalInfracciones=32741,
+ porcentajeAccidentes=0.004275984239943801,
+ porcentajeNoAccidentes=0.9957240157600562,
+ valorTotal=2176571.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=17:00,
+ hora_Final=17:59:59,
+ totalInfracciones=31481,
+ porcentajeAccidentes=0.008004828309138845,
+ porcentajeNoAccidentes=0.9919951716908612,
+ valorTotal=2065708.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=18:00,
+ hora_Final=18:59:59,
+ totalInfracciones=28724,
+ porcentajeAccidentes=0.008947221835398969,
+ porcentajeNoAccidentes=0.991052778164601,
+ valorTotal=1880439.46]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=07:00,
+ hora_Final=07:59:59,
+ totalInfracciones=24773,
+ porcentajeAccidentes=0.003673354054817745,
+ porcentajeNoAccidentes=0.9963266459451823,
+ valorTotal=1653200.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=00:00,
+ hora_Final=00:59:59,
+ totalInfracciones=20751,
+ porcentajeAccidentes=0.0104573273577177,
+ porcentajeNoAccidentes=0.9895426726422824,
+ valorTotal=1277090.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=19:00,
+ hora_Final=19:59:59,
+ totalInfracciones=17250,
+ porcentajeAccidentes=0.007478260869565217,
+ porcentajeNoAccidentes=0.9925217391304347,
+ valorTotal=1114901.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=06:00,
+ hora_Final=06:59:59,
+ totalInfracciones=13570,
+ porcentajeAccidentes=0.0040530582166543845,
+ porcentajeNoAccidentes=0.9959469417833456,
+ valorTotal=946199.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=20:00,
+ hora_Final=20:59:59,
+ totalInfracciones=13186,
+ porcentajeAccidentes=0.013347489761868649,
+ porcentajeNoAccidentes=0.9866525102381314,
+ valorTotal=848390.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=21:00,
+ hora_Final=21:59:59,
+ totalInfracciones=11258,
+ porcentajeAccidentes=0.011636169834784153,
+ porcentajeNoAccidentes=0.9883638301652159,
+ valorTotal=697313.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=22:00,
+ hora_Final=22:59:59,
+ totalInfracciones=10912,
+ porcentajeAccidentes=0.012646627565982404,
+ porcentajeNoAccidentes=0.9873533724340176,
+ valorTotal=673815.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=23:00,
+ hora_Final=23:59:59,
+ totalInfracciones=10597,
+ porcentajeAccidentes=0.014626781164480513,
+ porcentajeNoAccidentes=0.9853732188355195,
+ valorTotal=644812.0]
+
+
+InfraccionesFranjaHoraria [hora_Inicial=01:00,
+ hora_Final=01:59:59,
+ totalInfracciones=8703,
+ porcentajeAccidentes=0.011145581983224176,
+ porcentajeNoAccidentes=0.9888544180167759,
+ valorTotal=525692.5]
+
+
+---------ISIS 1206 - Estructuras de datos----------
+---------------------Proyecto 2----------------------
+0. Cargar datos del semestre
+1. Obtener el ranking de las N franjas horarias que tengan mas infracciones. (REQ 1A)
+2. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2A)
+3. Buscar las infracciones por rango de fechas (REQ 3A)
+4. Obtener  el  ranking  de  las  N  tipos  de  infraccion  (ViolationCode)  que  tengan  mas infracciones. (REQ 1B)
+5. Realizar  el  ordenamiento  de  las  infracciones  por  Localizacion  Geografica. (REQ 2B)
+6. Buscar las franjas de fecha-hora donde se tiene un valor acumulado de infracciones en un rango dado. (REQ 3B)
+7. Obtener  la informacion de  una  localizacion dada. (REQ 1C)
+8. Obtener  las infracciones  en  un  rango de  horas. (REQ 2C)
+9. Obtener  el  ranking  de  las  N localizaciones geograficas con la mayor cantidad de infracciones. (REQ 3C)
+10. Mostrar  una  grafica ASCII con los codigos (ViolationCode) ordenados por numero de infracciones. (REQ 4C)
+11. Salir
+Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):
+
