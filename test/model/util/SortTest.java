@@ -77,4 +77,16 @@ public class SortTest extends TestCase{
 			assertTrue(Sort.isSorted(datos, comparador));
 		}
 	}
+	
+	/**
+	 * Prueba de Quick3WaySort
+	 */
+	public void testQuick3Sort() {
+		for (int n = 0; n < totalEscenarios; n++) {
+			setUpEscenario(n);
+				
+			Sort.ordenarQuick3(datos, comparador);
+			assertTrue(Sort.isSorted(datos, comparador));
+		}
+	}
 }
