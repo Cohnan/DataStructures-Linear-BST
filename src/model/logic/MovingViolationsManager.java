@@ -138,10 +138,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.csv", 
 					"Moving_Violations_Issued_in_February_2018.csv",
-					//					"Moving_Violations_Issued_in_March_2018.csv",
-					//					"Moving_Violations_Issued_in_April_2018.csv",
-					//					"Moving_Violations_Issued_in_May_2018.csv",
-					//					"Moving_Violations_Issued_in_June_2018.csv"
+										"Moving_Violations_Issued_in_March_2018.csv",
+										"Moving_Violations_Issued_in_April_2018.csv",
+										"Moving_Violations_Issued_in_May_2018.csv",
+										"Moving_Violations_Issued_in_June_2018.csv"
 			});
 			semestreCargado = 1;
 		}
@@ -149,10 +149,10 @@ public class MovingViolationsManager {
 		{
 			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.csv",
 					"Moving_Violations_Issued_in_August_2018.csv",
-					//					"Moving_Violations_Issued_in_September_2018.csv", 
-					//					"Moving_Violations_Issued_in_October_2018.csv",
-					//					"Moving_Violations_Issued_in_November_2018.csv",
-					//					"Moving_Violations_Issued_in_December_2018.csv"
+										"Moving_Violations_Issued_in_September_2018.csv", 
+										"Moving_Violations_Issued_in_October_2018.csv",
+										"Moving_Violations_Issued_in_November_2018.csv",
+										"Moving_Violations_Issued_in_December_2018.csv"
 			});
 			semestreCargado = 2;
 		}
@@ -409,8 +409,9 @@ public class MovingViolationsManager {
 
 	private void crearCpViolationCode() {
 		//Se ordenan por ViolationCode Order para poder crear las estad�sticas
-//		Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+		//Sort.ordenarShellSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
 		Sort.ordenarQuick3(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
+		//Sort.ordenarQuickSort(movingVOLista, new VOMovingViolations.ViolationCodeOrder());
 		
 		Iterator<VOMovingViolations> iterador = movingVOLista.iterator();
 
