@@ -77,16 +77,15 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		
 	}
 	
-	// A restar tiene que ser estrictamente menor en tiempo
 	/**
 	 * Metodo que devuelve la estadistica resultado de restar estadisticas con franjas horarias contiguas que empiezan a media noche
-	 * @param aEliminar Franja a restar del final de la estadistica actual
+	 * @param aEliminar Franja a restar del inicio de la estadistica actual
 	 * @return Estadistica restada
 	 */
 	public InfraccionesFranjaHorariaViolationCode eliminarEstadisticas(InfraccionesFranjaHorariaViolationCode aEliminar) {
 		// Asegurarse de que ambas franjas empiezan a media noche
 		if (!this.getFranjaInicial().equals(LocalTime.of(0, 0)) || !aEliminar.getFranjaInicial().equals(LocalTime.of(0, 0))) throw new IllegalArgumentException("Solo se pueden restar estadisticas si ambas inician a la misma hora");
-		// Asegurarse de que la franja a eliminar termina mas tarde
+		// Asegurarse de que la franja a eliminar termina mas temprano
 		if (this.getFranjaFinal().compareTo(aEliminar.getFranjaFinal()) <= 0) throw new IllegalArgumentException("No se puede restar la estadistica de una franja que termina mas tarde");
 		
 		// Datos basicos de la nueva estadistica
@@ -101,13 +100,13 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		// Crear tabla de hash de la nueva estadistica
 		InfraccionesViolationCode aRestar;
 		InfraccionesViolationCode estResultante;
-		for (String codigo : aEliminar.getInfViolationCode()) { // Restar del conjunto mas grande
-			aRestar = this.getInfViolationCode().get(codigo);
+		for (String codigo : this.getInfViolationCode()) { // Restar del conjunto mas grande
+			aRestar = aEliminar.getInfViolationCode().get(codigo);
 			
 			if(aRestar == null) { // Si el codigo actual surgio por primera vez luego de terminada la primera estadistica
-				resultado.infViolationCode.put(codigo, aEliminar.infViolationCode.get(codigo));
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
 			} else {
-				estResultante = (aEliminar.infViolationCode.get(codigo)).eliminarEstadisticas(aRestar); 
+				estResultante = (this.infViolationCode.get(codigo)).eliminarEstadisticas(aRestar); 
 				if (estResultante.getTotalInfracciones() != 0) resultado.infViolationCode.put(codigo, estResultante); // No poner codigos que no contengan infracciones
 			}
 		}
