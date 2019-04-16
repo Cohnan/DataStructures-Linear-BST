@@ -70,15 +70,18 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		// Actualizacion de la tabla de hash con los violation codes encontrados en la franja de esta estadistica
 		InfraccionesViolationCode estadVOCode = infViolationCode.get(nuevaInfraccion.getViolationCode());
 		
-		if (estadVOCode == null) estadVOCode = new InfraccionesViolationCode(nuevaInfraccion.getViolationCode());
+		if (estadVOCode == null) {
+			estadVOCode = new InfraccionesViolationCode(nuevaInfraccion.getViolationCode());
+			infViolationCode.put(nuevaInfraccion.getViolationCode(), estadVOCode);
+		}
 		
 		estadVOCode.agregarEstadistica(nuevaInfraccion);
-		infViolationCode.put(nuevaInfraccion.getViolationCode(), estadVOCode); //TODO check if this is necessary
+		//infViolationCode.put(nuevaInfraccion.getViolationCode(), estadVOCode); // Es necesario por el new TODO
 		
 	}
 	
 	/**
-	 * Metodo que devuelve la estadistica resultado de restar estadisticas con franjas horarias contiguas que empiezan a media noche
+	 * Metodo que devuelve la estadistica resultado de restar estadisticas con franjas horarias que empiezan a media noche
 	 * @param aEliminar Franja a restar del inicio de la estadistica actual
 	 * @return Estadistica restada
 	 */
@@ -114,11 +117,16 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		return resultado;
 	}
 	
+	/**
+	 * Metodo que devuelve la estadistica resultado de sumar estadisticas con franjas horarias contiguas
+	 * @param aIncrementar Franja a sumar al final de la estadistica actual
+	 * @return Estadistica suma
+	 */
 	public InfraccionesFranjaHorariaViolationCode incrementarEstadisticas(InfraccionesFranjaHorariaViolationCode aIncrementar) {
 		// Asegurarse de que son estadisticas de franjas contiguas
 		if (!this.getFranjaFinal().plusSeconds(1).equals(aIncrementar.getFranjaInicial())) throw new IllegalArgumentException("Solo se pueden sumar una estadistica que empieze inmediatamente despues");
 		
-		
+		// Crear estadistica con datos generales
 		LocalTime horaInicial = this.getFranjaInicial();
 		LocalTime horaFinal = aIncrementar.getFranjaFinal();
 		InfraccionesFranjaHorariaViolationCode resultado = new InfraccionesFranjaHorariaViolationCode(horaInicial, horaFinal);
@@ -127,21 +135,22 @@ public class InfraccionesFranjaHorariaViolationCode extends InfraccionesFranjaHo
 		resultado.totalSinAccidentes = this.totalSinAccidentes + aIncrementar.totalSinAccidentes;
 		resultado.valorTotal = this.valorTotal + aIncrementar.valorTotal;
 		
-		// Crear nueva tabla de InfraccionesViolationCode
+		// Crear tabla de InfraccionesViolationCode para la nueva estadistica
+		// Agregar primero los valores finales para las estadisticas de los codigos de la estadistica actual
 		InfraccionesViolationCode aSumar;
 		for (String codigo : this.getInfViolationCode()) {
 			aSumar = aIncrementar.getInfViolationCode().get(codigo);
 			
 			if(aSumar == null) {
-				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo));//.incrementarEstadisticas(new InfraccionesViolationCode(codigo))); // Agregar una estadistica vacia permite que a lo agregado a la nueva tabla sea solo una copia
 			} else {
-				resultado.infViolationCode.put(codigo, infViolationCode.get(codigo).incrementarEstadisticas(aSumar));
+				resultado.infViolationCode.put(codigo, this.infViolationCode.get(codigo).incrementarEstadisticas(aSumar));
 			}
 		}
 		// Agregar las del segundo que no estan en el primero
 		for (String codigo : aIncrementar.getInfViolationCode()) {			
 			if(this.infViolationCode.get(codigo) == null) {
-				resultado.infViolationCode.put(codigo, aIncrementar.infViolationCode.get(codigo));
+				resultado.infViolationCode.put(codigo, aIncrementar.infViolationCode.get(codigo));//.incrementarEstadisticas(new InfraccionesViolationCode(codigo))); // Copia
 			} 
 		}
 		

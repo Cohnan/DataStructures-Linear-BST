@@ -202,9 +202,9 @@ public class MovingViolationsManagerView
 		double vX = 0.005; 
 		
 		System.out.println("Ranking de tipo de infracciones por porcentaje de infracciones. Año 2018 semestre " + semestre);
-		System.out.println("Codigo Infraccion | Porcentaje");
+		System.out.println("Codigo Infraccion | Numero | Porcentaje");
 		for (InfraccionesViolationCode estadistica : resultados.iterableEnOrden()) {
-			System.out.printf("%17s |", estadistica.getViolationCode());
+			System.out.printf("%17s | %6d | ", estadistica.getViolationCode(), estadistica.getTotalInfracciones());
 			for (int k = 0; k < (int) (estadistica.getTotalInfracciones()/(totalInfracciones * vX)); k++) {
 				System.out.print("X");
 			}
