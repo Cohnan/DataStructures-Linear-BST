@@ -66,54 +66,53 @@ public class MovingViolationsManager {
 	 * Creados en Parte A
 	 */
 	/**
-	 * 1A
+	 * 1A Cola de prioridad con ranking por total de infraccioens de las franjas horarias del semestre actual
 	 */
 	private IColaPrioridad<InfraccionesFranjaHoraria> cpFranjasHorarias;
 
 	/**
-	 * 2A
+	 * 2A Tabla de hash con las estadisticas para cada coordenada del semestre actual 
 	 */
 	private LinProbTH<Coordenadas, InfraccionesLocalizacion> thLocalizaciones; // Puede que se cambie a TablaSimOrd, pues Coordenadas tiene un orden que mencionan en el enunciado
 
 	/**
-	 * 3A
+	 * 3A Tabla de hash con las estadisticas para cada fecha del semestre actual
 	 */
 	private ITablaSimOrd<LocalDate, InfraccionesFecha> abFechas;
 
 
 
 	/**
-	 * 1B
+	 * 1B Cola de prioridad con las estadisticas para cada tipo de infracciones en el semestre actual
 	 */
 	private IColaPrioridad<InfraccionesViolationCode> cpViolationCode;
 
 
 	/**
-	 * 2B
+	 * 2B Arbol balanceado con las estadisticas para cada coordenada en el semestre actual
 	 */
 	private ITablaSimOrd<Coordenadas,InfraccionesLocalizacion> abLocalizaciones;
 
 
 	/**
-	 * 3B
+	 * 3B Tabla de simbolos ordenada para el valor acumulado por infraccion en una fecha-hora
 	 */
 	private ITablaSimOrd<Double,InfraccionesFechaHora> abValorAcumulado;
 
 
 	/**
-	 * 1C
+	 * 1C Tabla de hash con las estadisticas de cada localizacion en el semestre actual indexadas por addressId 
 	 */
 	private LinProbTH<Integer, InfraccionesLocalizacion> thLocAddress;
 
 	/**
-	 * 2C
-	 * Tabla de hash que contiene las estadisticas desde las 00:00 hasta cada uno de los demas segundos del dia referenciados por el segundo final
+	 * 2C Tabla de hash que contiene las estadisticas desde las 00:00 hasta cada uno de los demas segundos del dia referenciados por el segundo final
 	 */
 
 	private ITablaHash<LocalTime, InfraccionesFranjaHorariaViolationCode> thFranjaCode;
 	
 	/**
-	 * 3C
+	 * 3C Cola de prioridad con las estadisticas del semestre de cada localizacion 
 	 */
 	private IColaPrioridad<InfraccionesLocalizacion> cpLocalizaciones;
 
@@ -512,21 +511,18 @@ public class MovingViolationsManager {
 			crearAbValorAcumulado();
 		}
 
-
 		//Se itera sobre los valores en el rango
-		Iterator<Double> aux = abValorAcumulado.keysInRange(valorInicial, valorFinal).iterator();
-		double actual = aux.next();
-		respuesta.enqueue(abValorAcumulado.get(actual));
+		IArregloDinamico<Double> aux = new ArregloDinamico<>();
 		
-		while(aux.hasNext()){
-			actual = aux.next();
-			respuesta.enqueue(abValorAcumulado.get(actual));
+		for (Double valor : abValorAcumulado.keysInRange(valorInicial, valorFinal)) {
+			aux.agregar(valor);
 		}
+		Sort.ordenarShellSort(aux);
 		
-
-
-		
-		
+		for (Double valor : aux) {
+			respuesta.enqueue(abValorAcumulado.get(valor));
+		}
+				
 		return respuesta;
 
 	}

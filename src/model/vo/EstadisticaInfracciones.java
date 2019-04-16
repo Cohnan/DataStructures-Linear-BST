@@ -75,7 +75,10 @@ public class EstadisticaInfracciones {
 	//=========================================================
 	//Metodos Getters and Setters
 	//=========================================================
-	
+	/**
+	 * Permite actualizar la estadistica actual con la informacion de la infraccion que llega por parametro
+	 * @param nuevaInfraccion
+	 */
 	public void agregarEstadistica(VOMovingViolations nuevaInfraccion) {
 		totalInfracciones += 1;
 		

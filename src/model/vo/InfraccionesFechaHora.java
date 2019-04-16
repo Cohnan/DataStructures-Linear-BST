@@ -1,6 +1,7 @@
 package model.vo;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import model.data_structures.IQueue;
 
@@ -29,5 +30,13 @@ public class InfraccionesFechaHora extends EstadisticaInfracciones {
 		fecha_hora_inicial = pFechaHoraIni; 
 		fecha_hora_final = pFechaHoraFin; 
 	}
+	
+	public static class NInfraccionesOrder implements Comparator<InfraccionesFechaHora> {
 
+		@Override
+		public int compare(InfraccionesFechaHora arg0, InfraccionesFechaHora arg1) {
+			return arg0.totalInfracciones - arg1.totalInfracciones;
+		}
+		
+	}
 }
